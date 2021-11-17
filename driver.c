@@ -1,6 +1,9 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include "009-palindrome-number.h"
 #include "026-remove-duplicates-from-sorted-array.h"
+#include "234-palindrome-linked-list.h"
+
+#include "lib/llist.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,6 +44,19 @@ int lc026_RmDup(int argc, char ** argv) {
     return 0;
 }
 
+int lc234_Palindrome_ll (int argc, char ** argv) {
+    Node * input = NULL;
+
+    while (*argv)
+        input = AddValue(input, atoi(*argv++));
+
+    fprintf(stdout, "%s\n",
+            isPalindrome_ll(input) ? "True" : "False");
+
+    free(input);
+    return 0;
+}
+
 void Usage (void) {
     printf("Usage:");
 }
@@ -71,6 +87,9 @@ int main (int argc, char **argv) {
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
+            break;
+        case 234:
+            ret = lc234_Palindrome_ll (argc - 2, argv + 2);
             break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);
