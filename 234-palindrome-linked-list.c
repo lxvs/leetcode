@@ -8,7 +8,7 @@ bool isPalindrome_ll (struct ListNode * head) {
     struct ListNode * q;
     struct ListNode * tail;
     bool ret = true;
-    int len = 0;
+    int len = 1;
 
     q = malloc(sizeof *q);
     q->val = p->val;
