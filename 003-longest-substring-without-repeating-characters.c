@@ -1,8 +1,6 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include <stdio.h>
 
-#define DEBUG 0
-
 int lengthOfLongestSubstring (const char * s) {
 	const char * ps = s;
 	int end = 0;
