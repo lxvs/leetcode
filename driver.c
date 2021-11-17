@@ -1,4 +1,5 @@
 #include "003-longest-substring-without-repeating-characters.h"
+#include "009-palindrome-number.h"
 #include "026-remove-duplicates-from-sorted-array.h"
 
 #include <stdio.h>
@@ -10,6 +11,18 @@ int lc003_LongestSubstring (int argc, char ** argv) {
     if (argc < 1)
         return -1;
     return lengthOfLongestSubstring(argv[0]);
+}
+
+int lc009_Palindrome (int argc, char ** argv) {
+    int num;
+
+    while (*argv) {
+        num = atoi(*argv++);
+        fprintf(stdout, "%d %s a palindrome number.\n",
+                num, isPalindrome(num) ? "is" : "isn't");
+    }
+
+    return 0;
 }
 
 int lc026_RmDup(int argc, char ** argv) {
@@ -52,6 +65,9 @@ int main (int argc, char **argv) {
     switch(num) {
         case 3:
             ret = lc003_LongestSubstring (argc - 2, argv + 2);
+            break;
+        case 9:
+            ret = lc009_Palindrome (argc -2, argv + 2);
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
