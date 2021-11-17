@@ -31,7 +31,7 @@ int lengthOfLongestSubstring (const char * s) {
 			continue;
 		if (count > max)
 			max = count;
-		ps += end;
+		ps += p;
 		count = failed = end = 0;
 	}
 	if (count > max)
