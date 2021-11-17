@@ -8,10 +8,8 @@
 const char * usage_string = "./driver <id> [<argument> ...]";
 
 int lc003_LongestSubstring (int argc, char ** argv) {
-	printf ("argc = %d\n", argc);
 	if (argc < 1)
 		return -1;
-	printf ("argv[0] = %s\n", argv[0]);
 	return lengthOfLongestSubstring(argv[0]);
 }
 
