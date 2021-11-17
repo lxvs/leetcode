@@ -1,0 +1,6 @@
+#ifndef __003_LONGEST_SUBSTRING_WITHOUT_REPEATING_CHARACTERS_H__
+#define __003_LONGEST_SUBSTRING_WITHOUT_REPEATING_CHARACTERS_H__
+
+int lengthOfLongestSubstring (const char * s);
+
+#endif
