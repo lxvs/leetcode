@@ -1,6 +1,7 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include "009-palindrome-number.h"
 #include "026-remove-duplicates-from-sorted-array.h"
+#include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 
 #include "lib/llist.h"
@@ -41,6 +42,23 @@ int lc026_RmDup(int argc, char ** argv) {
     printf("after removal:\n");
     printArray(nums, NUMS_SIZE);
 
+    return 0;
+}
+
+int lc217_ContainsDup (int argc, char ** argv) {
+    int * input;
+
+    if (argc < 1)
+        return -1;
+
+    input = malloc(sizeof *input * argc);
+
+    for (int i = 0; i < argc; i++)
+        input[i] = atoi(argv[i]);
+
+    fprintf(stdout, "%s\n", containsDuplicate(input, argc) ? "True" : "False");
+
+    free(input);
     return 0;
 }
 
@@ -87,6 +105,9 @@ int main (int argc, char **argv) {
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
+            break;
+        case 217:
+            ret = lc217_ContainsDup (argc - 2, argv + 2);
             break;
         case 234:
             ret = lc234_Palindrome_ll (argc - 2, argv + 2);
