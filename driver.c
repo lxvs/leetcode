@@ -1,6 +1,7 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include "009-palindrome-number.h"
 #include "026-remove-duplicates-from-sorted-array.h"
+#include "053-maximum-subarray.h"
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 
@@ -44,6 +45,15 @@ int lc026_RmDup(int argc, char ** argv) {
     printArray(nums, NUMS_SIZE);
 
     return 0;
+}
+
+int lc053_MaxSubarray (int argc, char ** argv) {
+    int * input = pargia(argc, argv);
+
+    if (!input)
+        return -1;
+
+    return maxSubArray(input, argc);
 }
 
 int lc217_ContainsDup (int argc, char ** argv) {
@@ -101,6 +111,9 @@ int main (int argc, char **argv) {
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
+            break;
+        case 53:
+            ret = lc053_MaxSubarray (argc - 2, argv + 2);
             break;
         case 217:
             ret = lc217_ContainsDup (argc - 2, argv + 2);
