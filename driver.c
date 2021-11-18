@@ -4,6 +4,7 @@
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 
+#include "driver.h"
 #include "lib/llist.h"
 
 #include <stdio.h>
@@ -46,15 +47,10 @@ int lc026_RmDup(int argc, char ** argv) {
 }
 
 int lc217_ContainsDup (int argc, char ** argv) {
-    int * input;
+    int * input = pargia(argc, argv);
 
-    if (argc < 1)
+    if (!input)
         return -1;
-
-    input = malloc(sizeof *input * argc);
-
-    for (int i = 0; i < argc; i++)
-        input[i] = atoi(argv[i]);
 
     fprintf(stdout, "%s\n", containsDuplicate(input, argc) ? "True" : "False");
 
@@ -121,4 +117,26 @@ int main (int argc, char **argv) {
     if (ret)
         fprintf(stderr, "warning: Return value is %d\n", ret);
     return ret;
+}
+
+/*
+ * Parse arguments - int array
+ */
+static int * pargia (const int argc, char ** argv) {
+    int * input;
+
+    if (argc < 1)
+        return NULL;
+
+    input = malloc(sizeof *input * argc);
+
+    if (!input) {
+        fprintf(stderr, "error: Failed to allocate memory.\n");
+        return NULL;
+    }
+
+    for (int i = 0; i < argc; i++)
+        input[i] = atoi(argv[i]);
+
+    return input;
 }
