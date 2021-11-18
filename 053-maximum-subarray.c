@@ -5,20 +5,12 @@
 
 int maxSubArray (int * nums, int numsSize) {
     int sum = 0;
-    int max = 0;
+    int max = *nums;
     int org = 0;
     int len;
 
     while (org < numsSize) {
         len = 0;
-        if (nums[org] <= 0) {
-#if DEBUG
-            fprintf(stderr, "nums[%d] = %d, continuing loop.\n",
-                    org, nums[org]);
-#endif
-            org++;
-            continue;
-        }
 #if DEBUG
         fprintf(stderr, "org = %-3d, len = %-3d, nums[x] = %-3d\n",
                 org, len, nums[org + len]);
