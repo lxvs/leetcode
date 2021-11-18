@@ -3,7 +3,7 @@
 bool isPalindrome (int x) {
     int reversed = 0;
 
-    if (x < 0 || x && !(x % 10))
+    if (x < 0 || (x && !(x % 10)))
         return false;
 
     while (x > reversed) {
