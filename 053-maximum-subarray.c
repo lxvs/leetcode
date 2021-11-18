@@ -6,28 +6,17 @@
 int maxSubArray (int * nums, int numsSize) {
     int sum = 0;
     int max = *nums;
-    int org = 0;
-    int len;
 
-    while (org < numsSize) {
-        len = 0;
+    for (int i = 0; i < numsSize; i++) {
 #if DEBUG
-        fprintf(stderr, "org = %-3d, len = %-3d, nums[x] = %-3d\n",
-                org, len, nums[org + len]);
+        fprintf(stderr,
+                "sum     %10d\n"
+                "nums[i] %10d\n",
+                sum, nums[i]);
 #endif
-        sum = 0;
-        while (org + len < numsSize) {
-            sum += nums[org + len++];
-#if DEBUG
-        fprintf(stderr, "    org = %-3d, len = %-3d, sum = %-5d\n",
-                org, len - 1, sum);
-#endif
-            if (max < sum)
-                max = sum;
-            if (sum < 0)
-                break;
-        }
-        org++;
+        sum = nums[i] > sum + nums[i] ? nums[i] : sum + nums[i];
+        if (max < sum)
+            max = sum;
     }
 
     return max;
