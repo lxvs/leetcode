@@ -237,6 +237,6 @@ static int * pargia (const int argc, char ** argv) {
 
 static void printia (const int * nums, int size) {
     for (int i = 0; i < size; i++)
-        fprintf(stderr, "nums[%2d] = %d\n", i, nums[i]);
+        fprintf(stdout, "nums[%2d] = %d\n", i, nums[i]);
     return;
 }
