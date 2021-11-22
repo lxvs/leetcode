@@ -6,11 +6,13 @@
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 
-#include "driver.h"
 #include "lib/llist.h"
 
 #include <stdio.h>
 #include <stdlib.h>
+
+static int * pargia (const int argc, char ** argv);
+static void printia (const int * nums, int size);
 
 const char * usage_string = "./driver <id> [<argument> ...]";
 
