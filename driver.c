@@ -3,6 +3,7 @@
 #include "026-remove-duplicates-from-sorted-array.h"
 #include "053-maximum-subarray.h"
 #include "088-merge-sorted-array.h"
+#include "121-best-time-to-buy-and-sell-stock.h"
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 #include "350-intersection-of-two-arrays-ii.h"
@@ -76,6 +77,18 @@ int lc088_MergeNums (int argc, char ** argv) {
     printia(nums1, m + n);
 
     return 0;
+}
+
+int lc121_MaxProfit(int argc, char ** argv) {
+    int * input = pargia(argc, argv);
+    int ret;
+
+    if (!input)
+        return -1;
+
+    ret = maxProfit(input, argc);
+    free(input);
+    return ret;
 }
 
 int lc217_ContainsDup (int argc, char ** argv) {
@@ -176,6 +189,9 @@ int main (int argc, char **argv) {
             break;
         case 88:
             ret = lc088_MergeNums (argc - 2, argv + 2);
+            break;
+        case 121:
+            ret = lc121_MaxProfit (argc - 2, argv + 2);
             break;
         case 217:
             ret = lc217_ContainsDup (argc - 2, argv + 2);
