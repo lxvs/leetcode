@@ -5,6 +5,7 @@
 #include "088-merge-sorted-array.h"
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
+#include "350-intersection-of-two-arrays-ii.h"
 
 #include "lib/llist.h"
 
@@ -99,6 +100,43 @@ int lc234_Palindrome_ll (int argc, char ** argv) {
     return 0;
 }
 
+int lc350_Intersection (int argc, char ** argv) {
+    int * input = pargia(argc, argv);
+    int * nums2 = NULL;
+    int nums2Size[1];
+    int * ret = NULL;
+    int retsz[1];
+
+    if (!input)
+        return -1;
+
+    fprintf(stdout, "How many numbers in nums2? ");
+    scanf("%d", nums2Size);
+    nums2 = malloc(sizeof *nums2 * *nums2Size);
+    fprintf(stdout, "Input nums2, separated with spaces: ");
+    for (int i = 0; i < *nums2Size; i++)
+        if (scanf("%d", nums2 + i) != 1) {
+            fprintf(stderr, "Error in parsing input.\n");
+            return -1;
+        }
+
+    fprintf(stdout, "nums1:\n");
+    printia(input, argc);
+    fprintf(stdout, "nums2:\n");
+    printia(nums2, *nums2Size);
+    putchar('\n');
+
+    ret = intersect(input, argc, nums2, *nums2Size, retsz);
+
+    fprintf(stdout, "return:\n");
+    printia(ret, *retsz);
+
+    free(input);
+    free(ret);
+
+    return 0;
+}
+
 void Usage (void) {
     printf("Usage:");
 }
@@ -141,6 +179,9 @@ int main (int argc, char **argv) {
             break;
         case 234:
             ret = lc234_Palindrome_ll (argc - 2, argv + 2);
+            break;
+        case 350:
+            ret = lc350_Intersection (argc - 2, argv + 2);
             break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);
