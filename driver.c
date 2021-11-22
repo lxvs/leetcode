@@ -10,6 +10,7 @@
 #include "566-reshape-the-matrix.h"
 
 #include "lib/llist.h"
+#include "lib/debug.h"
 
 #include <stdio.h>
 #include <stdlib.h>
