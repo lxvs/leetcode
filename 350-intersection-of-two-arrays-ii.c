@@ -41,6 +41,7 @@ int* intersect(int* nums1, int nums1Size, int* nums2, int nums2Size, int* return
                 ret[(*returnSize)++] = n1[i];
                 DeleteValue(n1, nums1Size--, i);
                 DeleteValue(n2, nums2Size--, j);
+                j = 0;
             }
 #if DEBUG
     fprintf(stderr, "\nFinal n1[%d]:\n", nums1Size);
