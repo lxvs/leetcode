@@ -53,11 +53,14 @@ int lc026_RmDup(int argc, char ** argv) {
 
 int lc053_MaxSubarray (int argc, char ** argv) {
     int * input = pargia(argc, argv);
+    int ret;
 
     if (!input)
         return -1;
 
-    return maxSubArray(input, argc);
+    ret = maxSubArray(input, argc);
+    free(input);
+    return ret;
 }
 
 int lc088_MergeNums (int argc, char ** argv) {
