@@ -7,6 +7,7 @@
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 #include "350-intersection-of-two-arrays-ii.h"
+#include "566-reshape-the-matrix.h"
 
 #include "lib/llist.h"
 
@@ -14,7 +15,9 @@
 #include <stdlib.h>
 
 static int * pargia (const int argc, char ** argv);
+static int ** pargim (const int argc, char ** argv);
 static void printia (const int * nums, int size);
+static void printim (int ** matrix, int r, int c);
 
 const char * usage_string = "./driver <id> [<argument> ...]";
 
@@ -153,6 +156,51 @@ int lc350_Intersection (int argc, char ** argv) {
     return 0;
 }
 
+int lc566_MatrixReshape (int argc, char ** argv) {
+    int ** input;
+    int r, c, m, n;
+    int ** reshaped;
+    int retr[1];
+    int * retc[1];
+
+    if (argc < 4) {
+        fprintf(stdout,
+                "Usage:\n"
+                "\n"
+                "    driver 566 <r> <c> <col> <numbers> ...\n"
+                "\n"
+                "    <r> <c>     the number of rows/columns of reshaped matrix\n"
+                "    <col>       the number of columns of input matrix\n"
+                "    <numbers>   matrix elements in row-traversing order\n");
+        return 0;
+    }
+
+    n = atoi(argv[2]);
+    if ((argc - 3) % n)
+        return -1;
+
+    input = pargim(argc - 2, argv + 2);
+    r = atoi(argv[0]);
+    c = atoi(argv[1]);
+    m = (argc - 3) / n;
+
+    fprintf(stdout, "Input matrix:\n");
+    printim(input, m, n);
+
+    reshaped = matrixReshape(input, m, &n, r, c, retr, retc);
+
+    if (reshaped == input)
+        return 1;
+
+    fprintf(stdout, "Reshaped:\n");
+    printim(reshaped, r, c);
+
+    free(input);
+    free(*retc);
+    free(reshaped);
+    return 0;
+}
+
 void Usage (void) {
     printf("Usage:");
 }
@@ -202,6 +250,9 @@ int main (int argc, char **argv) {
         case 350:
             ret = lc350_Intersection (argc - 2, argv + 2);
             break;
+        case 566:
+            ret = lc566_MatrixReshape (argc - 2, argv + 2);
+            break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);
             ret = 1;
@@ -235,8 +286,57 @@ static int * pargia (const int argc, char ** argv) {
     return input;
 }
 
+/*
+ * Parse arguments - int matrix
+ *
+ * argv[0] is the number of columns.
+ */
+static int ** pargim (const int argc, char ** argv) {
+    int c = atoi(*argv);
+    int r;
+    int ** ret;
+
+    if (argc < 2) {
+        fprintf(stderr, "pargim error: Too few arguments\n");
+        return NULL;
+    }
+
+    if (!c) {
+        fprintf(stderr, "pargim error: Cannot create a matrix of 0 column.\n");
+        return NULL;
+    }
+
+    r = (argc - 1) / c;
+
+    ret = malloc(sizeof **ret * r);
+    for (int i = 0; i < r; i++)
+        ret[i] = malloc(sizeof *ret * c);
+
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+            ret[i][j] = atoi(argv[1 + i * c + j]);
+
+    return ret;
+}
+
 static void printia (const int * nums, int size) {
     for (int i = 0; i < size; i++)
         fprintf(stdout, "nums[%2d] = %d\n", i, nums[i]);
+    return;
+}
+
+static void printim (int ** matrix, int r, int c) {
+    fprintf(stdout, " r\\c");
+    for (int j = 0; j < c; j++)
+        fprintf(stdout, "  %2d  ", j);
+    putchar('\n');
+
+    for (int i = 0; i < r; i++) {
+        fprintf(stdout, "%2d  ", i);
+        for (int j = 0; j < c; j++)
+            fprintf(stdout, "  %4d", matrix[i][j]);
+        putchar('\n');
+    }
+
     return;
 }
