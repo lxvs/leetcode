@@ -16,15 +16,13 @@ int** matrixReshape(int** mat, int matSize, int* matColSize, int r, int c, int* 
     }
 
     *returnSize = r;
-    returnColumnSizes = malloc(sizeof *returnColumnSizes * r);
-    for (int i = 0; i < r; i++) {
-        returnColumnSizes[i] = malloc(sizeof **returnColumnSizes);
-        *returnColumnSizes[i] = c;
-    }
+    *returnColumnSizes = malloc(sizeof **returnColumnSizes * r);
 
     ret = malloc(sizeof *ret * r);
-    for (int i = 0; i < r; i++)
+    for (int i = 0; i < r; i++) {
         ret[i] = malloc(sizeof **ret * c);
+        (*returnColumnSizes)[i] = c;
+    }
 
     for (int i = 0; i < r; i++)
         for (int j = 0; j < c; j++)
