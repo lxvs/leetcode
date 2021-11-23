@@ -1,6 +1,7 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include "009-palindrome-number.h"
 #include "026-remove-duplicates-from-sorted-array.h"
+#include "036-valid-sudoku.h"
 #include "053-maximum-subarray.h"
 #include "088-merge-sorted-array.h"
 #include "118-pascals-triangle.h"
@@ -53,6 +54,37 @@ int lc026_RmDup(int argc, char ** argv) {
     removeDuplicates(nums, NUMS_SIZE);
     printf("after removal:\n");
     printArray(nums, NUMS_SIZE);
+
+    return 0;
+}
+
+int lc036_ValidSudoku (int argc, char ** argv) {
+    char ** input = malloc(sizeof *input * 9);
+    char valid[9][9] = {
+        {'5','3','.','.','7','.','.','.','.'},
+        {'6','.','.','1','9','5','.','.','.'},
+        {'.','9','8','.','.','.','.','6','.'},
+        {'8','.','.','.','6','.','.','.','3'},
+        {'4','.','.','8','.','3','.','.','1'},
+        {'7','.','.','.','2','.','.','.','6'},
+        {'.','6','.','.','.','.','2','8','.'},
+        {'.','.','.','4','1','9','.','.','5'},
+        {'.','.','.','.','8','.','.','7','9'}
+    };
+
+    for (int i = 0; i < 9; i++) {
+        input[i] = malloc(sizeof **input * 9);
+        for (int j = 0; j < 9; j++)
+            input[i][j] = valid[i][j];
+    }
+
+    fprintf(stdout, "Expected: true. Got: %s\n",
+            isValidSudoku(input, 9, NULL) ? "true" : "false");
+
+    input[0][0] = '8';
+
+    fprintf(stdout, "Expected: false. Got: %s\n",
+            isValidSudoku(input, 9, NULL) ? "true" : "false");
 
     return 0;
 }
@@ -262,6 +294,9 @@ int main (int argc, char **argv) {
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
+            break;
+        case 36:
+            ret = lc036_ValidSudoku (argc - 2, argv + 2);
             break;
         case 53:
             ret = lc053_MaxSubarray (argc - 2, argv + 2);
