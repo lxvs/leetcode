@@ -19,7 +19,7 @@ int** matrixReshape(int** mat, int matSize, int* matColSize, int r, int c, int* 
     }
 
     ret = malloc(sizeof *ret * r);
-    for (int i = 0; i < c; i++)
+    for (int i = 0; i < r; i++)
         ret[i] = malloc(sizeof **ret * c);
 
     for (int i = 0; i < r; i++)
