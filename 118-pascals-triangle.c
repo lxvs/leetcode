@@ -17,13 +17,8 @@ int** generate(int numRows, int* returnSize, int** returnColumnSizes){
     for (int i = 0; i < numRows; i++) {
         (*returnColumnSizes)[i] = i + 1;
         ret[i] = malloc(sizeof **ret * (i + 1));
-        ret[i][0] = 1;
-        for (int j = 1; j < i + 1; j++) {
-            if (j <=  i / 2)
-                ret[i][j] = ret[i - 1][j - 1] + ret[i - 1][j];
-            else
-                ret[i][j] = ret[i][i - j];
-        }
+        for (int j = 0; j < i + 1; j++)
+            ret[i][j] = i > 0 && j > 0 && j < i ? ret[i - 1][j - 1] + ret[i - 1][j] : 1;
     }
 
     return ret;
