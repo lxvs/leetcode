@@ -9,9 +9,13 @@
 int** matrixReshape(int** mat, int matSize, int* matColSize, int r, int c, int* returnSize, int** returnColumnSizes){
     int ** ret;
 
-    if (matSize * *matColSize != r * c)
+    if (matSize * *matColSize != r * c) {
+        *returnSize = matSize;
+        *returnColumnSizes = matColSize;
         return mat;
+    }
 
+    *returnSize = r;
     returnColumnSizes = malloc(sizeof *returnColumnSizes * r);
     for (int i = 0; i < r; i++) {
         returnColumnSizes[i] = malloc(sizeof **returnColumnSizes);

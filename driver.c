@@ -190,15 +190,14 @@ int lc566_MatrixReshape (int argc, char ** argv) {
 
     reshaped = matrixReshape(input, m, &n, r, c, retr, retc);
 
-    if (reshaped == input)
-        return 1;
-
     fprintf(stdout, "Reshaped:\n");
-    printim(reshaped, r, c);
+    printim(reshaped, *retr, **retc);
 
+    if (reshaped != input)
+        free(reshaped);
+    if (*retc != &n)
+        free(*retc);
     free(input);
-    free(*retc);
-    free(reshaped);
     return 0;
 }
 
