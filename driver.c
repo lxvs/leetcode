@@ -309,9 +309,9 @@ static int ** pargim (const int argc, char ** argv) {
 
     r = (argc - 1) / c;
 
-    ret = malloc(sizeof **ret * r);
+    ret = malloc(sizeof *ret * r);
     for (int i = 0; i < r; i++)
-        ret[i] = malloc(sizeof *ret * c);
+        ret[i] = malloc(sizeof **ret * c);
 
     for (int i = 0; i < r; i++)
         for (int j = 0; j < c; j++)
