@@ -3,6 +3,7 @@
 #include "026-remove-duplicates-from-sorted-array.h"
 #include "053-maximum-subarray.h"
 #include "088-merge-sorted-array.h"
+#include "118-pascals-triangle.h"
 #include "121-best-time-to-buy-and-sell-stock.h"
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
@@ -79,6 +80,36 @@ int lc088_MergeNums (int argc, char ** argv) {
     merge(nums1, nums1Size, m, nums2, nums2Size, n);
 
     printia(nums1, m + n);
+
+    return 0;
+}
+
+int lc118_PascalsTriangle (int argc, char ** argv) {
+    int row;
+    int retrow[1];
+    int *retcols[1];
+    int ** ret;
+
+    if (argc != 1) {
+        fprintf(stdout,
+                "Usage:\n"
+                "\n"
+                "    driver 118 <row>\n"
+                "\n"
+                "Generate a Pascal's triangle of <row> row(s)\n");
+        return 0;
+    }
+
+    row = atoi(*argv);
+
+    if (row < 1 || row > 20)
+        return -1;
+
+    ret = generate(row, retrow, retcols);
+
+    for (int i = 0; i < *retrow; i++)
+        for (int j = 0; j < (*retcols)[i]; j++)
+            fprintf(stdout, "ret[%d][%d] = %d\n", i, j, ret[i][j]);
 
     return 0;
 }
@@ -237,6 +268,9 @@ int main (int argc, char **argv) {
             break;
         case 88:
             ret = lc088_MergeNums (argc - 2, argv + 2);
+            break;
+        case 118:
+            ret = lc118_PascalsTriangle (argc - 2, argv + 2);
             break;
         case 121:
             ret = lc121_MaxProfit (argc - 2, argv + 2);
