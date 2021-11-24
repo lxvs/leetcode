@@ -10,6 +10,7 @@
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 #include "350-intersection-of-two-arrays-ii.h"
+#include "387-first-unique-character-in-a-string.h"
 #include "566-reshape-the-matrix.h"
 
 #include "lib/llist.h"
@@ -259,6 +260,18 @@ int lc350_Intersection (int argc, char ** argv) {
     return 0;
 }
 
+int lc387_FirstUniqueChar (int argc, char ** argv) {
+    if (argc - 1) {
+        fprintf(stdout,
+                "Usage:\n"
+                "\n"
+                "    driver 387 <string>\n");
+        return 0;
+    }
+
+    return firstUniqChar(*argv);
+}
+
 int lc566_MatrixReshape (int argc, char ** argv) {
     int ** input;
     int r, c, m, n;
@@ -361,6 +374,9 @@ int main (int argc, char **argv) {
             break;
         case 350:
             ret = lc350_Intersection (argc - 2, argv + 2);
+            break;
+        case 387:
+            ret = lc387_FirstUniqueChar (argc - 2, argv + 2);
             break;
         case 566:
             ret = lc566_MatrixReshape (argc - 2, argv + 2);

@@ -1,0 +1,6 @@
+#ifndef __387_FIRST_UNIQUE_CHARACTER_IN_A_STRING_H__
+#define __387_FIRST_UNIQUE_CHARACTER_IN_A_STRING_H__
+
+int firstUniqChar(char * s);
+
+#endif /* __387_FIRST_UNIQUE_CHARACTER_IN_A_STRING_H__ */
