@@ -9,6 +9,7 @@
 #include "121-best-time-to-buy-and-sell-stock.h"
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
+#include "242-valid-anagram.h"
 #include "350-intersection-of-two-arrays-ii.h"
 #include "383-ransom-note.h"
 #include "387-first-unique-character-in-a-string.h"
@@ -225,6 +226,16 @@ int lc234_Palindrome_ll (int argc, char ** argv) {
     return 0;
 }
 
+int lc242_ValidAnagram (int argc, char ** argv) {
+    if (argc < 2)
+        return -1;
+
+    fprintf(stdout, "%s\n",
+            isAnagram(argv[0], argv[1]) ? "True" : "False");
+
+    return 0;
+}
+
 int lc350_Intersection (int argc, char ** argv) {
     int * input = pargia(argc, argv);
     int * nums2 = NULL;
@@ -390,6 +401,9 @@ int main (int argc, char **argv) {
             break;
         case 234:
             ret = lc234_Palindrome_ll (argc - 2, argv + 2);
+            break;
+        case 242:
+            ret = lc242_ValidAnagram (argc - 2, argv + 2);
             break;
         case 350:
             ret = lc350_Intersection (argc - 2, argv + 2);
