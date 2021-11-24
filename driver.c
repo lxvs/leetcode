@@ -10,6 +10,7 @@
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 #include "350-intersection-of-two-arrays-ii.h"
+#include "383-ransom-note.h"
 #include "387-first-unique-character-in-a-string.h"
 #include "566-reshape-the-matrix.h"
 
@@ -261,6 +262,23 @@ int lc350_Intersection (int argc, char ** argv) {
     return 0;
 }
 
+int lc383_RansomNote (int argc, char ** argv) {
+    const char * usage =
+        "Usage:\n"
+        "\n"
+        "    " EXEC " 383 <note> <magazine>\n";
+
+    if (argc < 2) {
+        fprintf(stdout, "%s", usage);
+        return 0;
+    }
+
+    fprintf(stdout, "%s\n",
+            canConstruct(argv[0], argv[1]) ? "True" : "False");
+
+    return 0;
+}
+
 int lc387_FirstUniqueChar (int argc, char ** argv) {
     if (argc - 1) {
         fprintf(stdout,
@@ -375,6 +393,9 @@ int main (int argc, char **argv) {
             break;
         case 350:
             ret = lc350_Intersection (argc - 2, argv + 2);
+            break;
+        case 383:
+            ret = lc383_RansomNote (argc - 2, argv + 2);
             break;
         case 387:
             ret = lc387_FirstUniqueChar (argc - 2, argv + 2);
