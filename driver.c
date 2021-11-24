@@ -19,12 +19,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define EXEC    "lcdriver"
 static int * pargia (const int argc, char ** argv);
 static int ** pargim (const int argc, char ** argv);
 static void printia (const int * nums, int size);
 static void printim (int ** matrix, int r, int c);
 
-const char * usage_string = "./driver <id> [<argument> ...]";
+const char * usage_string = EXEC " <id> [<argument> ...]";
 
 int lc003_LongestSubstring (int argc, char ** argv) {
     if (argc < 1)
@@ -114,7 +115,7 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
         fprintf(stdout,
                 "Usage:\n"
                 "\n"
-                "    driver 74 <target> <col> <numbers> ...\n");
+                "    " EXEC " 74 <target> <col> <numbers> ...\n");
         return 0;
     }
 
@@ -166,7 +167,7 @@ int lc118_PascalsTriangle (int argc, char ** argv) {
         fprintf(stdout,
                 "Usage:\n"
                 "\n"
-                "    driver 118 <row>\n"
+                "    " EXEC " 118 <row>\n"
                 "\n"
                 "Generate a Pascal's triangle of <row> row(s)\n");
         return 0;
@@ -265,7 +266,7 @@ int lc387_FirstUniqueChar (int argc, char ** argv) {
         fprintf(stdout,
                 "Usage:\n"
                 "\n"
-                "    driver 387 <string>\n");
+                "    " EXEC " 387 <string>\n");
         return 0;
     }
 
@@ -283,7 +284,7 @@ int lc566_MatrixReshape (int argc, char ** argv) {
         fprintf(stdout,
                 "Usage:\n"
                 "\n"
-                "    driver 566 <r> <c> <col> <numbers> ...\n"
+                "    " EXEC " 566 <r> <c> <col> <numbers> ...\n"
                 "\n"
                 "    <r> <c>     the number of rows/columns of reshaped matrix\n"
                 "    <col>       the number of columns of input matrix\n"
