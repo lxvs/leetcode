@@ -1,5 +1,6 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include "009-palindrome-number.h"
+#include "021-merge-two-sorted-lists.h"
 #include "026-remove-duplicates-from-sorted-array.h"
 #include "036-valid-sudoku.h"
 #include "053-maximum-subarray.h"
@@ -44,6 +45,53 @@ int lc009_Palindrome (int argc, char ** argv) {
                 num, isPalindrome(num) ? "is" : "isn't");
     }
 
+    return 0;
+}
+
+int lc021_Merge2LinkedLists (int argc, char ** argv) {
+    Node * l1 = NULL;
+    Node * l2 = NULL;
+    Node * ret;
+    int len1, len2;
+    const char * usage =
+        "Usage:\n"
+        "\n"
+        "    " EXEC " 21 <l1.len> <l2.len> [<l1.val> ...] [<l2.val> ...]\n"
+        "\n"
+        "Merge linked list l1 and l2.\n";
+
+    if (argc < 2) {
+        fprintf(stdout, "%s", usage);
+        return 0;
+    }
+
+    len1 = atoi(argv[0]);
+    len2 = atoi(argv[1]);
+
+    if (len1 + len2 != argc - 2)
+        return -1;
+
+    for (int i = 0; i < len1 + len2; i++) {
+        if (i < len1)
+            l1 = AddValue(l1, atoi(argv[2 + i]));
+        else
+            l2 = AddValue(l2, atoi(argv[2 + i]));
+    }
+
+#if DEBUG
+    fprintf(stdout, "Input lists:\n");
+    PrintList(l1);
+    putchar('\n');
+    PrintList(l2);
+    putchar('\n');
+#endif
+
+    ret = mergeTwoLists(l1, l2);
+
+    fprintf(stdout, "Merged lists:\n");
+    PrintList(ret);
+
+    free(ret);
     return 0;
 }
 
@@ -374,6 +422,9 @@ int main (int argc, char **argv) {
             break;
         case 9:
             ret = lc009_Palindrome (argc -2, argv + 2);
+            break;
+        case 21:
+            ret = lc021_Merge2LinkedLists (argc - 2, argv + 2);
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
