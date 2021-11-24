@@ -3,6 +3,7 @@
 #include "026-remove-duplicates-from-sorted-array.h"
 #include "036-valid-sudoku.h"
 #include "053-maximum-subarray.h"
+#include "074-search-a-2d-matrix.h"
 #include "088-merge-sorted-array.h"
 #include "118-pascals-triangle.h"
 #include "121-best-time-to-buy-and-sell-stock.h"
@@ -99,6 +100,44 @@ int lc053_MaxSubarray (int argc, char ** argv) {
     ret = maxSubArray(input, argc);
     free(input);
     return ret;
+}
+
+int lc074_Search2dMatrix (int argc, char ** argv) {
+    int ** input;
+    int t;
+    int r;
+    int c;
+    int * csz;
+
+    if (argc < 3) {
+        fprintf(stdout,
+                "Usage:\n"
+                "\n"
+                "    driver 74 <target> <col> <numbers> ...\n");
+        return 0;
+    }
+
+    input = pargim(argc - 1, argv + 1);
+
+    if (!input)
+        return -1;
+
+    t = atoi(argv[0]);
+    c = atoi(argv[1]);
+    r = (argc - 2) / c;
+    fprintf(stdout, "input matrix:\n");
+    printim(input, r, c);
+    putchar('\n');
+
+    csz = malloc(sizeof *csz * r);
+    for (int i = 0; i < r; i++)
+        csz[i] = c;
+
+    fprintf(stdout, "%s target %d\n.",
+            searchMatrix(input, r, csz, t) ? "Found" : "Couldn't find",
+            t);
+
+    return 0;
 }
 
 int lc088_MergeNums (int argc, char ** argv) {
@@ -301,6 +340,9 @@ int main (int argc, char **argv) {
             break;
         case 53:
             ret = lc053_MaxSubarray (argc - 2, argv + 2);
+            break;
+        case 74:
+            ret = lc074_Search2dMatrix (argc - 2, argv + 2);
             break;
         case 88:
             ret = lc088_MergeNums (argc - 2, argv + 2);
