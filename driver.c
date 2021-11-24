@@ -239,13 +239,14 @@ int lc566_MatrixReshape (int argc, char ** argv) {
         return 0;
     }
 
-    n = atoi(argv[2]);
-    if ((argc - 3) % n)
+    input = pargim(argc - 2, argv + 2);
+
+    if (!input)
         return -1;
 
-    input = pargim(argc - 2, argv + 2);
     r = atoi(argv[0]);
     c = atoi(argv[1]);
+    n = atoi(argv[2]);
     m = (argc - 3) / n;
 
     fprintf(stdout, "Input matrix:\n");
@@ -372,6 +373,13 @@ static int ** pargim (const int argc, char ** argv) {
 
     if (!c) {
         fprintf(stderr, "pargim error: Cannot create a matrix of 0 column.\n");
+        return NULL;
+    }
+
+    if ((argc - 1) % c) {
+        fprintf(stderr,
+                "pargim error: Cannot create a matrix of %d columns out of %d %s.\n",
+                c, argc - 1, argc - 1 > 1 ? "numbers" : "number");
         return NULL;
     }
 
