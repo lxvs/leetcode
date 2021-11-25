@@ -5,6 +5,7 @@
 #include "036-valid-sudoku.h"
 #include "053-maximum-subarray.h"
 #include "074-search-a-2d-matrix.h"
+#include "083-remove-duplicates-from-sorted-list.h"
 #include "088-merge-sorted-array.h"
 #include "118-pascals-triangle.h"
 #include "121-best-time-to-buy-and-sell-stock.h"
@@ -190,6 +191,20 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
             searchMatrix(input, r, csz, t) ? "Found" : "Couldn't find",
             t);
 
+    return 0;
+}
+
+int lc083_RemoveDupFromSortedList (int argc, char ** argv) {
+    Node * input = NULL;
+    Node * ret;
+
+    while (*argv)
+        input = AddValue(input, atoi(*argv++));
+
+    ret = deleteDuplicates(input);
+    PrintList(ret);
+
+    free(ret);
     return 0;
 }
 
@@ -453,6 +468,9 @@ int main (int argc, char **argv) {
             break;
         case 74:
             ret = lc074_Search2dMatrix (argc - 2, argv + 2);
+            break;
+        case 83:
+            ret = lc083_RemoveDupFromSortedList (argc - 2, argv + 2);
             break;
         case 88:
             ret = lc088_MergeNums (argc - 2, argv + 2);
