@@ -38,6 +38,12 @@ void DelValue (Node *list, int value) {
 
 void PrintList (const Node *list) {
     const Node *p = list;
+
+    if (!p) {
+        fprintf(stdout, "PrintList: empty list\n");
+        return;
+    }
+
     fprintf(stdout, "=======================\n");
     fprintf(stdout, " %5s %15s\n", "Index", "Value");
     fprintf(stdout, "-----------------------\n");
