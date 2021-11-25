@@ -17,6 +17,7 @@
 #include "383-ransom-note.h"
 #include "387-first-unique-character-in-a-string.h"
 #include "566-reshape-the-matrix.h"
+#include "5930-two-furthest-houses-with-different-colors.h"
 
 #include "lib/llist.h"
 #include "lib/debug.h"
@@ -426,6 +427,16 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     return 0;
 }
 
+int lc5930_maxDistance (int argc, char ** argv) {
+    int * input = pargia(argc, argv);
+    int ret;
+
+    ret = maxDistance(input, argc);
+    free(input);
+
+    return ret;
+}
+
 void Usage (void) {
     printf("Usage:");
 }
@@ -504,6 +515,9 @@ int main (int argc, char **argv) {
             break;
         case 566:
             ret = lc566_MatrixReshape (argc - 2, argv + 2);
+            break;
+        case 5930:
+            ret = lc5930_maxDistance (argc - 2, argv + 2);
             break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);
