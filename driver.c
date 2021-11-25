@@ -8,6 +8,7 @@
 #include "088-merge-sorted-array.h"
 #include "118-pascals-triangle.h"
 #include "121-best-time-to-buy-and-sell-stock.h"
+#include "206-reverse-linked-list.h"
 #include "217-contains-duplicate.h"
 #include "234-palindrome-linked-list.h"
 #include "242-valid-anagram.h"
@@ -249,6 +250,21 @@ int lc121_MaxProfit(int argc, char ** argv) {
     return ret;
 }
 
+int lc206_ReverseLinkedList (int argc, char ** argv) {
+    Node * input = NULL;
+    Node * ret;
+
+    while (*argv)
+        input = AddValue(input, atoi(*argv++));
+
+    ret = reverseList(input);
+
+    PrintList(ret);
+
+    free(ret);
+    return 0;
+}
+
 int lc217_ContainsDup (int argc, char ** argv) {
     int * input = pargia(argc, argv);
 
@@ -446,6 +462,9 @@ int main (int argc, char **argv) {
             break;
         case 121:
             ret = lc121_MaxProfit (argc - 2, argv + 2);
+            break;
+        case 206:
+            ret = lc206_ReverseLinkedList (argc - 2, argv + 2);
             break;
         case 217:
             ret = lc217_ContainsDup (argc - 2, argv + 2);
