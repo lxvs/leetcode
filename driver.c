@@ -1,5 +1,6 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include "009-palindrome-number.h"
+#include "020-valid-parentheses.h"
 #include "021-merge-two-sorted-lists.h"
 #include "026-remove-duplicates-from-sorted-array.h"
 #include "036-valid-sudoku.h"
@@ -47,6 +48,15 @@ int lc009_Palindrome (int argc, char ** argv) {
         fprintf(stdout, "%d %s a palindrome number.\n",
                 num, isPalindrome(num) ? "is" : "isn't");
     }
+
+    return 0;
+}
+
+int lc020_ValidParentheses (int argc, char ** argv) {
+    if (argc != 1)
+        return -1;
+
+    fprintf(stdout, "%s\n", isValid(*argv) ? "Valid" : "Invalid");
 
     return 0;
 }
@@ -464,6 +474,9 @@ int main (int argc, char **argv) {
             break;
         case 9:
             ret = lc009_Palindrome (argc -2, argv + 2);
+            break;
+        case 20:
+            ret = lc020_ValidParentheses (argc -2, argv + 2);
             break;
         case 21:
             ret = lc021_Merge2LinkedLists (argc - 2, argv + 2);
