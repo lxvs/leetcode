@@ -1,25 +1,14 @@
 #include <stdlib.h>
 
-static void swap (int * a, int * b) {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
-    return;
-}
-
-static int * BubbleSort (int * nums, int numsSize) {
-    for (int i = 0; i < numsSize - 1; i++) {
-        char swapped = 0;
-        for (int j = 0; j < numsSize - 1 - i; j++) {
-            if (nums[j] > nums[j + 1]) {
-                swap(nums + j, nums + j + 1);
-                swapped = 1;
-            }
-        }
-        if (!swapped)
-            break;
+static void InsertionSort (int * nums, int numsSize) {
+    int sorting;
+    for (int i = 1, j; i < numsSize; i++) {
+        sorting = nums[i];
+        for (j = i - 1; j >= 0 && nums[j] > sorting; j--)
+            nums[j + 1] = nums[j];
+        nums[j + 1] = sorting;
     }
-    return nums;
+    return;
 }
 
 /**
@@ -31,5 +20,6 @@ int * sortedSquares (int * nums, int numsSize, int * returnSize) {
     for (int i = 0; i < numsSize; i++)
         ret[i] = nums[i] * nums[i];
 
-    return BubbleSort(ret, numsSize);
+    InsertionSort(ret, numsSize);
+    return ret;
 }
