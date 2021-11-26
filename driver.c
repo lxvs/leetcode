@@ -3,6 +3,7 @@
 #include "020-valid-parentheses.h"
 #include "021-merge-two-sorted-lists.h"
 #include "026-remove-duplicates-from-sorted-array.h"
+#include "034-find-first-and-last-position-of-element-in-sorted-array.h"
 #include "036-valid-sudoku.h"
 #include "053-maximum-subarray.h"
 #include "074-search-a-2d-matrix.h"
@@ -120,6 +121,30 @@ int lc026_RmDup(int argc, char ** argv) {
     removeDuplicates(nums, NUMS_SIZE);
     printf("after removal:\n");
     printArray(nums, NUMS_SIZE);
+
+    return 0;
+}
+
+int lc034_FindPosOfElementsInSortedArray(int argc, char ** argv) {
+    int target;
+    int * input;
+    int * ret;
+    int retsz;
+    const char * usage = "Usage: " EXEC " 34 <target> [<nums> ...]\n";
+
+    if (argc < 1) {
+        fprintf(stdout, "%s", usage);
+        return 0;
+    }
+
+    target = atoi(*argv);
+    input = pargia(argc - 1, argv + 1);
+    ret = searchRange(input, argc - 1, target, &retsz);
+
+    printia(ret, retsz);
+
+    free(ret);
+    free(input);
 
     return 0;
 }
@@ -483,6 +508,9 @@ int main (int argc, char **argv) {
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
+            break;
+        case 34:
+            ret = lc034_FindPosOfElementsInSortedArray (argc - 2, argv + 2);
             break;
         case 36:
             ret = lc036_ValidSudoku (argc - 2, argv + 2);

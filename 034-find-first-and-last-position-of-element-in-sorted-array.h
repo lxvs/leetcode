@@ -1,0 +1,6 @@
+#ifndef __034_FIND_FIRST_AND_LAST_POSITION_OF_ELEMENT_IN_SORTED_ARRAY_H__
+#define __034_FIND_FIRST_AND_LAST_POSITION_OF_ELEMENT_IN_SORTED_ARRAY_H__
+
+int * searchRange(int * nums, int numsSize, int target, int * returnSize);
+
+#endif /* __034_FIND_FIRST_AND_LAST_POSITION_OF_ELEMENT_IN_SORTED_ARRAY_H__ */
