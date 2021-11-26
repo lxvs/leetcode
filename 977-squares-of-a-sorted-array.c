@@ -1,13 +1,20 @@
 #include <stdlib.h>
 
-static void InsertionSort (int * nums, int numsSize) {
+static void InsertionSort (int * nums, int numsSize, int d) {
     int sorting;
-    for (int i = 1, j; i < numsSize; i++) {
+    for (int i = d, j; i < numsSize; i += d) {
         sorting = nums[i];
-        for (j = i - 1; j >= 0 && nums[j] > sorting; j--)
-            nums[j + 1] = nums[j];
-        nums[j + 1] = sorting;
+        for (j = i - d; j >= 0 && nums[j] > sorting; j -= d)
+            nums[j + d] = nums[j];
+        nums[j + d] = sorting;
     }
+    return;
+}
+
+static void ShellSort (int * nums, int numsSize) {
+    for (int d = numsSize / 2; d > 0; d /= 2)
+        for (int i = 0; i < d; i++)
+            InsertionSort(nums, numsSize, d);
     return;
 }
 
@@ -20,6 +27,6 @@ int * sortedSquares (int * nums, int numsSize, int * returnSize) {
     for (int i = 0; i < numsSize; i++)
         ret[i] = nums[i] * nums[i];
 
-    InsertionSort(ret, numsSize);
+    ShellSort(ret, numsSize);
     return ret;
 }
