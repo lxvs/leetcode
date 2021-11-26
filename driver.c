@@ -19,6 +19,7 @@
 #include "383-ransom-note.h"
 #include "387-first-unique-character-in-a-string.h"
 #include "566-reshape-the-matrix.h"
+#include "977-squares-of-a-sorted-array.h"
 #include "5930-two-furthest-houses-with-different-colors.h"
 
 #include "lib/llist.h"
@@ -462,6 +463,24 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     return 0;
 }
 
+int lc977_SortSquare (int argc, char ** argv) {
+    int * input;
+    int * ret;
+    int retsz;
+
+    if (argc < 1)
+        return -1;
+
+    input = pargia(argc, argv);
+    ret = sortedSquares(input, argc, &retsz);
+
+    printia(ret, retsz);
+
+    free(input);
+    free(ret);
+    return 0;
+}
+
 int lc5930_maxDistance (int argc, char ** argv) {
     int * input = pargia(argc, argv);
     int ret;
@@ -556,6 +575,9 @@ int main (int argc, char **argv) {
             break;
         case 566:
             ret = lc566_MatrixReshape (argc - 2, argv + 2);
+            break;
+        case 977:
+            ret = lc977_SortSquare (argc - 2, argv + 2);
             break;
         case 5930:
             ret = lc5930_maxDistance (argc - 2, argv + 2);
