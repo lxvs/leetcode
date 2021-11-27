@@ -21,6 +21,7 @@
 #include "566-reshape-the-matrix.h"
 #include "977-squares-of-a-sorted-array.h"
 #include "5930-two-furthest-houses-with-different-colors.h"
+#include "5924-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 
 #include "lib/llist.h"
 #include "lib/debug.h"
@@ -481,6 +482,15 @@ int lc977_SortSquare (int argc, char ** argv) {
     return 0;
 }
 
+int lc5924_RobotComingHome (int argc, char ** argv) {
+    int start[2] = {1, 0};
+    int home[2] = {2, 3};
+    int rowCosts[3] = {5, 4, 3};
+    int colCosts[4] = {8, 2, 6, 7};
+
+    return minCost(start, 2, home, 2, rowCosts, 3, colCosts, 4);
+}
+
 int lc5930_maxDistance (int argc, char ** argv) {
     int * input = pargia(argc, argv);
     int ret;
@@ -578,6 +588,9 @@ int main (int argc, char **argv) {
             break;
         case 977:
             ret = lc977_SortSquare (argc - 2, argv + 2);
+            break;
+        case 5924:
+            ret = lc5924_RobotComingHome (argc - 2, argv + 2);
             break;
         case 5930:
             ret = lc5930_maxDistance (argc - 2, argv + 2);
