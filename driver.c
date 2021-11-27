@@ -488,7 +488,16 @@ int lc5924_RobotComingHome (int argc, char ** argv) {
     int rowCosts[3] = {5, 4, 3};
     int colCosts[4] = {8, 2, 6, 7};
 
+#if DEBUG
+    int ** costTable = minCostDbg(start, 2, home, 2, rowCosts, 3, colCosts, 4);
+    printim(costTable, 3, 4);
+    for (int i = 0; i < 3; i++)
+        free(costTable[i]);
+    free(costTable);
+    return 0;
+#else
     return minCost(start, 2, home, 2, rowCosts, 3, colCosts, 4);
+#endif
 }
 
 int lc5930_maxDistance (int argc, char ** argv) {
