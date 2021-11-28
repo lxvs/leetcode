@@ -22,6 +22,7 @@
 #include "977-squares-of-a-sorted-array.h"
 #include "5930-two-furthest-houses-with-different-colors.h"
 #include "5924-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
+#include "5941-find-all-people-with-secret.h"
 
 #include "lib/llist.h"
 #include "lib/debug.h"
@@ -501,6 +502,34 @@ int lc5930_maxDistance (int argc, char ** argv) {
     return ret;
 }
 
+int lc5941_Secret (int argc, char ** argv) {
+    int ** meetings = malloc(sizeof *meetings * 3);
+    int retsz[1];
+    int * ret;
+    int expected[3] = {0, 1, 3};
+
+    for (int i = 0; i < 3; i++)
+        meetings[i] = malloc(sizeof **meetings * 3);
+    meetings[0][0] = 3;
+    meetings[0][1] = 1;
+    meetings[0][2] = 3;
+    meetings[1][0] = 1;
+    meetings[1][1] = 2;
+    meetings[1][2] = 2;
+    meetings[2][0] = 0;
+    meetings[2][1] = 3;
+    meetings[2][2] = 3;
+
+    ret = findAllPeople(4, meetings, 3, NULL, 3, retsz);
+
+    fprintf(stdout, "Expected:\n");
+    printia(expected, 3);
+    fprintf(stdout, "Got:\n");
+    printia(ret, *retsz);
+
+    return 0;
+}
+
 void Usage (void) {
     printf("Usage:");
 }
@@ -594,6 +623,9 @@ int main (int argc, char **argv) {
             break;
         case 5930:
             ret = lc5930_maxDistance (argc - 2, argv + 2);
+            break;
+        case 5941:
+            ret = lc5941_Secret (argc - 2, argv + 2);
             break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);
