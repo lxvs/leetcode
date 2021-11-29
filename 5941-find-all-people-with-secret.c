@@ -16,22 +16,26 @@ int * findAllPeople (int n, int ** meetings, int meetingsSize, int * meetingsCol
     time[0] = 0;
     time[firstPerson] = 0;
 
-    for (int i = 0; i < meetingsSize; i++) {
-        int t = meetings[i][2];
-        int * t0 = time + meetings[i][0];
-        int * t1 = time + meetings[i][1];
-        if (*t0 + *t1 == -2 || ((*t0 + 1) && (*t1 + 1)))
-            continue;
-        if (*t0 == -1) {
-            if (t < *t1)
+    for (int j = 0; j < meetingsSize; j++) {
+        for (int i = j; i >= 0; i--) {
+            int t = meetings[i][2];
+            if (i != j && t < meetings[j][2])
                 continue;
-            *t0 = t;
-            ret[(*returnSize)++] = meetings[i][0];
-        } else {
-            if (t < *t0)
+            int * t0 = time + meetings[i][0];
+            int * t1 = time + meetings[i][1];
+            if (*t0 + *t1 == -2 || ((*t0 + 1) && (*t1 + 1)))
                 continue;
-            *t1 = t;
-            ret[(*returnSize)++] = meetings[i][1];
+            if (*t0 == -1) {
+                if (t < *t1)
+                    continue;
+                *t0 = t;
+                ret[(*returnSize)++] = meetings[i][0];
+            } else {
+                if (t < *t0)
+                    continue;
+                *t1 = t;
+                ret[(*returnSize)++] = meetings[i][1];
+            }
         }
     }
 
