@@ -503,31 +503,112 @@ int lc5930_maxDistance (int argc, char ** argv) {
 }
 
 int lc5941_Secret (int argc, char ** argv) {
-    int ** meetings = malloc(sizeof *meetings * 3);
+    char testcase = 0;
     int retsz[1];
     int * ret;
-    int expected[3] = {0, 1, 3};
+    int * expected;
+    int expectedsz;
+    int n, first;
+    int ** meetings = malloc(sizeof *meetings * 3);
+    int exitcode = 0;
 
     for (int i = 0; i < 3; i++)
         meetings[i] = malloc(sizeof **meetings * 3);
-    meetings[0][0] = 3;
-    meetings[0][1] = 1;
-    meetings[0][2] = 3;
-    meetings[1][0] = 1;
-    meetings[1][1] = 2;
-    meetings[1][2] = 2;
-    meetings[2][0] = 0;
-    meetings[2][1] = 3;
-    meetings[2][2] = 3;
 
-    ret = findAllPeople(4, meetings, 3, NULL, 3, retsz);
+    if (argc)
+        testcase = atoi(*argv);
+
+    switch (testcase) {
+        case 0:
+            n = 6;
+            first = 1;
+            meetings[0][0] = 1;
+            meetings[0][1] = 2;
+            meetings[0][2] = 5;
+            meetings[1][0] = 2;
+            meetings[1][1] = 3;
+            meetings[1][2] = 8;
+            meetings[2][0] = 1;
+            meetings[2][1] = 5;
+            meetings[2][2] = 10;
+            expected = malloc(sizeof *expected * (expectedsz = 5));
+            expected[0] = 0;
+            expected[1] = 1;
+            expected[2] = 2;
+            expected[3] = 3;
+            expected[4] = 5;
+            break;
+        case 1:
+            n = 4;
+            first = 3;
+            meetings[0][0] = 3;
+            meetings[0][1] = 1;
+            meetings[0][2] = 3;
+            meetings[1][0] = 1;
+            meetings[1][1] = 2;
+            meetings[1][2] = 2;
+            meetings[2][0] = 0;
+            meetings[2][1] = 3;
+            meetings[2][2] = 3;
+            expected = malloc(sizeof *expected * (expectedsz = 3));
+            expected[0] = 0;
+            expected[1] = 1;
+            expected[2] = 3;
+            break;
+        case 2:
+            n = 5;
+            first = 1;
+            meetings[0][0] = 3;
+            meetings[0][1] = 4;
+            meetings[0][2] = 2;
+            meetings[1][0] = 1;
+            meetings[1][1] = 2;
+            meetings[1][2] = 1;
+            meetings[2][0] = 2;
+            meetings[2][1] = 3;
+            meetings[2][2] = 1;
+            expected = malloc(sizeof *expected * (expectedsz = 5));
+            expected[0] = 0;
+            expected[1] = 1;
+            expected[2] = 2;
+            expected[3] = 3;
+            expected[4] = 4;
+            break;
+        case 3:
+            n = 6;
+            first = 1;
+            meetings[0][0] = 0;
+            meetings[0][1] = 2;
+            meetings[0][2] = 1;
+            meetings[1][0] = 1;
+            meetings[1][1] = 3;
+            meetings[1][2] = 1;
+            meetings[2][0] = 4;
+            meetings[2][1] = 5;
+            meetings[2][2] = 1;
+            expected = malloc(sizeof *expected * (expectedsz = 4));
+            expected[0] = 0;
+            expected[1] = 1;
+            expected[2] = 2;
+            expected[3] = 3;
+            break;
+        default:
+            exitcode = -1;
+            goto gc5941;
+    }
+
+    ret = findAllPeople(n, meetings, 3, NULL, first, retsz);
 
     fprintf(stdout, "Expected:\n");
-    printia(expected, 3);
+    printia(expected, expectedsz);
     fprintf(stdout, "Got:\n");
     printia(ret, *retsz);
 
-    return 0;
+gc5941:
+    for (int i = 0; i < 3; i++)
+        free(meetings[i]);
+    free(meetings);
+    return exitcode;
 }
 
 void Usage (void) {
