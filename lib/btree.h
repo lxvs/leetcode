@@ -7,4 +7,6 @@ typedef struct TreeNode {
     struct TreeNode * right;
 } tree_t;
 
+tree_t * NewNode (int val);
+
 #endif // __BTREE_H__

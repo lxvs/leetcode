@@ -9,6 +9,7 @@
 #include "074-search-a-2d-matrix.h"
 #include "083-remove-duplicates-from-sorted-list.h"
 #include "088-merge-sorted-array.h"
+#include "102-binary-tree-level-order-traversal.h"
 #include "118-pascals-triangle.h"
 #include "121-best-time-to-buy-and-sell-stock.h"
 #include "206-reverse-linked-list.h"
@@ -25,6 +26,7 @@
 #include "5941-find-all-people-with-secret.h"
 
 #include "lib/llist.h"
+#include "lib/btree.h"
 #include "lib/debug.h"
 
 #include <stdio.h>
@@ -259,6 +261,30 @@ int lc088_MergeNums (int argc, char ** argv) {
 
     printia(nums1, m + n);
 
+    return 0;
+}
+
+int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
+    tree_t * tree = NewNode(3);
+    tree->left = NewNode(9);
+    tree->right = NewNode(20);
+    tree->right->left = NewNode(15);
+    tree->right->right = NewNode(7);
+    int retsz[1];
+    int * retcsz[1];
+    int ** ret = levelOrder(tree, retsz, retcsz);
+    for (int i = 0; i < *retsz; i++) {
+        for (int j = 0; j < retcsz[0][i]; j++)
+            printf("%2d ", ret[i][j]);
+        putchar('\n');
+    }
+    free(tree->right->right);
+    free(tree->right->left);
+    free(tree->right);
+    free(tree->left);
+    free(tree);
+    free(retcsz[0]);
+    free(ret);
     return 0;
 }
 
@@ -584,6 +610,9 @@ int main (int argc, char **argv) {
             break;
         case 88:
             ret = lc088_MergeNums (argc - 2, argv + 2);
+            break;
+        case 102:
+            ret = lc102_BinTreeLevelTraversal (argc - 2, argv + 2);
             break;
         case 118:
             ret = lc118_PascalsTriangle (argc - 2, argv + 2);
