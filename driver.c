@@ -9,6 +9,7 @@
 #include "074-search-a-2d-matrix.h"
 #include "083-remove-duplicates-from-sorted-list.h"
 #include "088-merge-sorted-array.h"
+#include "098-validate-binary-search-tree.h"
 #include "102-binary-tree-level-order-traversal.h"
 #include "118-pascals-triangle.h"
 #include "121-best-time-to-buy-and-sell-stock.h"
@@ -261,6 +262,23 @@ int lc088_MergeNums (int argc, char ** argv) {
 
     printia(nums1, m + n);
 
+    return 0;
+}
+
+int lc098_ValidBST (int argc, char ** argv) {
+    tree_t * tree = NewNode(5);
+    tree->left = NewNode(4);
+    tree->right = NewNode(6);
+    tree->right->left = NewNode(3);
+    tree->right->right = NewNode(7);
+
+    fprintf(stdout, "%s BST\n", isValidBST(tree) ? "Valid" : "Invalid");
+
+    free(tree->right->right);
+    free(tree->right->left);
+    free(tree->right);
+    free(tree->left);
+    free(tree);
     return 0;
 }
 
@@ -610,6 +628,9 @@ int main (int argc, char **argv) {
             break;
         case 88:
             ret = lc088_MergeNums (argc - 2, argv + 2);
+            break;
+        case 98:
+            ret = lc098_ValidBST (argc - 2, argv + 2);
             break;
         case 102:
             ret = lc102_BinTreeLevelTraversal (argc - 2, argv + 2);
