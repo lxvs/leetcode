@@ -22,6 +22,7 @@
 #include "387-first-unique-character-in-a-string.h"
 #include "566-reshape-the-matrix.h"
 #include "977-squares-of-a-sorted-array.h"
+#include "1290-convert-binary-number-in-a-linked-list-to-integer.h"
 #include "5930-two-furthest-houses-with-different-colors.h"
 #include "5924-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "5941-find-all-people-with-secret.h"
@@ -527,6 +528,18 @@ int lc977_SortSquare (int argc, char ** argv) {
     return 0;
 }
 
+int lc1290_Bin2Int (int argc, char ** argv) {
+    if (!argc)
+        return -1;
+
+    Node * head = NULL;
+
+    while (*argv)
+        head = AddValue(head, atoi(*argv++));
+
+    return getDecimalValue(head);
+}
+
 int lc5924_RobotComingHome (int argc, char ** argv) {
     int start[2] = {1, 0};
     int home[2] = {2, 3};
@@ -667,6 +680,9 @@ int main (int argc, char **argv) {
             break;
         case 977:
             ret = lc977_SortSquare (argc - 2, argv + 2);
+            break;
+        case 1290:
+            ret = lc1290_Bin2Int (argc - 2, argv + 2);
             break;
         case 5924:
             ret = lc5924_RobotComingHome (argc - 2, argv + 2);
