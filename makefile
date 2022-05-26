@@ -1,4 +1,4 @@
-.PHONY: all clean debug cat install uninstall
+.PHONY: all clean dbg debug cat install uninstall
 
 ifeq ($(PREFIX),)
     PREFIX := /usr/local
@@ -12,8 +12,10 @@ all: *.c *.h lib/*.c lib/*.h
 clean:
 	rm $(EXEC)
 
+dbg: debug
+
 debug:
-	gcc -DDEBUG=1 -Wall *.c lib/*.c -o $(EXEC)
+	gcc -DDEBUG -Wall *.c lib/*.c -o $(EXEC)
 
 cat:
 	@cat $(CAT) | clip.exe
