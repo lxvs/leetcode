@@ -1,4 +1,5 @@
 #include "003-longest-substring-without-repeating-characters.h"
+#include "005-longest-palindromic-substring.h"
 #include "009-palindrome-number.h"
 #include "020-valid-parentheses.h"
 #include "021-merge-two-sorted-lists.h"
@@ -46,6 +47,15 @@ int lc003_LongestSubstring (int argc, char ** argv) {
     if (argc < 1)
         return -1;
     return lengthOfLongestSubstring(argv[0]);
+}
+
+int lc005_LongestPalindromicSubstring (int argc, char ** argv) {
+    if (argc != 1) {
+        fprintf (stderr, "error: it requires exact one argument.\n");
+        return -1;
+    }
+    fprintf (stdout, "Longest palindromic substring of `%s' is `%s'\n", *argv, longestPalindrome(*argv));
+    return 0;
 }
 
 int lc009_Palindrome (int argc, char ** argv) {
@@ -611,6 +621,9 @@ int main (int argc, char **argv) {
     switch(num) {
         case 3:
             ret = lc003_LongestSubstring (argc - 2, argv + 2);
+            break;
+        case 5:
+            ret = lc005_LongestPalindromicSubstring (argc - 2, argv + 2);
             break;
         case 9:
             ret = lc009_Palindrome (argc -2, argv + 2);
