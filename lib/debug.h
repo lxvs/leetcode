@@ -8,6 +8,6 @@
 #define dbg(fmt, args...)       fprintf(stderr, "debug: %s:%d:%s(): " fmt, __FILE__, __LINE__, __func__, ##args)
 #else
 #define dbgline
-#define dbg(...)                do {} while (0)
+#define dbg(...)
 #endif
 #endif /* __DEBUG_H__ */
