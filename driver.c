@@ -50,11 +50,15 @@ int lc003_LongestSubstring (int argc, char ** argv) {
 }
 
 int lc005_LongestPalindromicSubstring (int argc, char ** argv) {
+    char * ret;
+
     if (argc != 1) {
         fprintf (stderr, "error: it requires exact one argument.\n");
         return -1;
     }
-    fprintf (stdout, "Longest palindromic substring of `%s' is `%s'\n", *argv, longestPalindrome(*argv));
+    ret = longestPalindrome(*argv);
+    fprintf (stdout, "Longest palindromic substring of `%s' is `%s'\n", *argv, ret);
+    free (ret);
     return 0;
 }
 
