@@ -12,5 +12,6 @@ Node * AddValue (Node * list, int value);
 void DelValue (Node * list, int value);
 void PrintList (const Node * list);
 void GenRandList (Node * list, int length);
+void FreeLinkedList (Node * list);
 
 #endif

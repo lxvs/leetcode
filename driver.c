@@ -126,7 +126,7 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
     fprintf(stdout, "Merged lists:\n");
     PrintList(ret);
 
-    free(ret);
+    FreeLinkedList (ret);
     return 0;
 }
 
@@ -261,7 +261,7 @@ int lc083_RemoveDupFromSortedList (int argc, char ** argv) {
     ret = deleteDuplicates(input);
     PrintList(ret);
 
-    free(ret);
+    FreeLinkedList (ret);
     return 0;
 }
 
@@ -374,7 +374,7 @@ int lc206_ReverseLinkedList (int argc, char ** argv) {
 
     PrintList(ret);
 
-    free(ret);
+    FreeLinkedList (ret);
     return 0;
 }
 
@@ -399,7 +399,7 @@ int lc234_Palindrome_ll (int argc, char ** argv) {
     fprintf(stdout, "%s\n",
             isPalindrome_ll(input) ? "True" : "False");
 
-    free(input);
+    FreeLinkedList (input);
     return 0;
 }
 

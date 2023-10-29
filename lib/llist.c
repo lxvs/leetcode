@@ -89,3 +89,13 @@ void InsertionSort (Node *list) {
     }
     return;
 }
+
+void FreeLinkedList (Node * list) {
+    Node *p;
+
+    while (list != NULL) {
+        p = list;
+        list = list->next;
+        free (p);
+    }
+}
