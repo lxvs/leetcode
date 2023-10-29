@@ -14,7 +14,7 @@ Node * AddValue (Node * list, int value) {
         p = list;
         while (p->next)
             p=p->next;
-        p->next = (Node *) malloc(sizeof(Node*));
+        p->next = (Node *) malloc(sizeof(Node));
         p = p->next;
         p->val = value;
         p->next = NULL;
