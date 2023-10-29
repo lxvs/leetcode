@@ -23,6 +23,7 @@ static void palindromeAround (char * center_left, char * center_right, char * lo
     if (length > *max_length) {
         *max_length = length;
         strncpy(longest, back_walker, *max_length);
+        longest[*max_length] = '\0';
         dbg ("new longest: %s, length: %d\n", longest, length);
     }
 }
