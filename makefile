@@ -28,4 +28,4 @@ uninstall:
 	rm $(DESTDIR)$(PREFIX)/bin/$(EXEC)
 
 asan:
-	gcc -Wall *.c lib/*.c -o $(EXEC) -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
+	gcc -Wall *.c lib/*.c -o $(EXEC) -fsanitize=address -static-libasan -g -fno-omit-frame-pointer -DDEBUG
