@@ -1,6 +1,7 @@
 #include "003-longest-substring-without-repeating-characters.h"
 #include "005-longest-palindromic-substring.h"
 #include "009-palindrome-number.h"
+#include "013-roman-to-integer.h"
 #include "020-valid-parentheses.h"
 #include "021-merge-two-sorted-lists.h"
 #include "026-remove-duplicates-from-sorted-array.h"
@@ -70,6 +71,16 @@ int lc009_Palindrome (int argc, char ** argv) {
         fprintf(stdout, "%d %s a palindrome number.\n",
                 num, isPalindrome(num) ? "is" : "isn't");
     }
+
+    return 0;
+}
+
+int lc013_RomanToInteger (int argc, char ** argv) {
+    if (argc != 1) {
+        return -1;
+    }
+
+    fprintf (stdout, "Roman numeral `%s' is integer `%d'\n", *argv, romanToInt (*argv));
 
     return 0;
 }
@@ -631,6 +642,9 @@ int main (int argc, char **argv) {
             break;
         case 9:
             ret = lc009_Palindrome (argc -2, argv + 2);
+            break;
+        case 13:
+            ret = lc013_RomanToInteger (argc -2, argv + 2);
             break;
         case 20:
             ret = lc020_ValidParentheses (argc -2, argv + 2);
