@@ -21,7 +21,7 @@ char * longestPalindrome (char * s) {
     int max_length = 0;
     int s_length = strlen (s);
 
-    for (int center = 0; center < s_length - max_length; center++) {
+    for (int center = 0; center < s_length - max_length / 2; center++) {
         dbg ("walking to s[%d]: %c\n", center, s[center]);
         length_odd = palindromeAround (center, center, s);
         length_even = palindromeAround (center, center + 1, s);
