@@ -3,51 +3,37 @@
 #include <stdlib.h>
 #include "lib/debug.h"
 
-static void palindromeAround (char * center_left, char * center_right, char * longest, int * max_length, char * s) {
-    char * walker = center_right;
-    char * back_walker = center_left;
-    int length = center_right - center_left + 1;
+#define MAX_VALUE(a, b)     (a > b ? a : b)
 
-    dbg ("arguments: %ld, %ld, <longest>, %d, <s>\n", center_left - s, center_right - s, *max_length);
-    dbg ("walker: %c\n", *walker);
-    dbg ("back_walker: %c\n", *back_walker);
-    dbg ("length: %d\n", length);
+static int palindromeAround (int center_left, int center_right, const char * const s) {
+    int s_length = strlen (s);
 
-    while (*walker != '\0' && back_walker >= s && *walker == *back_walker) {
-        length += 2;
-        walker++;
-        back_walker--;
+    while (center_left >= 0 && center_right < s_length && s[center_left] == s[center_right]) {
+        center_left--;
+        center_right++;
     }
-    length -= 2;
-    back_walker++;
-    if (length > *max_length) {
-        *max_length = length;
-        strncpy(longest, back_walker, *max_length);
-        longest[*max_length] = '\0';
-        dbg ("new longest: %s, length: %d\n", longest, length);
-    }
+    return center_right - center_left + 1 - 2;
 }
 
 char * longestPalindrome (char * s) {
     char * longest;
-    char * c = s;
+    int max_position, length_odd, length_even, length_longer;
     int max_length = 0;
+    int s_length = strlen (s);
 
-    longest = malloc ((strlen(s) + 1) * sizeof *longest);
-    if (longest == NULL) {
-        fprintf (stderr, "error: failed to allocate %lu byte(s)\n", (strlen(s) + 1) * sizeof *longest);
-        return NULL;
-    }
-
-    while (c != NULL && *c != '\0') {
-        dbg ("walking to %c\n", *c);
-        palindromeAround (c, c, longest, &max_length, s);
-        if (*(c + 1) == *c) {
-            dbg ("walking to %c%c\n", *c, *(c + 1));
-            palindromeAround (c, c + 1, longest, &max_length, s);
+    for (int center = 0; center < s_length - max_length; center++) {
+        dbg ("walking to s[%d]: %c\n", center, s[center]);
+        length_odd = palindromeAround (center, center, s);
+        length_even = palindromeAround (center, center + 1, s);
+        if (max_length < (length_longer = MAX_VALUE (length_odd, length_even))) {
+            max_position = center;
+            max_length = length_longer;
         }
-        c++;
     }
+
+    longest = malloc ((max_length + 1) * sizeof *longest);
+    strncpy (longest, s + max_position - (max_length - 1) / 2, max_length);
+    longest[max_length] = '\0';
 
     return longest;
 }
