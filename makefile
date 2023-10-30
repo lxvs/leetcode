@@ -1,4 +1,4 @@
-.PHONY: all clean dbg debug cat install uninstall
+.PHONY: all clean debug
 
 ifeq ($(PREFIX),)
     PREFIX := /usr/local
@@ -12,20 +12,5 @@ all: *.c *.h lib/*.c lib/*.h
 clean:
 	rm $(EXEC)
 
-dbg: debug
-
 debug:
-	gcc -DDEBUG -Wall *.c lib/*.c -o $(EXEC)
-
-cat:
-	@cat $(CAT) | clip.exe
-
-install: $(EXEC)
-	install -d $(DESTDIR)$(PREFIX)/bin/
-	install $(EXEC) $(DESTDIR)$(PREFIX)/bin/
-
-uninstall:
-	rm $(DESTDIR)$(PREFIX)/bin/$(EXEC)
-
-asan:
-	gcc -Wall *.c lib/*.c -o $(EXEC) -fsanitize=address -static-libasan -g -fno-omit-frame-pointer -DDEBUG
+	gcc -DDEBUG -Wall *.c lib/*.c -o $(EXEC) -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
