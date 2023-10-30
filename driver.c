@@ -37,10 +37,10 @@
 #include <stdlib.h>
 
 #define EXEC    "lcdriver"
-static int * pargia (const int argc, char ** argv);
-static int ** pargim (const int argc, char ** argv);
-static void printia (const int * nums, int size);
-static void printim (int ** matrix, int r, int c);
+static int * parseArgsToIntArray (const int argc, char ** argv);
+static int ** parseArgsToIntMatrix (const int argc, char ** argv);
+static void printIntArray (const int * nums, int size);
+static void printIntMatrix (int ** matrix, int r, int c);
 
 const char * usage_string = EXEC " <id> [<argument> ...]";
 
@@ -170,10 +170,10 @@ int lc034_FindPosOfElementsInSortedArray(int argc, char ** argv) {
     }
 
     target = atoi(*argv);
-    input = pargia(argc - 1, argv + 1);
+    input = parseArgsToIntArray(argc - 1, argv + 1);
     ret = searchRange(input, argc - 1, target, &retsz);
 
-    printia(ret, retsz);
+    printIntArray(ret, retsz);
 
     free(ret);
     free(input);
@@ -213,7 +213,7 @@ int lc036_ValidSudoku (int argc, char ** argv) {
 }
 
 int lc053_MaxSubarray (int argc, char ** argv) {
-    int * input = pargia(argc, argv);
+    int * input = parseArgsToIntArray(argc, argv);
     int ret;
 
     if (!input)
@@ -239,7 +239,7 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
         return 0;
     }
 
-    input = pargim(argc - 1, argv + 1);
+    input = parseArgsToIntMatrix(argc - 1, argv + 1);
 
     if (!input)
         return -1;
@@ -248,7 +248,7 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
     c = atoi(argv[1]);
     r = (argc - 2) / c;
     fprintf(stdout, "input matrix:\n");
-    printim(input, r, c);
+    printIntMatrix(input, r, c);
     putchar('\n');
 
     csz = malloc(sizeof *csz * r);
@@ -286,7 +286,7 @@ int lc088_MergeNums (int argc, char ** argv) {
 
     merge(nums1, nums1Size, m, nums2, nums2Size, n);
 
-    printia(nums1, m + n);
+    printIntArray(nums1, m + n);
 
     return 0;
 }
@@ -363,7 +363,7 @@ int lc118_PascalsTriangle (int argc, char ** argv) {
 }
 
 int lc121_MaxProfit(int argc, char ** argv) {
-    int * input = pargia(argc, argv);
+    int * input = parseArgsToIntArray(argc, argv);
     int ret;
 
     if (!input)
@@ -390,7 +390,7 @@ int lc206_ReverseLinkedList (int argc, char ** argv) {
 }
 
 int lc217_ContainsDup (int argc, char ** argv) {
-    int * input = pargia(argc, argv);
+    int * input = parseArgsToIntArray(argc, argv);
 
     if (!input)
         return -1;
@@ -425,7 +425,7 @@ int lc242_ValidAnagram (int argc, char ** argv) {
 }
 
 int lc350_Intersection (int argc, char ** argv) {
-    int * input = pargia(argc, argv);
+    int * input = parseArgsToIntArray(argc, argv);
     int * nums2 = NULL;
     int nums2Size[1];
     int * ret = NULL;
@@ -445,15 +445,15 @@ int lc350_Intersection (int argc, char ** argv) {
         }
 
     fprintf(stdout, "nums1:\n");
-    printia(input, argc);
+    printIntArray(input, argc);
     fprintf(stdout, "nums2:\n");
-    printia(nums2, *nums2Size);
+    printIntArray(nums2, *nums2Size);
     putchar('\n');
 
     ret = intersect(input, argc, nums2, *nums2Size, retsz);
 
     fprintf(stdout, "return:\n");
-    printia(ret, *retsz);
+    printIntArray(ret, *retsz);
 
     free(input);
     free(ret);
@@ -509,7 +509,7 @@ int lc566_MatrixReshape (int argc, char ** argv) {
         return 0;
     }
 
-    input = pargim(argc - 2, argv + 2);
+    input = parseArgsToIntMatrix(argc - 2, argv + 2);
 
     if (!input)
         return -1;
@@ -520,12 +520,12 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     m = (argc - 3) / n;
 
     fprintf(stdout, "Input matrix:\n");
-    printim(input, m, n);
+    printIntMatrix(input, m, n);
 
     reshaped = matrixReshape(input, m, &n, r, c, retr, retc);
 
     fprintf(stdout, "Reshaped:\n");
-    printim(reshaped, *retr, **retc);
+    printIntMatrix(reshaped, *retr, **retc);
 
     if (reshaped != input)
         free(reshaped);
@@ -543,10 +543,10 @@ int lc977_SortSquare (int argc, char ** argv) {
     if (argc < 1)
         return -1;
 
-    input = pargia(argc, argv);
+    input = parseArgsToIntArray(argc, argv);
     ret = sortedSquares(input, argc, &retsz);
 
-    printia(ret, retsz);
+    printIntArray(ret, retsz);
 
     free(input);
     free(ret);
@@ -575,7 +575,7 @@ int lc5924_RobotComingHome (int argc, char ** argv) {
 }
 
 int lc5930_maxDistance (int argc, char ** argv) {
-    int * input = pargia(argc, argv);
+    int * input = parseArgsToIntArray(argc, argv);
     int ret;
 
     ret = maxDistance(input, argc);
@@ -605,9 +605,9 @@ int lc5941_Secret (int argc, char ** argv) {
     ret = findAllPeople(4, meetings, 3, NULL, 3, retsz);
 
     fprintf(stdout, "Expected:\n");
-    printia(expected, 3);
+    printIntArray(expected, 3);
     fprintf(stdout, "Got:\n");
-    printia(ret, *retsz);
+    printIntArray(ret, *retsz);
 
     return 0;
 }
@@ -735,10 +735,7 @@ int main (int argc, char **argv) {
     return ret;
 }
 
-/*
- * Parse arguments - int array
- */
-static int * pargia (const int argc, char ** argv) {
+static int * parseArgsToIntArray (const int argc, char ** argv) {
     int * input;
 
     if (argc < 1)
@@ -757,29 +754,24 @@ static int * pargia (const int argc, char ** argv) {
     return input;
 }
 
-/*
- * Parse arguments - int matrix
- *
- * argv[0] is the number of columns.
- */
-static int ** pargim (const int argc, char ** argv) {
+static int ** parseArgsToIntMatrix (const int argc, char ** argv) {
     int c = atoi(*argv);
     int r;
     int ** ret;
 
     if (argc < 2) {
-        fprintf(stderr, "pargim error: Too few arguments\n");
+        fprintf(stderr, "parseArgsToIntMatrix error: Too few arguments\n");
         return NULL;
     }
 
     if (!c) {
-        fprintf(stderr, "pargim error: Cannot create a matrix of 0 column.\n");
+        fprintf(stderr, "parseArgsToIntMatrix error: Cannot create a matrix of 0 column.\n");
         return NULL;
     }
 
     if ((argc - 1) % c) {
         fprintf(stderr,
-                "pargim error: Cannot create a matrix of %d columns out of %d %s.\n",
+                "parseArgsToIntMatrix error: Cannot create a matrix of %d columns out of %d %s.\n",
                 c, argc - 1, argc - 1 > 1 ? "numbers" : "number");
         return NULL;
     }
@@ -797,13 +789,13 @@ static int ** pargim (const int argc, char ** argv) {
     return ret;
 }
 
-static void printia (const int * nums, int size) {
+static void printIntArray (const int * nums, int size) {
     for (int i = 0; i < size; i++)
         fprintf(stdout, "nums[%2d] = %d\n", i, nums[i]);
     return;
 }
 
-static void printim (int ** matrix, int r, int c) {
+static void printIntMatrix (int ** matrix, int r, int c) {
     fprintf(stdout, " r\\c");
     for (int j = 0; j < c; j++)
         fprintf(stdout, "  %2d  ", j);
