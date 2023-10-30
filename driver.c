@@ -167,18 +167,28 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
 }
 
 int lc026_RmDup(int argc, char ** argv) {
+    const char * usage = \
+        "usage: " EXEC " 26 <integer> [<integer> ...]\n" \
+        "Remove duplicated items from a non-decreasing integer array.\n";
+    int * input;
+    int newSize;
 
-    int nums[NUMS_SIZE];
-
-    for (int i=0; i<NUMS_SIZE; i++) {
-        nums[i] = i/2;
+    if (argc < 1) {
+        fprintf (stdout, "%s", usage);
+        return 0;
     }
 
-    printArray(nums, NUMS_SIZE);
-    removeDuplicates(nums, NUMS_SIZE);
-    printf("after removal:\n");
-    printArray(nums, NUMS_SIZE);
+    input = parseArgsToIntArray (argc, argv);
 
+    printf ("input array:\n");
+    printIntArray (input, argc);
+
+    newSize = removeDuplicates(input, argc);
+
+    printf ("after removal of duplicated items:\n");
+    printIntArray (input, newSize);
+
+    free (input);
     return 0;
 }
 
