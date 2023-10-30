@@ -5,18 +5,11 @@
 int * parseArgsToIntArray (const int argc, char ** argv) {
     int * input;
 
-    if (argc < 1)
-        return NULL;
-
     input = malloc(sizeof *input * argc);
 
-    if (!input) {
-        fprintf(stderr, "error: Failed to allocate memory.\n");
-        return NULL;
-    }
-
-    for (int i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++) {
         input[i] = atoi(argv[i]);
+    }
 
     return input;
 }
@@ -26,12 +19,7 @@ int ** parseArgsToIntMatrix (const int argc, char ** argv) {
     int r;
     int ** ret;
 
-    if (argc < 2) {
-        fprintf(stderr, "parseArgsToIntMatrix error: Too few arguments\n");
-        return NULL;
-    }
-
-    if (!c) {
+    if (c == 0) {
         fprintf(stderr, "parseArgsToIntMatrix error: Cannot create a matrix of 0 column.\n");
         return NULL;
     }
@@ -46,12 +34,15 @@ int ** parseArgsToIntMatrix (const int argc, char ** argv) {
     r = (argc - 1) / c;
 
     ret = malloc(sizeof *ret * r);
-    for (int i = 0; i < r; i++)
+    for (int i = 0; i < r; i++) {
         ret[i] = malloc(sizeof **ret * c);
+    }
 
-    for (int i = 0; i < r; i++)
-        for (int j = 0; j < c; j++)
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
             ret[i][j] = atoi(argv[1 + i * c + j]);
+        }
+    }
 
     return ret;
 }
