@@ -1,5 +1,5 @@
-#ifndef __242_VALID_ANAGRAM_H__
-#define __242_VALID_ANAGRAM_H__
+#ifndef INCLUDED_242_VALID_ANAGRAM_H_
+#define INCLUDED_242_VALID_ANAGRAM_H_
 
 #include <stdbool.h>
 

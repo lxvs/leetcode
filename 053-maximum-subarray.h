@@ -1,5 +1,5 @@
-#ifndef __053_MAXIMUM_SUBARRAY_H__
-#define __053_MAXIMUM_SUBARRAY_H__
+#ifndef INCLUDED_053_MAXIMUM_SUBARRAY_H_
+#define INCLUDED_053_MAXIMUM_SUBARRAY_H_
 
 int maxSubArray (int * nums, int numsSize);
 

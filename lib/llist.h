@@ -1,5 +1,5 @@
-#ifndef __LLIST_H__
-#define __LLIST_H__
+#ifndef INCLUDED_LLIST_H_
+#define INCLUDED_LLIST_H_
 
 struct ListNode {
     int val;

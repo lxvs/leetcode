@@ -1,5 +1,5 @@
-#ifndef __009_PALINDROME_NUMBER_H__
-#define __009_PALINDROME_NUMBER_H__
+#ifndef INCLUDED_009_PALINDROME_NUMBER_H_
+#define INCLUDED_009_PALINDROME_NUMBER_H_
 
 #include <stdbool.h>
 

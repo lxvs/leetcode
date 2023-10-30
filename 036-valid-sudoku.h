@@ -1,5 +1,5 @@
-#ifndef __036_VALID_SUDOKU_H__
-#define __036_VALID_SUDOKU_H__
+#ifndef INCLUDED_036_VALID_SUDOKU_H_
+#define INCLUDED_036_VALID_SUDOKU_H_
 
 #include <stdbool.h>
 

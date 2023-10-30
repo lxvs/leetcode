@@ -1,5 +1,5 @@
-#ifndef __074_SEARCH_A_2D_MATRIX_H__
-#define __074_SEARCH_A_2D_MATRIX_H__
+#ifndef INCLUDED_074_SEARCH_A_2D_MATRIX_H_
+#define INCLUDED_074_SEARCH_A_2D_MATRIX_H_
 
 #include <stdbool.h>
 

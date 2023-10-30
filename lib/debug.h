@@ -1,5 +1,5 @@
-#ifndef __DEBUG_H__
-#define __DEBUG_H__
+#ifndef INCLUDED_DEBUG_H_
+#define INCLUDED_DEBUG_H_
 
 #if DEBUG
 #include <stdio.h>

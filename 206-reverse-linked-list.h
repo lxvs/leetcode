@@ -1,5 +1,5 @@
-#ifndef __206_REVERSE_LINKED_LIST_H__
-#define __206_REVERSE_LINKED_LIST_H__
+#ifndef INCLUDED_206_REVERSE_LINKED_LIST_H_
+#define INCLUDED_206_REVERSE_LINKED_LIST_H_
 
 struct ListNode * reverseList (struct ListNode * head);
 

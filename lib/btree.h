@@ -1,5 +1,5 @@
-#ifndef __BTREE_H__
-#define __BTREE_H__
+#ifndef INCLUDED_BTREE_H_
+#define INCLUDED_BTREE_H_
 
 typedef struct TreeNode {
     int val;

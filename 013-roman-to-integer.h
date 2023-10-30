@@ -1,5 +1,5 @@
-#ifndef __013_ROMAN_TO_INTEGER_H__
-#define __013_ROMAN_TO_INTEGER_H__
+#ifndef INCLUDED_013_ROMAN_TO_INTEGER_H_
+#define INCLUDED_013_ROMAN_TO_INTEGER_H_
 
 int romanToInt (char * s);
 

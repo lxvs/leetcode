@@ -1,5 +1,5 @@
-#ifndef __020_VALID_PARENTHESES_H__
-#define __020_VALID_PARENTHESES_H__
+#ifndef INCLUDED_020_VALID_PARENTHESES_H_
+#define INCLUDED_020_VALID_PARENTHESES_H_
 
 #include <stdbool.h>
 

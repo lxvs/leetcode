@@ -1,5 +1,5 @@
-#ifndef __383_RANSOM_NOTE_H__
-#define __383_RANSOM_NOTE_H__
+#ifndef INCLUDED_383_RANSOM_NOTE_H_
+#define INCLUDED_383_RANSOM_NOTE_H_
 
 #include <stdbool.h>
 

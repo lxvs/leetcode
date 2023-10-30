@@ -1,5 +1,5 @@
-#ifndef __001_TWO_SUM_H__
-#define __001_TWO_SUM_H__
+#ifndef INCLUDED_001_TWO_SUM_H_
+#define INCLUDED_001_TWO_SUM_H_
 
 int* twoSum(int* nums, int numsSize, int target, int* returnSize);
 

@@ -1,5 +1,5 @@
-#ifndef __021_MERGE_TWO_SORTED_LISTS_H__
-#define __021_MERGE_TWO_SORTED_LISTS_H__
+#ifndef INCLUDED_021_MERGE_TWO_SORTED_LISTS_H_
+#define INCLUDED_021_MERGE_TWO_SORTED_LISTS_H_
 
 #include "lib/llist.h"
 
