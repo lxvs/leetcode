@@ -1,14 +1,12 @@
 #include "026-remove-duplicates-from-sorted-array.h"
 
 int removeDuplicates (int * nums, int numsSize) {
+    int newSize = 1;
     for (int i = 1; i < numsSize; i++) {
-        while (nums[i] == nums[i - 1] && i < numsSize) {
-            numsSize--;
-            for (int j = i; j < numsSize; j++) {
-                nums[j] = nums[j + 1];
-            }
+        if (nums[i] != nums[newSize - 1]) {
+            nums[newSize++] = nums[i];
         }
     }
 
-    return numsSize;
+    return newSize;
 }
