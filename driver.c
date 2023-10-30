@@ -158,8 +158,11 @@ int lc034_FindPosOfElementsInSortedArray(int argc, char ** argv) {
     int target;
     int * input;
     int * ret;
-    int retsz;
-    const char * usage = "Usage: " EXEC " 34 <target> [<nums> ...]\n";
+    int retSize;
+    const char * usage = \
+        "usage: " EXEC " 34 <target> [<nums> ...]\n" \
+        "\n" \
+        "Find the starting and ending position of <target> in a non-decreasing sorted integer list.\n";
 
     if (argc < 1) {
         fprintf(stdout, "%s", usage);
@@ -168,9 +171,9 @@ int lc034_FindPosOfElementsInSortedArray(int argc, char ** argv) {
 
     target = atoi(*argv);
     input = parseArgsToIntArray(argc - 1, argv + 1);
-    ret = searchRange(input, argc - 1, target, &retsz);
+    ret = searchRange(input, argc - 1, target, &retSize);
 
-    printIntArray(ret, retsz);
+    printIntArray(ret, retSize);
 
     free(ret);
     free(input);
