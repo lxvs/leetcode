@@ -4,23 +4,19 @@
 
 char * longestCommonPrefix (char ** strs, int strsSize) {
     char * ret;
-    int indexOfMax = 0;
     int maxCommonLength = strlen (strs[0]);
 
-    for (int i = 0, j; i < strsSize; i++) {
-        for (j = 0; j < maxCommonLength; j++) {
-            if (strs[i][j] != strs[indexOfMax][j]) {
-                break;
-            }
+    for (int i = 0, j = 0; i < strsSize; i++, j = 0) {
+        while (j < maxCommonLength && strs[i][j] == strs[0][j]) {
+            j++;
         }
         if (j < maxCommonLength) {
             maxCommonLength = j;
-            indexOfMax = i;
         }
     }
 
     ret = malloc ((maxCommonLength + 1) * sizeof *ret);
-    strncpy (ret, strs[indexOfMax], maxCommonLength);
+    strncpy (ret, strs[0], maxCommonLength);
     ret[maxCommonLength] = '\0';
 
     return ret;
