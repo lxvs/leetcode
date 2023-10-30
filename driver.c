@@ -10,6 +10,7 @@
 #include "005-longest-palindromic-substring.h"
 #include "009-palindrome-number.h"
 #include "013-roman-to-integer.h"
+#include "014-longest-common-prefix.h"
 #include "020-valid-parentheses.h"
 #include "021-merge-two-sorted-lists.h"
 #include "026-remove-duplicates-from-sorted-array.h"
@@ -78,6 +79,33 @@ int lc013_RomanToInteger (int argc, char ** argv) {
     }
 
     fprintf (stdout, "Roman numeral `%s' is integer `%d'\n", *argv, romanToInt (*argv));
+
+    return 0;
+}
+
+int lc014_LongestCommonPrefix (int argc, char ** argv) {
+    char ** input;
+    char * ret;
+    const char * usage = \
+        "usage: " EXEC " 14 <string> [<string> ...]\n" \
+        "\n" \
+        "Find the longest common prefix of the strings.\n";
+
+    if (argc < 1) {
+        fprintf (stdout, "%s", usage);
+        return 0;
+    }
+
+    input = parseArgsToStringArray (argc, argv);
+    if (input == NULL) {
+        return -1;
+    }
+
+    ret = longestCommonPrefix (argv, argc);
+    fprintf (stdout, "Longest common prefix is `%s'\n", ret);
+
+    free (ret);
+    freeStringArray (input, argc);
 
     return 0;
 }
@@ -645,6 +673,9 @@ int main (int argc, char **argv) {
             break;
         case 13:
             ret = lc013_RomanToInteger (argc -2, argv + 2);
+            break;
+        case 14:
+            ret = lc014_LongestCommonPrefix (argc -2, argv + 2);
             break;
         case 20:
             ret = lc020_ValidParentheses (argc -2, argv + 2);

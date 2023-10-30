@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "array.h"
 
 int * parseArgsToIntArray (const int argc, char ** argv) {
@@ -12,6 +13,26 @@ int * parseArgsToIntArray (const int argc, char ** argv) {
     }
 
     return input;
+}
+
+char ** parseArgsToStringArray (const int argc, char ** argv) {
+    char ** ret;
+    int MAX_STRING_LENGTH = 0;
+
+    for (int i = 0, stringLength; i < argc; i++) {
+        if (MAX_STRING_LENGTH < (stringLength = strlen (argv[i]))) {
+            MAX_STRING_LENGTH = stringLength;
+        }
+    }
+
+    ret = malloc (sizeof *ret * argc);
+
+    for (int i = 0; i < argc; i++) {
+        ret[i] = malloc (sizeof *ret[i] * (MAX_STRING_LENGTH + 1));
+        strncpy (ret[i], argv[i], strlen (argv[i]) + 1);
+    }
+
+    return ret;
 }
 
 int ** parseArgsToIntMatrix (const int argc, char ** argv) {
@@ -53,6 +74,12 @@ void printIntArray (const int * nums, int size) {
     return;
 }
 
+void printStringArray (char ** str, int size) {
+    for (int i = 0; i < size; i++) {
+        fprintf (stdout, "str[%2d] = %s\n", i, str[i]);
+    }
+}
+
 void printIntMatrix (int ** matrix, int r, int c) {
     fprintf(stdout, " r\\c");
     for (int j = 0; j < c; j++)
@@ -67,6 +94,13 @@ void printIntMatrix (int ** matrix, int r, int c) {
     }
 
     return;
+}
+
+void freeStringArray (char ** str, int elementCount) {
+    while (elementCount > 0) {
+        free (str[--elementCount]);
+    }
+    free (str);
 }
 
 void freeIntMatrix (int ** matrix, int row) {
