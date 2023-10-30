@@ -525,10 +525,10 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     printIntMatrix(reshaped, *retr, **retc);
 
     if (reshaped != input)
-        free(reshaped);
+        freeIntMatrix (reshaped, *retr);
     if (*retc != &n)
-        free(*retc);
-    free(input);
+        free (*retc);
+    freeIntMatrix (input, m);
     return 0;
 }
 

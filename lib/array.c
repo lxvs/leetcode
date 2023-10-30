@@ -77,3 +77,10 @@ void printIntMatrix (int ** matrix, int r, int c) {
 
     return;
 }
+
+void freeIntMatrix (int ** matrix, int row) {
+    for (int i = 0; i < row; i++) {
+        free (matrix[i]);
+    }
+    free (matrix);
+}
