@@ -14,6 +14,7 @@
 #include "020-valid-parentheses.h"
 #include "021-merge-two-sorted-lists.h"
 #include "026-remove-duplicates-from-sorted-array.h"
+#include "027-remove-element.h"
 #include "034-find-first-and-last-position-of-element-in-sorted-array.h"
 #include "036-valid-sudoku.h"
 #include "053-maximum-subarray.h"
@@ -187,6 +188,35 @@ int lc026_RmDup(int argc, char ** argv) {
 
     printf ("after removal of duplicated items:\n");
     printIntArray (input, newSize);
+
+    free (input);
+    return 0;
+}
+
+int lc027_RemoveElement (int argc, char ** argv) {
+    const char * usage = \
+        "usage: " EXEC " 27 <value> [<integer> ...]\n" \
+        "Remove all occurrences of <value> in given integer array.\n" \
+        "array size: [0, 100]\n" \
+        "array element range: [0, 50]\n" \
+        "value range: [0, 100]\n";
+    int * input;
+    int value;
+    int arraySize;
+
+    if (argc < 1) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    arraySize = argc - 1;
+    value = atoi (argv[0]);
+    input = parseArgsToIntArray (arraySize, argv + 1);
+    printf ("input array:\n");
+    printIntArray (input, arraySize);
+    arraySize = removeElement (input, arraySize, value);
+    printf ("after removal:\n");
+    printIntArray (input, arraySize);
 
     free (input);
     return 0;
@@ -695,6 +725,9 @@ int main (int argc, char **argv) {
             break;
         case 26:
             ret = lc026_RmDup (argc - 2, argv + 2);
+            break;
+        case 27:
+            ret = lc027_RemoveElement (argc - 2, argv + 2);
             break;
         case 34:
             ret = lc034_FindPosOfElementsInSortedArray (argc - 2, argv + 2);
