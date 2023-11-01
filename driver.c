@@ -4,6 +4,7 @@
 #include <lib/llist.h>
 #include <lib/btree.h>
 #include <lib/array.h>
+#include "easy/001-two-sum.h"
 #include "easy/009-palindrome-number.h"
 #include "easy/013-roman-to-integer.h"
 #include "easy/014-longest-common-prefix.h"
@@ -40,6 +41,36 @@
 #define EXEC    "lcdriver"
 
 const char * usage_string = EXEC " <id> [<argument> ...]\n";
+
+int lc001_TwoSums (int argc, char ** argv) {
+    const char * usage = \
+        "usage: " EXEC " 1 <target> <integer> <integer> [<integer> ...]\n" \
+        "Return two different indices of the two integers such that they add up to target.\n";
+    int * input;
+    int * ret;
+    int inputSize;
+    int retSize[1] = {0};
+    int target;
+
+    if (argc < 3) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    inputSize = argc - 1;
+    target = atoi (argv[0]);
+    input = parseArgsToIntArray (inputSize, argv + 1);
+    printf ("input array:\n");
+    printIntArray (input, inputSize);
+    ret = twoSum (input, inputSize, target, retSize);
+    printf ("returned 2 indices:\n");
+    printIntArray (ret, *retSize);
+
+    free (input);
+    free (ret);
+
+    return 0;
+}
 
 int lc003_LongestSubstring (int argc, char ** argv) {
     if (argc < 1)
@@ -695,6 +726,9 @@ int main (int argc, char **argv) {
     }
 
     switch(num) {
+        case 1:
+            ret = lc001_TwoSums (argc - 2, argv + 2);
+            break;
         case 3:
             ret = lc003_LongestSubstring (argc - 2, argv + 2);
             break;
