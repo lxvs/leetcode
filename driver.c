@@ -391,6 +391,8 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
             searchMatrix(input, r, csz, t) ? "Found" : "Couldn't find",
             t);
 
+    free (csz);
+    freeIntMatrix (input, r);
     return 0;
 }
 
