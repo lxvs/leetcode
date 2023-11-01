@@ -5,4 +5,4 @@
 
 bool isValidSudoku(char** board, int boardSize, int* boardColSize);
 
-#endif /* __036_VALID_SUDOKU_H__ */
+#endif  /* INCLUDED_036_VALID_SUDOKU_H_ */

@@ -5,4 +5,4 @@
 
 bool canConstruct(char * ransomNote, char * magazine);
 
-#endif /* __383_RANSOM_NOTE_H__ */
+#endif  /* INCLUDED_383_RANSOM_NOTE_H_ */

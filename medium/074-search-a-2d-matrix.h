@@ -5,4 +5,4 @@
 
 bool searchMatrix(int** matrix, int matrixSize, int* matrixColSize, int target);
 
-#endif /* __074_SEARCH_A_2D_MATRIX_H__ */
+#endif  /* INCLUDED_074_SEARCH_A_2D_MATRIX_H_ */

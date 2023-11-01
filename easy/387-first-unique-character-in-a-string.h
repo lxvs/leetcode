@@ -3,4 +3,4 @@
 
 int firstUniqChar(char * s);
 
-#endif /* __387_FIRST_UNIQUE_CHARACTER_IN_A_STRING_H__ */
+#endif  /* INCLUDED_387_FIRST_UNIQUE_CHARACTER_IN_A_STRING_H_ */

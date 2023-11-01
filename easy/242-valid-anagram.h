@@ -5,4 +5,4 @@
 
 bool isAnagram(char * s, char * t);
 
-#endif /* __242_VALID_ANAGRAM_H__ */
+#endif  /* INCLUDED_242_VALID_ANAGRAM_H_ */

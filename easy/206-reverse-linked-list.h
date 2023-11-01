@@ -3,4 +3,4 @@
 
 struct ListNode * reverseList (struct ListNode * head);
 
-#endif /* __206_REVERSE_LINKED_LIST_H__ */
+#endif  /* INCLUDED_206_REVERSE_LINKED_LIST_H_ */

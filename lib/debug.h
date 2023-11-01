@@ -10,4 +10,4 @@
 #define dbgline
 #define dbg(...)
 #endif
-#endif /* __DEBUG_H__ */
+#endif  /* INCLUDED_DEBUG_H_ */

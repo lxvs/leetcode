@@ -5,4 +5,4 @@
 
 int ** levelOrder (struct TreeNode * root, int * returnSize, int ** returnColumnSizes);
 
-#endif /* __102_BINARY_TREE_LEVEL_ORDER_TRAVERSAL_H__ */
+#endif  /* INCLUDED_102_BINARY_TREE_LEVEL_ORDER_TRAVERSAL_H_ */

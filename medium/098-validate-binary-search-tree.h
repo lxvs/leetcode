@@ -6,4 +6,4 @@
 
 bool isValidBST (struct TreeNode * root);
 
-#endif /* __098_VALIDATE_BINARY_SEARCH_TREE_H__ */
+#endif  /* INCLUDED_098_VALIDATE_BINARY_SEARCH_TREE_H_ */

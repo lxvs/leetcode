@@ -3,4 +3,4 @@
 
 int maxSubArray (int * nums, int numsSize);
 
-#endif /* __053_MAXIMUM_SUBARRAY_H__ */
+#endif  /* INCLUDED_053_MAXIMUM_SUBARRAY_H_ */

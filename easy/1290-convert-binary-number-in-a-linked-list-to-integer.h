@@ -3,4 +3,4 @@
 
 int getDecimalValue (struct ListNode * head);
 
-#endif /* __1290_CONVERT_BINARY_NUMBER_IN_A_LINKED_LIST_TO_INTEGER_H__ */
+#endif  /* INCLUDED_1290_CONVERT_BINARY_NUMBER_IN_A_LINKED_LIST_TO_INTEGER_H_ */

@@ -3,4 +3,4 @@
 
 struct ListNode * deleteDuplicates (struct ListNode* head);
 
-#endif /* __083_REMOVE_DUPLICATES_FROM_SORTED_LIST_H__ */
+#endif  /* INCLUDED_083_REMOVE_DUPLICATES_FROM_SORTED_LIST_H_ */

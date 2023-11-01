@@ -9,4 +9,4 @@ typedef struct TreeNode {
 
 tree_t * NewNode (int val);
 
-#endif // __BTREE_H__
+#endif  /* INCLUDED_BTREE_H_ */

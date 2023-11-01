@@ -5,4 +5,4 @@
 
 bool isValid (char * s);
 
-#endif /* __020_VALID_PARENTHESES_H__ */
+#endif  /* INCLUDED_020_VALID_PARENTHESES_H_ */

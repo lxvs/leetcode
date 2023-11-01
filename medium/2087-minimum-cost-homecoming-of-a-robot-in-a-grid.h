@@ -3,4 +3,4 @@
 
 int minCost(int* startPos, int startPosSize, int* homePos, int homePosSize, int* rowCosts, int rowCostsSize, int* colCosts, int colCostsSize);
 
-#endif /* __2087_MINIMUM_COST_HOMECOMING_OF_A_ROBOT_IN_A_GRID_H__ */
+#endif  /* INCLUDED_2087_MINIMUM_COST_HOMECOMING_OF_A_ROBOT_IN_A_GRID_H_ */
