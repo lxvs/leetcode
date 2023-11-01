@@ -40,13 +40,14 @@
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "hard/2092-find-all-people-with-secret.h"
 
-#define EXEC    "lcdriver"
+#define EXEC            "lcdriver"
+#define USAGE_PREFIX    "usage: " EXEC " "
 
-const char * usage_string = EXEC " <id> [<argument> ...]\n";
+const char * driver_usage = USAGE_PREFIX "<id> [<argument> ...]\n";
 
 int lc001_TwoSums (int argc, char ** argv) {
     const char * usage = \
-        "usage: " EXEC " 1 <target> <integer> <integer> [<integer> ...]\n" \
+        USAGE_PREFIX "1 <target> <integer> <integer> [<integer> ...]\n" \
         "Return two different indices of the two integers such that they add up to target.\n";
     int * input;
     int * ret;
@@ -76,7 +77,7 @@ int lc001_TwoSums (int argc, char ** argv) {
 
 int lc002_AddTwoNumbers (int argc, char ** argv) {
     const char * usage = \
-        "usage: " EXEC " 2 <augend> <addend>\n" \
+        USAGE_PREFIX "2 <augend> <addend>\n" \
         "Return the sum of the 2 given numbers.\n";
     Node * augend = NULL;
     Node * addend = NULL;
@@ -156,9 +157,8 @@ int lc014_LongestCommonPrefix (int argc, char ** argv) {
     char ** input;
     char * ret;
     const char * usage = \
-        "usage: " EXEC " 14 <string> [<string> ...]\n" \
-        "\n" \
-        "Find the longest common prefix of the strings.\n";
+        USAGE_PREFIX "14 <string> [<string> ...]\n" \
+        "Find the longest common prefix of the given strings.\n";
 
     if (argc < 1) {
         fprintf (stdout, "%s", usage);
@@ -194,14 +194,11 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
     Node * ret;
     int len1, len2;
     const char * usage =
-        "Usage:\n"
-        "\n"
-        "    " EXEC " 21 <l1.len> <l2.len> [<l1.val> ...] [<l2.val> ...]\n"
-        "\n"
-        "Merge linked list l1 and l2.\n";
+        USAGE_PREFIX "21 <l1.len> <l2.len> [<l1.val> ...] [<l2.val> ...]\n"
+        "Merge 2 non-decreasing linked lists.\n";
 
     if (argc < 2) {
-        fprintf(stdout, "%s", usage);
+        printf ("%s", usage);
         return 0;
     }
 
@@ -237,7 +234,7 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
 
 int lc026_RmDup(int argc, char ** argv) {
     const char * usage = \
-        "usage: " EXEC " 26 <integer> [<integer> ...]\n" \
+        USAGE_PREFIX "26 <integer> [<integer> ...]\n" \
         "Remove duplicated items from a non-decreasing integer array.\n";
     int * input;
     int newSize;
@@ -263,7 +260,7 @@ int lc026_RmDup(int argc, char ** argv) {
 
 int lc027_RemoveElement (int argc, char ** argv) {
     const char * usage = \
-        "usage: " EXEC " 27 <value> [<integer> ...]\n" \
+        USAGE_PREFIX "27 <value> [<integer> ...]\n" \
         "Remove all occurrences of <value> in given integer array.\n" \
         "array size: [0, 100]\n" \
         "array element range: [0, 50]\n" \
@@ -296,9 +293,8 @@ int lc034_FindPosOfElementsInSortedArray(int argc, char ** argv) {
     int * ret;
     int retSize;
     const char * usage = \
-        "usage: " EXEC " 34 <target> [<nums> ...]\n" \
-        "\n" \
-        "Find the starting and ending position of <target> in a non-decreasing sorted integer list.\n";
+        USAGE_PREFIX "34 <target> [<integer> ...]\n" \
+        "Find the starting and ending position of <target> in a non-decreasing integer array.\n";
 
     if (argc < 1) {
         fprintf(stdout, "%s", usage);
@@ -361,6 +357,9 @@ int lc053_MaxSubarray (int argc, char ** argv) {
 }
 
 int lc074_Search2dMatrix (int argc, char ** argv) {
+    const char * usage = \
+        USAGE_PREFIX "74 <target> <column> <integer> [<integer> ...]\n" \
+        "Search the given matrix of given column(s) for given target.\n";
     int ** input;
     int t;
     int r;
@@ -368,10 +367,7 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
     int * csz;
 
     if (argc < 3) {
-        fprintf(stdout,
-                "Usage:\n"
-                "\n"
-                "    " EXEC " 74 <target> <col> <numbers> ...\n");
+        printf ("%s", usage);
         return 0;
     }
 
@@ -469,18 +465,16 @@ int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
 }
 
 int lc118_PascalsTriangle (int argc, char ** argv) {
+    const char * usage = \
+        USAGE_PREFIX "118 <row>\n" \
+        "Generate a Pascal's triangle of given row(s)\n";
     int row;
     int retrow[1];
     int *retcols[1];
     int ** ret;
 
     if (argc != 1) {
-        fprintf(stdout,
-                "Usage:\n"
-                "\n"
-                "    " EXEC " 118 <row>\n"
-                "\n"
-                "Generate a Pascal's triangle of <row> row(s)\n");
+        printf ("%s", usage);
         return 0;
     }
 
@@ -598,35 +592,38 @@ int lc350_Intersection (int argc, char ** argv) {
 }
 
 int lc383_RansomNote (int argc, char ** argv) {
-    const char * usage =
-        "Usage:\n"
-        "\n"
-        "    " EXEC " 383 <note> <magazine>\n";
+    const char * usage = \
+        USAGE_PREFIX "383 <note> <magazine>\n" \
+        "Check if a complete ransom note can be made by characters in given magazine.\n";
 
     if (argc < 2) {
-        fprintf(stdout, "%s", usage);
+        printf ("%s", usage);
         return 0;
     }
 
-    fprintf(stdout, "%s\n",
-            canConstruct(argv[0], argv[1]) ? "True" : "False");
+    printf("%s\n", canConstruct(argv[0], argv[1]) ? "True" : "False");
 
     return 0;
 }
 
 int lc387_FirstUniqueChar (int argc, char ** argv) {
-    if (argc - 1) {
-        fprintf(stdout,
-                "Usage:\n"
-                "\n"
-                "    " EXEC " 387 <string>\n");
+    const char * usage = \
+        USAGE_PREFIX "387 <string>\n" \
+        "Return the index of the first non-repeating character in given string.\n" \
+        "If it does not exist, return -1.\n";
+
+    if (argc != 1) {
+        printf ("%s", usage);
         return 0;
     }
 
-    return firstUniqChar(*argv);
+    return firstUniqChar (*argv);
 }
 
 int lc566_MatrixReshape (int argc, char ** argv) {
+    const char * usage = \
+        USAGE_PREFIX "566 <new-row> <new-column> <column> <integer> [<integer> ...]\n" \
+        "Reshape the given matrix.\n";
     int ** input;
     int r, c, m, n;
     int ** reshaped;
@@ -634,14 +631,7 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     int * retc[1];
 
     if (argc < 4) {
-        fprintf(stdout,
-                "Usage:\n"
-                "\n"
-                "    " EXEC " 566 <r> <c> <col> <numbers> ...\n"
-                "\n"
-                "    <r> <c>     the number of rows/columns of reshaped matrix\n"
-                "    <col>       the number of columns of input matrix\n"
-                "    <numbers>   matrix elements in row-traversing order\n");
+        printf ("%s", usage);
         return 0;
     }
 
@@ -655,12 +645,12 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     n = atoi(argv[2]);
     m = (argc - 3) / n;
 
-    fprintf(stdout, "Input matrix:\n");
+    printf ("Input matrix:\n");
     printIntMatrix(input, m, n);
 
     reshaped = matrixReshape(input, m, &n, r, c, retr, retc);
 
-    fprintf(stdout, "Reshaped:\n");
+    printf ("Reshaped:\n");
     printIntMatrix(reshaped, *retr, **retc);
 
     if (reshaped != input)
@@ -753,7 +743,7 @@ int main (int argc, char **argv) {
     int num;
 
     if (argc < 2) {
-        printf("usage: %s", usage_string);
+        printf("usage: %s", driver_usage);
         return 0;
     }
 
