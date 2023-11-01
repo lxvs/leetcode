@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "lib/btree.h"
+#include <lib/btree.h>
 
 static void traverse(struct TreeNode * root, int * array, int * returnSize) {
     if (!root)

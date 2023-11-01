@@ -1,4 +1,4 @@
-#include "lib/btree.h"
+#include <lib/btree.h>
 
 struct TreeNode * searchBST (struct TreeNode * root, int val) {
     struct TreeNode * p = root;

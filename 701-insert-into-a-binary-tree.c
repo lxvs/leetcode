@@ -1,4 +1,4 @@
-#include "lib/btree.h"
+#include <lib/btree.h>
 #include <stdlib.h>
 
 struct TreeNode * insertIntoBST (struct TreeNode * root, int val) {

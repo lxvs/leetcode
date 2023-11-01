@@ -1,47 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "lib/debug.h"
-#include "lib/llist.h"
-#include "lib/btree.h"
-#include "lib/array.h"
-
-#include "003-longest-substring-without-repeating-characters.h"
-#include "005-longest-palindromic-substring.h"
-#include "009-palindrome-number.h"
-#include "013-roman-to-integer.h"
-#include "014-longest-common-prefix.h"
-#include "020-valid-parentheses.h"
-#include "021-merge-two-sorted-lists.h"
-#include "026-remove-duplicates-from-sorted-array.h"
-#include "027-remove-element.h"
-#include "034-find-first-and-last-position-of-element-in-sorted-array.h"
-#include "036-valid-sudoku.h"
-#include "053-maximum-subarray.h"
-#include "074-search-a-2d-matrix.h"
-#include "083-remove-duplicates-from-sorted-list.h"
-#include "088-merge-sorted-array.h"
-#include "098-validate-binary-search-tree.h"
-#include "102-binary-tree-level-order-traversal.h"
-#include "118-pascals-triangle.h"
-#include "121-best-time-to-buy-and-sell-stock.h"
-#include "206-reverse-linked-list.h"
-#include "217-contains-duplicate.h"
-#include "234-palindrome-linked-list.h"
-#include "242-valid-anagram.h"
-#include "350-intersection-of-two-arrays-ii.h"
-#include "383-ransom-note.h"
-#include "387-first-unique-character-in-a-string.h"
-#include "566-reshape-the-matrix.h"
-#include "977-squares-of-a-sorted-array.h"
-#include "1290-convert-binary-number-in-a-linked-list-to-integer.h"
-#include "5930-two-furthest-houses-with-different-colors.h"
-#include "5924-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
-#include "5941-find-all-people-with-secret.h"
+#include <lib/debug.h>
+#include <lib/llist.h>
+#include <lib/btree.h>
+#include <lib/array.h>
+#include "easy/009-palindrome-number.h"
+#include "easy/013-roman-to-integer.h"
+#include "easy/014-longest-common-prefix.h"
+#include "easy/020-valid-parentheses.h"
+#include "easy/021-merge-two-sorted-lists.h"
+#include "easy/026-remove-duplicates-from-sorted-array.h"
+#include "easy/027-remove-element.h"
+#include "easy/083-remove-duplicates-from-sorted-list.h"
+#include "easy/088-merge-sorted-array.h"
+#include "easy/118-pascals-triangle.h"
+#include "easy/121-best-time-to-buy-and-sell-stock.h"
+#include "easy/206-reverse-linked-list.h"
+#include "easy/217-contains-duplicate.h"
+#include "easy/234-palindrome-linked-list.h"
+#include "easy/242-valid-anagram.h"
+#include "easy/350-intersection-of-two-arrays-ii.h"
+#include "easy/383-ransom-note.h"
+#include "easy/387-first-unique-character-in-a-string.h"
+#include "easy/566-reshape-the-matrix.h"
+#include "easy/977-squares-of-a-sorted-array.h"
+#include "easy/1290-convert-binary-number-in-a-linked-list-to-integer.h"
+#include "easy/2078-two-furthest-houses-with-different-colors.h"
+#include "medium/003-longest-substring-without-repeating-characters.h"
+#include "medium/005-longest-palindromic-substring.h"
+#include "medium/034-find-first-and-last-position-of-element-in-sorted-array.h"
+#include "medium/036-valid-sudoku.h"
+#include "medium/053-maximum-subarray.h"
+#include "medium/074-search-a-2d-matrix.h"
+#include "medium/098-validate-binary-search-tree.h"
+#include "medium/102-binary-tree-level-order-traversal.h"
+#include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
+#include "hard/2092-find-all-people-with-secret.h"
 
 #define EXEC    "lcdriver"
 
-const char * usage_string = EXEC " <id> [<argument> ...]";
+const char * usage_string = EXEC " <id> [<argument> ...]\n";
 
 int lc003_LongestSubstring (int argc, char ** argv) {
     if (argc < 1)
@@ -633,7 +631,7 @@ int lc1290_Bin2Int (int argc, char ** argv) {
     return getDecimalValue(head);
 }
 
-int lc5924_RobotComingHome (int argc, char ** argv) {
+int lc2087_RobotComingHome (int argc, char ** argv) {
     int start[2] = {1, 0};
     int home[2] = {2, 3};
     int rowCosts[3] = {5, 4, 3};
@@ -642,7 +640,7 @@ int lc5924_RobotComingHome (int argc, char ** argv) {
     return minCost(start, 2, home, 2, rowCosts, 3, colCosts, 4);
 }
 
-int lc5930_maxDistance (int argc, char ** argv) {
+int lc2078_maxDistance (int argc, char ** argv) {
     int * input = parseArgsToIntArray(argc, argv);
     int ret;
 
@@ -652,7 +650,7 @@ int lc5930_maxDistance (int argc, char ** argv) {
     return ret;
 }
 
-int lc5941_Secret (int argc, char ** argv) {
+int lc2092_Secret (int argc, char ** argv) {
     int ** meetings = malloc(sizeof *meetings * 3);
     int retsz[1];
     int * ret;
@@ -680,24 +678,19 @@ int lc5941_Secret (int argc, char ** argv) {
     return 0;
 }
 
-void Usage (void) {
-    printf("Usage:");
-}
-
 int main (int argc, char **argv) {
     int ret;
     int num;
 
     if (argc < 2) {
-        fprintf(stderr, "error: Too few arguments.\n");
-        fprintf(stderr, "Usage: %s\n", usage_string);
-        exit(1);
+        printf("usage: %s", usage_string);
+        return 0;
     }
 
     num = atoi(argv[1]);
 
     if (num <= 0) {
-        fprintf(stderr, "error: Number must be greater than 0.\n");
+        fprintf(stderr, "error: ID must be greater than 0.\n");
         return 1;
     }
 
@@ -789,14 +782,14 @@ int main (int argc, char **argv) {
         case 1290:
             ret = lc1290_Bin2Int (argc - 2, argv + 2);
             break;
-        case 5924:
-            ret = lc5924_RobotComingHome (argc - 2, argv + 2);
+        case 2087:
+            ret = lc2087_RobotComingHome (argc - 2, argv + 2);
             break;
-        case 5930:
-            ret = lc5930_maxDistance (argc - 2, argv + 2);
+        case 2078:
+            ret = lc2078_maxDistance (argc - 2, argv + 2);
             break;
-        case 5941:
-            ret = lc5941_Secret (argc - 2, argv + 2);
+        case 2092:
+            ret = lc2092_Secret (argc - 2, argv + 2);
             break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);

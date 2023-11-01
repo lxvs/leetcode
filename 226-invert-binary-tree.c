@@ -1,4 +1,4 @@
-#include "lib/btree.h"
+#include <lib/btree.h>
 #include <stdlib.h>
 
 static void swap (struct TreeNode ** a, struct TreeNode ** b) {

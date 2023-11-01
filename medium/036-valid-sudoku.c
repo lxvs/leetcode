@@ -1,5 +1,5 @@
 #if DEBUG
-#include "lib/debug.h"
+#include <lib/debug.h>
 #endif
 
 #include <stdbool.h>

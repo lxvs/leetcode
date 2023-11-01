@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "lib/debug.h"
+#include <lib/debug.h>
 
 #define MAX_VALUE(a, b)     (a > b ? a : b)
 
