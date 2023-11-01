@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <lib/debug.h>
 #include <lib/llist.h>
 #include <lib/btree.h>
@@ -27,6 +28,7 @@
 #include "easy/977-squares-of-a-sorted-array.h"
 #include "easy/1290-convert-binary-number-in-a-linked-list-to-integer.h"
 #include "easy/2078-two-furthest-houses-with-different-colors.h"
+#include "medium/002-add-two-numbers.h"
 #include "medium/003-longest-substring-without-repeating-characters.h"
 #include "medium/005-longest-palindromic-substring.h"
 #include "medium/034-find-first-and-last-position-of-element-in-sorted-array.h"
@@ -68,6 +70,43 @@ int lc001_TwoSums (int argc, char ** argv) {
 
     free (input);
     free (ret);
+
+    return 0;
+}
+
+int lc002_AddTwoNumbers (int argc, char ** argv) {
+    const char * usage = \
+        "usage: " EXEC " 2 <augend> <addend>\n" \
+        "Return the sum of the 2 given numbers.\n";
+    Node * augend = NULL;
+    Node * addend = NULL;
+    Node * sum = NULL;
+
+    if (argc != 2) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    for (int i = 0, length = strlen (argv[0]); argv[0][i] != '\0'; i++) {
+        augend = AddValue (augend, argv[0][length - i - 1] - '0');
+    }
+
+    for (int i = 0, length = strlen (argv[1]); argv[1][i] != '\0'; i++) {
+        addend = AddValue (addend, argv[1][length - i - 1] - '0');
+    }
+
+    printf ("augend:\n");
+    PrintList (augend);
+    printf ("addend:\n");
+    PrintList (addend);
+
+    sum = addTwoNumbers (augend, addend);
+    printf ("sum:\n");
+    PrintList (sum);
+
+    FreeLinkedList (augend);
+    FreeLinkedList (addend);
+    FreeLinkedList (sum);
 
     return 0;
 }
@@ -728,6 +767,9 @@ int main (int argc, char **argv) {
     switch(num) {
         case 1:
             ret = lc001_TwoSums (argc - 2, argv + 2);
+            break;
+        case 2:
+            ret = lc002_AddTwoNumbers (argc - 2, argv + 2);
             break;
         case 3:
             ret = lc003_LongestSubstring (argc - 2, argv + 2);

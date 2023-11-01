@@ -1,7 +1,7 @@
-#include "llist.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "llist.h"
 
 Node * AddValue (Node * list, int value) {
     Node * p;
