@@ -469,10 +469,11 @@ int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
 int lc118_PascalsTriangle (int argc, char ** argv) {
     const char * usage = \
         USAGE_PREFIX "118 <row>\n" \
-        "Generate a Pascal's triangle of given row(s)\n";
+        "Generate a Pascal's triangle of given row(s).\n" \
+        "row range: [1, 20]\n";
     int row;
-    int retrow[1];
-    int *retcols[1];
+    int retRow[1];
+    int * retCols[1];
     int ** ret;
 
     if (argc != 1) {
@@ -480,17 +481,20 @@ int lc118_PascalsTriangle (int argc, char ** argv) {
         return 0;
     }
 
-    row = atoi(*argv);
+    ret = generate (row = atoi (argv[0]), retRow, retCols);
 
-    if (row < 1 || row > 20)
-        return -1;
+    for (int i = 0; i < *retRow; i++) {
+        for (int j = *retRow - (i + 1); j > 0; j--) {
+            printf ("%3s", "");
+        }
+        for (int j = 0; j < (*retCols)[i]; j++) {
+            printf ("%5d ", ret[i][j]);
+        }
+        printf ("\n");
+    }
 
-    ret = generate(row, retrow, retcols);
-
-    for (int i = 0; i < *retrow; i++)
-        for (int j = 0; j < (*retcols)[i]; j++)
-            fprintf(stdout, "ret[%d][%d] = %d\n", i, j, ret[i][j]);
-
+    freeIntMatrix (ret, *retRow);
+    free (*retCols);
     return 0;
 }
 
