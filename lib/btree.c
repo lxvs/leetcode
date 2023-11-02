@@ -33,7 +33,7 @@ tree_t * NewTree (int nodeAmount, char ** nodes) {
 /* TODO */
 tree_t * parseArgsToTree (int argc, char ** argv) {
     for (int i = 0; i < argc; i++) {
-        if (strncmp (argv[i], "NULL", 4) == 0) {
+        if (strcmp (argv[i], "NULL") == 0) {
             argv[i] = NULL;
         }
     }
