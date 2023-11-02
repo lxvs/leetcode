@@ -489,21 +489,17 @@ int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
     tree->right = NewNode(20);
     tree->right->left = NewNode(15);
     tree->right->right = NewNode(7);
-    int retsz[1];
-    int * retcsz[1];
-    int ** ret = levelOrder(tree, retsz, retcsz);
-    for (int i = 0; i < *retsz; i++) {
-        for (int j = 0; j < retcsz[0][i]; j++)
+    int retSize[1];
+    int * retColumnSize[1];
+    int ** ret = levelOrder(tree, retSize, retColumnSize);
+    for (int i = 0; i < *retSize; i++) {
+        for (int j = 0; j < retColumnSize[0][i]; j++)
             printf("%2d ", ret[i][j]);
         putchar('\n');
     }
-    free(tree->right->right);
-    free(tree->right->left);
-    free(tree->right);
-    free(tree->left);
-    free(tree);
-    free(retcsz[0]);
-    free(ret);
+    freeTree (tree);
+    free(retColumnSize[0]);
+    freeIntMatrix (ret, *retSize);
     return 0;
 }
 
