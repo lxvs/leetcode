@@ -16,6 +16,7 @@
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
+#include "easy/104-maximum-depth-of-binary-tree.h"
 #include "easy/118-pascals-triangle.h"
 #include "easy/121-best-time-to-buy-and-sell-stock.h"
 #include "easy/206-reverse-linked-list.h"
@@ -503,6 +504,44 @@ int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
     return 0;
 }
 
+int lc104_MaxDepthOfBinaryTree (int argc, char ** argv) {
+    const char * usage = \
+        USAGE_PREFIX "104\n" \
+        "Get maximum depth of a binary tree.\n" \
+        "Currently there is only fixed test cases.\n";
+    tree_t * testCaseOne;
+    tree_t * testCaseTwo;
+
+    if (argc != 0) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    testCaseOne = NewTreeNode (1);
+    testCaseOne->left = NewTreeNode (1);
+    testCaseOne->left->left = NewTreeNode (1);
+    printf ("test case 1:\n");
+    printTree (testCaseOne, 0);
+    printf ("The maximum depth of this tree is %d\n", maxDepth (testCaseOne));
+
+    testCaseTwo = NewTreeNode (2);
+    testCaseTwo->left = NewTreeNode (2);
+    testCaseTwo->left->left = NewTreeNode (2);
+    testCaseTwo->left->right = NewTreeNode (2);
+    testCaseTwo->left->left->left = NewTreeNode (2);
+    testCaseTwo->right = NewTreeNode (2);
+    testCaseTwo->right->left = NewTreeNode (2);
+    testCaseTwo->right->right = NewTreeNode (2);
+    testCaseTwo->right->right->right = NewTreeNode (2);
+    printf ("test case 2:\n");
+    printTree (testCaseTwo, 0);
+    printf ("The maximum depth of this tree is %d\n", maxDepth (testCaseTwo));
+
+    freeTree (testCaseOne);
+    freeTree (testCaseTwo);
+    return 0;
+}
+
 int lc118_PascalsTriangle (int argc, char ** argv) {
     const char * usage = \
         USAGE_PREFIX "118 <row>\n" \
@@ -857,6 +896,9 @@ int main (int argc, char **argv) {
             break;
         case 102:
             ret = lc102_BinTreeLevelTraversal (argc - 2, argv + 2);
+            break;
+        case 104:
+            ret = lc104_MaxDepthOfBinaryTree (argc - 2, argv + 2);
             break;
         case 118:
             ret = lc118_PascalsTriangle (argc - 2, argv + 2);
