@@ -1,8 +1,7 @@
-#include <lib/btree.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include "101-symmetric-tree.h"
 
-static bool symmetric (struct TreeNode * left, struct TreeNode * right) {
+static bool symmetric (tree_t * left, tree_t * right) {
     if (!left || !right)
         return left == right;
     if (left->val != right->val)
@@ -10,6 +9,6 @@ static bool symmetric (struct TreeNode * left, struct TreeNode * right) {
     return symmetric(left->left, right->right) && symmetric(left->right, right->left);
 }
 
-bool isSymmetric (struct TreeNode * root) {
+bool isSymmetric (tree_t * root) {
     return !root || symmetric(root->left, root->right);
 }

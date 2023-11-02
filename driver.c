@@ -15,6 +15,7 @@
 #include "easy/027-remove-element.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
+#include "easy/101-symmetric-tree.h"
 #include "easy/118-pascals-triangle.h"
 #include "easy/121-best-time-to-buy-and-sell-stock.h"
 #include "easy/206-reverse-linked-list.h"
@@ -442,6 +443,46 @@ int lc098_ValidBST (int argc, char ** argv) {
     return 0;
 }
 
+int lc101_SymmetricTree (int argc, char ** argv) {
+    const char * usage = \
+        USAGE_PREFIX "101\n" \
+        "Check if given tree is symmetric.\n" \
+        "Currently there is only fixed test cases.\n";
+    tree_t * testCasePass;
+    tree_t * testCaseFail;
+
+    if (argc != 0) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    testCasePass = NewNode (1);
+    testCasePass->left = NewNode (5);
+    testCasePass->left->left = NewNode (3);
+    testCasePass->left->right = NewNode (4);
+    testCasePass->right = NewNode (5);
+    testCasePass->right->left = NewNode (4);
+    testCasePass->right->right = NewNode (3);
+    printf ("input tree:\n");
+    printTree (testCasePass, 0);
+    printf ("This tree is %s\n", isSymmetric (testCasePass) ? "symmetric" : "asymmetric");
+
+    testCaseFail = NewNode (1);
+    testCaseFail->left = NewNode (5);
+    testCaseFail->left->left = NewNode (3);
+    testCaseFail->left->right = NewNode (8);
+    testCaseFail->right = NewNode (5);
+    testCaseFail->right->left = NewNode (4);
+    testCaseFail->right->right = NewNode (3);
+    printf ("input tree:\n");
+    printTree (testCaseFail, 0);
+    printf ("This tree is %s\n", isSymmetric (testCaseFail) ? "symmetric" : "asymmetric");
+
+    freeTree (testCasePass);
+    freeTree (testCaseFail);
+    return 0;
+}
+
 int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
     tree_t * tree = NewNode(3);
     tree->left = NewNode(9);
@@ -814,6 +855,9 @@ int main (int argc, char **argv) {
             break;
         case 98:
             ret = lc098_ValidBST (argc - 2, argv + 2);
+            break;
+        case 101:
+            ret = lc101_SymmetricTree (argc - 2, argv + 2);
             break;
         case 102:
             ret = lc102_BinTreeLevelTraversal (argc - 2, argv + 2);
