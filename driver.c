@@ -797,6 +797,17 @@ int lc1290_Bin2Int (int argc, char ** argv) {
 
     return getDecimalValue(head);
 }
+
+int lc2078_maxDistance (int argc, char ** argv) {
+    int * input = parseArgsToIntArray(argc, argv);
+    int ret;
+
+    ret = maxDistance(input, argc);
+    free(input);
+
+    return ret;
+}
+
 int lc2085_CountCommonWordsWithOneOccurrence (int argc, char ** argv) {
     const char * usage = \
         USAGE_PREFIX "2085 <words1size> <words2size> <string> [<string> ...] <string> [<string> ...]\n" \
@@ -842,16 +853,6 @@ int lc2087_RobotComingHome (int argc, char ** argv) {
     int colCosts[4] = {8, 2, 6, 7};
 
     return minCost(start, 2, home, 2, rowCosts, 3, colCosts, 4);
-}
-
-int lc2078_maxDistance (int argc, char ** argv) {
-    int * input = parseArgsToIntArray(argc, argv);
-    int ret;
-
-    ret = maxDistance(input, argc);
-    free(input);
-
-    return ret;
 }
 
 int lc2092_Secret (int argc, char ** argv) {
@@ -1001,14 +1002,14 @@ int main (int argc, char **argv) {
         case 1290:
             ret = lc1290_Bin2Int (argc - 2, argv + 2);
             break;
+        case 2078:
+            ret = lc2078_maxDistance (argc - 2, argv + 2);
+            break;
         case 2085:
             ret = lc2085_CountCommonWordsWithOneOccurrence (argc - 2, argv + 2);
             break;
         case 2087:
             ret = lc2087_RobotComingHome (argc - 2, argv + 2);
-            break;
-        case 2078:
-            ret = lc2078_maxDistance (argc - 2, argv + 2);
             break;
         case 2092:
             ret = lc2092_Secret (argc - 2, argv + 2);
