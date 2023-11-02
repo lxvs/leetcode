@@ -7,7 +7,7 @@ typedef struct TreeNode {
     struct TreeNode * right;
 } tree_t;
 
-tree_t * NewNode (int val);
+tree_t * NewTreeNode (int val);
 
 /**
  * Generate a new tree based on given nodes.

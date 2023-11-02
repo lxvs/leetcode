@@ -3,7 +3,7 @@
 #include <string.h>
 #include "btree.h"
 
-tree_t * NewNode (int val) {
+tree_t * NewTreeNode (int val) {
     tree_t * p = malloc(sizeof *p);
     p->val = val;
     p->left = p->right = NULL;

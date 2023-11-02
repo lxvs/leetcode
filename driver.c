@@ -427,11 +427,11 @@ int lc088_MergeNums (int argc, char ** argv) {
 }
 
 int lc098_ValidBST (int argc, char ** argv) {
-    tree_t * tree = NewNode(5);
-    tree->left = NewNode(4);
-    tree->right = NewNode(6);
-    tree->right->left = NewNode(3);
-    tree->right->right = NewNode(7);
+    tree_t * tree = NewTreeNode(5);
+    tree->left = NewTreeNode(4);
+    tree->right = NewTreeNode(6);
+    tree->right->left = NewTreeNode(3);
+    tree->right->right = NewTreeNode(7);
 
     fprintf(stdout, "%s BST\n", isValidBST(tree) ? "Valid" : "Invalid");
 
@@ -456,24 +456,24 @@ int lc101_SymmetricTree (int argc, char ** argv) {
         return 0;
     }
 
-    testCasePass = NewNode (1);
-    testCasePass->left = NewNode (5);
-    testCasePass->left->left = NewNode (3);
-    testCasePass->left->right = NewNode (4);
-    testCasePass->right = NewNode (5);
-    testCasePass->right->left = NewNode (4);
-    testCasePass->right->right = NewNode (3);
+    testCasePass = NewTreeNode (1);
+    testCasePass->left = NewTreeNode (5);
+    testCasePass->left->left = NewTreeNode (3);
+    testCasePass->left->right = NewTreeNode (4);
+    testCasePass->right = NewTreeNode (5);
+    testCasePass->right->left = NewTreeNode (4);
+    testCasePass->right->right = NewTreeNode (3);
     printf ("input tree:\n");
     printTree (testCasePass, 0);
     printf ("This tree is %s\n", isSymmetric (testCasePass) ? "symmetric" : "asymmetric");
 
-    testCaseFail = NewNode (1);
-    testCaseFail->left = NewNode (5);
-    testCaseFail->left->left = NewNode (3);
-    testCaseFail->left->right = NewNode (8);
-    testCaseFail->right = NewNode (5);
-    testCaseFail->right->left = NewNode (4);
-    testCaseFail->right->right = NewNode (3);
+    testCaseFail = NewTreeNode (1);
+    testCaseFail->left = NewTreeNode (5);
+    testCaseFail->left->left = NewTreeNode (3);
+    testCaseFail->left->right = NewTreeNode (8);
+    testCaseFail->right = NewTreeNode (5);
+    testCaseFail->right->left = NewTreeNode (4);
+    testCaseFail->right->right = NewTreeNode (3);
     printf ("input tree:\n");
     printTree (testCaseFail, 0);
     printf ("This tree is %s\n", isSymmetric (testCaseFail) ? "symmetric" : "asymmetric");
@@ -484,11 +484,11 @@ int lc101_SymmetricTree (int argc, char ** argv) {
 }
 
 int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
-    tree_t * tree = NewNode(3);
-    tree->left = NewNode(9);
-    tree->right = NewNode(20);
-    tree->right->left = NewNode(15);
-    tree->right->right = NewNode(7);
+    tree_t * tree = NewTreeNode(3);
+    tree->left = NewTreeNode(9);
+    tree->right = NewTreeNode(20);
+    tree->right->left = NewTreeNode(15);
+    tree->right->right = NewTreeNode(7);
     int retSize[1];
     int * retColumnSize[1];
     int ** ret = levelOrder(tree, retSize, retColumnSize);
