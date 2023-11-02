@@ -41,6 +41,7 @@
 #include "medium/074-search-a-2d-matrix.h"
 #include "medium/098-validate-binary-search-tree.h"
 #include "medium/102-binary-tree-level-order-traversal.h"
+#include "medium/2086-minimum-number-of-food-buckets-to-feed-the-hamsters.h"
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "hard/2092-find-all-people-with-secret.h"
 
@@ -846,6 +847,20 @@ int lc2085_CountCommonWordsWithOneOccurrence (int argc, char ** argv) {
     return returnValue;
 }
 
+int lc2086_FeedTheHamsters (int argc, char ** argv) {
+    const char * usage =
+        USAGE_PREFIX "2086 <string>\n"
+        "Return the minimum number of food buckets to feed the hamsters.\n"
+        "String can only contain `H', representing a hamster, or `.', representing a place to put a bucket.\n";
+
+    if (argc != 1) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    return minimumBuckets (*argv);
+}
+
 int lc2087_RobotComingHome (int argc, char ** argv) {
     int start[2] = {1, 0};
     int home[2] = {2, 3};
@@ -1007,6 +1022,9 @@ int main (int argc, char **argv) {
             break;
         case 2085:
             ret = lc2085_CountCommonWordsWithOneOccurrence (argc - 2, argv + 2);
+            break;
+        case 2086:
+            ret = lc2086_FeedTheHamsters (argc - 2, argv + 2);
             break;
         case 2087:
             ret = lc2087_RobotComingHome (argc - 2, argv + 2);
