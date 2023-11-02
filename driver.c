@@ -31,6 +31,7 @@
 #include "easy/977-squares-of-a-sorted-array.h"
 #include "easy/1290-convert-binary-number-in-a-linked-list-to-integer.h"
 #include "easy/2078-two-furthest-houses-with-different-colors.h"
+#include "easy/2085-count-common-words-with-one-occurrence.h"
 #include "medium/002-add-two-numbers.h"
 #include "medium/003-longest-substring-without-repeating-characters.h"
 #include "medium/005-longest-palindromic-substring.h"
@@ -796,6 +797,43 @@ int lc1290_Bin2Int (int argc, char ** argv) {
 
     return getDecimalValue(head);
 }
+int lc2085_CountCommonWordsWithOneOccurrence (int argc, char ** argv) {
+    const char * usage = \
+        USAGE_PREFIX "2085 <words1size> <words2size> <string> [<string> ...] <string> [<string> ...]\n" \
+        "Count strings that appear exactly once in both string arrays.\n";
+    int words1Size;
+    int words2Size;
+    char ** words1;
+    char ** words2;
+    int returnValue;
+
+    if (argc < 4) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    words1Size = atoi (argv[0]);
+    words2Size = atoi (argv[1]);
+
+    if (words1Size + words2Size != argc - 2) {
+        fprintf (stderr,
+            "error: invalid number of arguments\n"
+            "Provided sizes are %d and %d (total %d), but the real total size is %d.\n",
+            words1Size,
+            words2Size,
+            words1Size + words2Size,
+            argc - 2);
+        return -1;
+    }
+
+    words1 = parseArgsToStringArray (words1Size, argv + 2);
+    words2 = parseArgsToStringArray (words2Size, argv + 2 + words1Size);
+    returnValue = countWords (words1, words1Size, words2, words2Size);
+
+    freeStringArray (words1, words1Size);
+    freeStringArray (words2, words2Size);
+    return returnValue;
+}
 
 int lc2087_RobotComingHome (int argc, char ** argv) {
     int start[2] = {1, 0};
@@ -962,6 +1000,9 @@ int main (int argc, char **argv) {
             break;
         case 1290:
             ret = lc1290_Bin2Int (argc - 2, argv + 2);
+            break;
+        case 2085:
+            ret = lc2085_CountCommonWordsWithOneOccurrence (argc - 2, argv + 2);
             break;
         case 2087:
             ret = lc2087_RobotComingHome (argc - 2, argv + 2);

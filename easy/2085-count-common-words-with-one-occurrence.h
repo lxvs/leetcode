@@ -1,0 +1,6 @@
+#ifndef INCLUDED_2085_COUNT_COMMON_WORDS_WITH_ONE_OCCURRENCE_H_
+#define INCLUDED_2085_COUNT_COMMON_WORDS_WITH_ONE_OCCURRENCE_H_
+
+int countWords (char ** words1, int words1Size, char ** words2, int words2Size);
+
+#endif  /* INCLUDED_2085_COUNT_COMMON_WORDS_WITH_ONE_OCCURRENCE_H_ */
