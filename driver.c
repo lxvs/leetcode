@@ -19,6 +19,7 @@
 #include "easy/104-maximum-depth-of-binary-tree.h"
 #include "easy/118-pascals-triangle.h"
 #include "easy/121-best-time-to-buy-and-sell-stock.h"
+#include "easy/203-remove-linked-list-elements.h"
 #include "easy/206-reverse-linked-list.h"
 #include "easy/217-contains-duplicate.h"
 #include "easy/234-palindrome-linked-list.h"
@@ -586,6 +587,29 @@ int lc121_MaxProfit(int argc, char ** argv) {
     return ret;
 }
 
+int lc203_RemoveLinkedListElements (int argc, char ** argv) {
+    const char * usage = \
+        USAGE_PREFIX "203 <value> [<integer> ...]\n" \
+        "Remove all occurrences of value for given linked list.\n";
+    int value;
+    Node * input;
+
+    if (argc < 1) {
+        printf ("%s", usage);
+        return 0;
+    }
+    value = atoi (argv[0]);
+    input = parseArgsToLinkedList (argv + 1);
+    printf ("input list:\n");
+    PrintList (input);
+    input = removeElements (input, value);
+    printf ("after removal of all %d:\n", value);
+    PrintList (input);
+
+    FreeLinkedList (input);
+    return 0;
+}
+
 int lc206_ReverseLinkedList (int argc, char ** argv) {
     Node * input = NULL;
     Node * ret;
@@ -905,6 +929,9 @@ int main (int argc, char **argv) {
             break;
         case 121:
             ret = lc121_MaxProfit (argc - 2, argv + 2);
+            break;
+        case 203:
+            ret = lc203_RemoveLinkedListElements (argc - 2, argv + 2);
             break;
         case 206:
             ret = lc206_ReverseLinkedList (argc - 2, argv + 2);

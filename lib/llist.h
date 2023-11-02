@@ -13,5 +13,6 @@ void DelValue (Node * list, int value);
 void PrintList (const Node * list);
 void GenRandList (Node * list, int length);
 void FreeLinkedList (Node * list);
+Node * parseArgsToLinkedList (char ** argv);
 
 #endif

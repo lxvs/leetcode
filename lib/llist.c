@@ -99,3 +99,11 @@ void FreeLinkedList (Node * list) {
         free (p);
     }
 }
+
+Node * parseArgsToLinkedList (char ** argv) {
+    Node * ret = NULL;
+    while (*argv != NULL) {
+        ret = AddValue (ret, atoi (*argv++));
+    }
+    return ret;
+}
