@@ -11,6 +11,8 @@ main () {
 get_description () {
     description=$(git describe --always --dirty)
     description=${description#v}
+    test "${DEBUG_FLAGS+1}" && description="$description (debug)"
+    test "${ADDRESS_SANITIZER_FLAGS+1}" && description="$description (address sanitizer)"
     test "$description" || return
 }
 
