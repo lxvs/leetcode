@@ -4,7 +4,7 @@ ifeq ($(PREFIX),)
     PREFIX := /usr/local
 endif
 
-EXEC := lcdriver
+EXEC := lcd
 
 GCC_FLAGS := -Wall -I.
 ADDRESS_SANITIZER_FLAGS := -fsanitize=address -static-libasan -g -fno-omit-frame-pointer

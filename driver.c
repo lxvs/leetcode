@@ -5,6 +5,7 @@
 #include <lib/llist.h>
 #include <lib/btree.h>
 #include <lib/array.h>
+#include "driver.h"
 #include "easy/001-two-sum.h"
 #include "easy/009-palindrome-number.h"
 #include "easy/013-roman-to-integer.h"
@@ -49,10 +50,9 @@
 #include "medium/2091-removing-minimum-and-maximum-from-array.h"
 #include "hard/2092-find-all-people-with-secret.h"
 
-#define EXEC            "lcdriver"
-#define USAGE_PREFIX    "usage: " EXEC " "
-
-const char * driver_usage = USAGE_PREFIX "<id> [<argument> ...]\n";
+const char * driver_usage =
+    "Leet-Code Driver\n"
+    USAGE_PREFIX "<id> [<argument> ...]\n";
 
 int lc001_TwoSums (int argc, char ** argv) {
     const char * usage = \
@@ -1003,7 +1003,7 @@ int main (int argc, char **argv) {
     int num;
 
     if (argc < 2) {
-        printf("usage: %s", driver_usage);
+        printf("%s", driver_usage);
         return 0;
     }
 
