@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "2089-find-target-indices-after-sorting-array.h"
 
 static void swap (int * a, int * b) {
     int tmp = *a;

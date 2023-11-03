@@ -1,0 +1,6 @@
+#ifndef INCLUDED_2089_FIND_TARGET_INDICES_AFTER_SORTING_ARRAY_H_
+#define INCLUDED_2089_FIND_TARGET_INDICES_AFTER_SORTING_ARRAY_H_
+
+int * targetIndices (int * nums, int numsSize, int target, int * returnSize);
+
+#endif  /* INCLUDED_2089_FIND_TARGET_INDICES_AFTER_SORTING_ARRAY_H_ */

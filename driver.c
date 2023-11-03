@@ -33,6 +33,7 @@
 #include "easy/1290-convert-binary-number-in-a-linked-list-to-integer.h"
 #include "easy/2078-two-furthest-houses-with-different-colors.h"
 #include "easy/2085-count-common-words-with-one-occurrence.h"
+#include "easy/2089-find-target-indices-after-sorting-array.h"
 #include "medium/002-add-two-numbers.h"
 #include "medium/003-longest-substring-without-repeating-characters.h"
 #include "medium/005-longest-palindromic-substring.h"
@@ -876,6 +877,39 @@ int lc2087_RobotComingHome (int argc, char ** argv) {
     return minCost(start, 2, home, 2, rowCosts, 3, colCosts, 4);
 }
 
+int lc2089_FindTargetIndicesAfterSortingArray (int argc, char ** argv) {
+    const char * usage =
+        USAGE_PREFIX "2089 <target> <integer> [<integer> ...]\n"
+        "Return the indices of all occurrences of target integer after sorting the given\n"
+        "array in non-decreasing order.  The returned array must be sorted in increasing\n"
+        "order.\n";
+    int target;
+    int inputSize;
+    int * input;
+    int * returnedValues;
+    int returnedSize[1];
+
+    if (argc < 2) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    target = atoi (argv[0]);
+    inputSize = argc - 1;
+    input = parseArgsToIntArray (inputSize, argv + 1);
+
+    printf ("input array:\n");
+    printIntArray (input, inputSize);
+
+    returnedValues = targetIndices (input, inputSize, target, returnedSize);
+    printf ("returned array:\n");
+    printIntArray (returnedValues, *returnedSize);
+
+    free (input);
+    free (returnedValues);
+    return 0;
+}
+
 int lc2092_Secret (int argc, char ** argv) {
     int ** meetings = malloc(sizeof *meetings * 3);
     int retsz[1];
@@ -1037,6 +1071,9 @@ int main (int argc, char **argv) {
             break;
         case 2087:
             ret = lc2087_RobotComingHome (argc - 2, argv + 2);
+            break;
+        case 2089:
+            ret = lc2089_FindTargetIndicesAfterSortingArray (argc - 2, argv + 2);
             break;
         case 2092:
             ret = lc2092_Secret (argc - 2, argv + 2);
