@@ -1,17 +1,6 @@
-#include <stdbool.h>
 #include <stdlib.h>
-
-#define STACK_MAX_SIZE      100
-
-typedef struct Stack {
-    int * val;
-    int top;
-} Stack;
-
-typedef struct {
-    Stack * bag;
-    Stack * stash;
-} MyQueue;
+#include <stdbool.h>
+#include "232-implement-queue-using-stacks.h"
 
 MyQueue* myQueueCreate() {
     MyQueue * p = malloc(sizeof *p);

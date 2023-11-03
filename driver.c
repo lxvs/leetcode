@@ -22,6 +22,7 @@
 #include "easy/203-remove-linked-list-elements.h"
 #include "easy/206-reverse-linked-list.h"
 #include "easy/217-contains-duplicate.h"
+#include "easy/232-implement-queue-using-stacks.h"
 #include "easy/234-palindrome-linked-list.h"
 #include "easy/242-valid-anagram.h"
 #include "easy/350-intersection-of-two-arrays-ii.h"
@@ -639,6 +640,11 @@ int lc217_ContainsDup (int argc, char ** argv) {
     return 0;
 }
 
+int lc232_ImplementQueueUsingStacks (int argc, char ** argv) {
+    printf ("driver 232 not ready yet\n");
+    return 0;
+}
+
 int lc234_Palindrome_ll (int argc, char ** argv) {
     Node * input = NULL;
 
@@ -992,6 +998,9 @@ int main (int argc, char **argv) {
             break;
         case 217:
             ret = lc217_ContainsDup (argc - 2, argv + 2);
+            break;
+        case 232:
+            ret = lc232_ImplementQueueUsingStacks (argc - 2, argv + 2);
             break;
         case 234:
             ret = lc234_Palindrome_ll (argc - 2, argv + 2);
