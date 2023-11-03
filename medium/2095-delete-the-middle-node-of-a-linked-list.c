@@ -1,5 +1,5 @@
-#include <lib/llist.h>
 #include <stdlib.h>
+#include "2095-delete-the-middle-node-of-a-linked-list.h"
 
 struct ListNode * deleteMiddle (struct ListNode * head) {
     if (!head->next) {

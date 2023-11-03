@@ -49,6 +49,7 @@
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "medium/2090-k-radius-subarray-averages.h"
 #include "medium/2091-removing-minimum-and-maximum-from-array.h"
+#include "medium/2095-delete-the-middle-node-of-a-linked-list.h"
 #include "hard/2092-find-all-people-with-secret.h"
 
 const char * driver_usage =
@@ -1023,6 +1024,24 @@ int lc2094_Finding3DigitEvenNumbers (int argc, char ** argv) {
     return 0;
 }
 
+int lc2095_DeleteTheMiddleNodeOfALinkedList (int argc, char ** argv) {
+    const char * usage =
+        USAGE_PREFIX "2095 <integer> [<integer>]\n"
+        "Delete the middle node of given linked list.\n"
+        "The middle node of linked list of size N is the N/2-th (0-based) node.\n";
+    Node * input;
+
+    if (argc < 1) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    input = parseArgsToLinkedList (argv);
+    PrintList (deleteMiddle (input));
+    FreeLinkedList (input);
+    return 0;
+}
+
 int main (int argc, char **argv) {
     int ret;
     int num;
@@ -1171,6 +1190,9 @@ int main (int argc, char **argv) {
             break;
         case 2094:
             ret = lc2094_Finding3DigitEvenNumbers (argc - 2, argv + 2);
+            break;
+        case 2095:
+            ret = lc2095_DeleteTheMiddleNodeOfALinkedList (argc - 2, argv + 2);
             break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);
