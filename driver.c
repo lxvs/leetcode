@@ -51,7 +51,7 @@
 #include "hard/2092-find-all-people-with-secret.h"
 
 const char * driver_usage =
-    "Leet-Code Driver\n"
+    "leet-code driver " EXEC_VERSION "\n"
     USAGE_PREFIX "<id> [<argument> ...]\n";
 
 int lc001_TwoSums (int argc, char ** argv) {
