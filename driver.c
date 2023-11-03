@@ -45,6 +45,7 @@
 #include "medium/102-binary-tree-level-order-traversal.h"
 #include "medium/2086-minimum-number-of-food-buckets-to-feed-the-hamsters.h"
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
+#include "medium/2090-k-radius-subarray-averages.h"
 #include "hard/2092-find-all-people-with-secret.h"
 
 #define EXEC            "lcdriver"
@@ -910,6 +911,38 @@ int lc2089_FindTargetIndicesAfterSortingArray (int argc, char ** argv) {
     return 0;
 }
 
+int lc2090_KRadiusSubarrayAverages (int argc, char ** argv) {
+    const char * usage =
+        USAGE_PREFIX "2090 <k> <integer> [<integer> ...]\n"
+        "Return a integer array containing the average values of range [i - k, i + k] of\n"
+        "the given array.  If i - k < 0 or i + k > array size, the average is -1.\n";
+    int k;
+    int inputSize;
+    int * input;
+    int * returnedArray;
+    int returnedSize[1];
+
+    if (argc < 2) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    k = atoi (argv[0]);
+    inputSize = argc - 1;
+    input = parseArgsToIntArray (inputSize, argv + 1);
+
+    printf ("input array:\n");
+    printIntArray (input, inputSize);
+
+    returnedArray = getAverages (input, inputSize, k, returnedSize);
+    printf ("returned array:\n");
+    printIntArray (returnedArray, *returnedSize);
+
+    free (input);
+    free (returnedArray);
+    return 0;
+}
+
 int lc2092_Secret (int argc, char ** argv) {
     int ** meetings = malloc(sizeof *meetings * 3);
     int retsz[1];
@@ -1074,6 +1107,9 @@ int main (int argc, char **argv) {
             break;
         case 2089:
             ret = lc2089_FindTargetIndicesAfterSortingArray (argc - 2, argv + 2);
+            break;
+        case 2090:
+            ret = lc2090_KRadiusSubarrayAverages (argc - 2, argv + 2);
             break;
         case 2092:
             ret = lc2092_Secret (argc - 2, argv + 2);
