@@ -1,3 +1,5 @@
+#include "2091-removing-minimum-and-maximum-from-array.h"
+
 int minimumDeletions (int * nums, int numsSize) {
     int max = 0;
     int min = 0;

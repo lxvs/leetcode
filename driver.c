@@ -46,6 +46,7 @@
 #include "medium/2086-minimum-number-of-food-buckets-to-feed-the-hamsters.h"
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "medium/2090-k-radius-subarray-averages.h"
+#include "medium/2091-removing-minimum-and-maximum-from-array.h"
 #include "hard/2092-find-all-people-with-secret.h"
 
 #define EXEC            "lcdriver"
@@ -943,6 +944,32 @@ int lc2090_KRadiusSubarrayAverages (int argc, char ** argv) {
     return 0;
 }
 
+int lc2091_RemovingMinumumAndMaximumFromArray (int argc, char ** argv) {
+    const char * usage =
+        USAGE_PREFIX "2091 <integer> [<integer> ...]\n"
+        "Return the minimum number of deletions it would take to remove the both the\n"
+        "minimum and maximum element from the given array of *distinct* integers.\n"
+        "A deletion is removing an element from either the front or the back of the\n"
+        "array.\n";
+    int inputSize;
+    int * input;
+    int returnedValue;
+
+    if (argc < 1) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    inputSize = argc;
+    input = parseArgsToIntArray (inputSize, argv);
+    printf ("input array:\n");
+    printIntArray (input, inputSize);
+
+    returnedValue = minimumDeletions (input, inputSize);
+    free (input);
+    return returnedValue;
+}
+
 int lc2092_Secret (int argc, char ** argv) {
     int ** meetings = malloc(sizeof *meetings * 3);
     int retsz[1];
@@ -1110,6 +1137,9 @@ int main (int argc, char **argv) {
             break;
         case 2090:
             ret = lc2090_KRadiusSubarrayAverages (argc - 2, argv + 2);
+            break;
+        case 2091:
+            ret = lc2091_RemovingMinumumAndMaximumFromArray (argc - 2, argv + 2);
             break;
         case 2092:
             ret = lc2092_Secret (argc - 2, argv + 2);
