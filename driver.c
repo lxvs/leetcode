@@ -20,9 +20,12 @@
 #include "easy/104-maximum-depth-of-binary-tree.h"
 #include "easy/118-pascals-triangle.h"
 #include "easy/121-best-time-to-buy-and-sell-stock.h"
+#include "easy/144-binary-tree-preorder-traversal.h"
+#include "easy/145-binary-tree-postorder-traversal.h"
 #include "easy/203-remove-linked-list-elements.h"
 #include "easy/206-reverse-linked-list.h"
 #include "easy/217-contains-duplicate.h"
+#include "easy/226-invert-binary-tree.h"
 #include "easy/232-implement-queue-using-stacks.h"
 #include "easy/234-palindrome-linked-list.h"
 #include "easy/242-valid-anagram.h"
@@ -30,6 +33,7 @@
 #include "easy/383-ransom-note.h"
 #include "easy/387-first-unique-character-in-a-string.h"
 #include "easy/566-reshape-the-matrix.h"
+#include "easy/700-search-in-a-binary-search-tree.h"
 #include "easy/977-squares-of-a-sorted-array.h"
 #include "easy/1290-convert-binary-number-in-a-linked-list-to-integer.h"
 #include "easy/2078-two-furthest-houses-with-different-colors.h"
@@ -45,6 +49,7 @@
 #include "medium/074-search-a-2d-matrix.h"
 #include "medium/098-validate-binary-search-tree.h"
 #include "medium/102-binary-tree-level-order-traversal.h"
+#include "medium/701-insert-into-a-binary-tree.h"
 #include "medium/2086-minimum-number-of-food-buckets-to-feed-the-hamsters.h"
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "medium/2090-k-radius-subarray-averages.h"
@@ -595,6 +600,16 @@ int lc121_MaxProfit(int argc, char ** argv) {
     return ret;
 }
 
+int lc144_BinaryTreePreorderTraversal (int argc, char ** argv) {
+    printf ("driver not ready\n");
+    return 0;
+}
+
+int lc145_BinaryTreePostorderTraversal (int argc, char ** argv) {
+    printf ("driver not ready\n");
+    return 0;
+}
+
 int lc203_RemoveLinkedListElements (int argc, char ** argv) {
     const char * usage = \
         USAGE_PREFIX "203 <value> [<integer> ...]\n" \
@@ -642,6 +657,11 @@ int lc217_ContainsDup (int argc, char ** argv) {
     fprintf(stdout, "%s\n", containsDuplicate(input, argc) ? "True" : "False");
 
     free(input);
+    return 0;
+}
+
+int lc226_InvertBinaryTree (int argc, char ** argv) {
+    printf ("driver not ready\n");
     return 0;
 }
 
@@ -777,6 +797,16 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     if (*retc != &n)
         free (*retc);
     freeIntMatrix (input, m);
+    return 0;
+}
+
+int lc700_SearchBst (int argc, char ** argv) {
+    printf ("driver not ready\n");
+    return 0;
+}
+
+int lc701_InsertIntoABinaryTree (int argc, char ** argv) {
+    printf ("driver not ready\n");
     return 0;
 }
 
@@ -1128,6 +1158,12 @@ int main (int argc, char **argv) {
         case 121:
             ret = lc121_MaxProfit (argc - 2, argv + 2);
             break;
+        case 144:
+            ret = lc144_BinaryTreePreorderTraversal (argc - 2, argv + 2);
+            break;
+        case 145:
+            ret = lc145_BinaryTreePostorderTraversal (argc - 2, argv + 2);
+            break;
         case 203:
             ret = lc203_RemoveLinkedListElements (argc - 2, argv + 2);
             break;
@@ -1136,6 +1172,9 @@ int main (int argc, char **argv) {
             break;
         case 217:
             ret = lc217_ContainsDup (argc - 2, argv + 2);
+            break;
+        case 226:
+            ret = lc226_InvertBinaryTree (argc - 2, argv + 2);
             break;
         case 232:
             ret = lc232_ImplementQueueUsingStacks (argc - 2, argv + 2);
@@ -1157,6 +1196,12 @@ int main (int argc, char **argv) {
             break;
         case 566:
             ret = lc566_MatrixReshape (argc - 2, argv + 2);
+            break;
+        case 700:
+            ret = lc700_SearchBst (argc - 2, argv + 2);
+            break;
+        case 701:
+            ret = lc701_InsertIntoABinaryTree (argc - 2, argv + 2);
             break;
         case 977:
             ret = lc977_SortSquare (argc - 2, argv + 2);

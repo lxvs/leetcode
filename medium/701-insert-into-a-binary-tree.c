@@ -1,5 +1,5 @@
-#include <lib/btree.h>
 #include <stdlib.h>
+#include "701-insert-into-a-binary-tree.h"
 
 struct TreeNode * insertIntoBST (struct TreeNode * root, int val) {
     if (!root) {

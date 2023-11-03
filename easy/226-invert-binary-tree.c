@@ -1,5 +1,5 @@
-#include <lib/btree.h>
 #include <stdlib.h>
+#include "226-invert-binary-tree.h"
 
 static void swap (struct TreeNode ** a, struct TreeNode ** b) {
     struct TreeNode * tmp = *a;

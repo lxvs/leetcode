@@ -1,6 +1,5 @@
-#include <lib/btree.h>
-
 #include <stdlib.h>
+#include "144-binary-tree-preorder-traversal.h"
 
 /**
  * Note: The returned array must be malloced, assume caller calls free().
