@@ -1,9 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <lib/debug.h>
-
-#define MAX_VALUE(a, b)     (a > b ? a : b)
+#include "005-longest-palindromic-substring.h"
 
 static int palindromeAround (int center_left, int center_right, const char * const s) {
     int s_length = strlen (s);
@@ -22,7 +20,6 @@ char * longestPalindrome (char * s) {
     int s_length = strlen (s);
 
     for (int center = 0; center < s_length - max_length / 2; center++) {
-        dbg ("walking to s[%d]: %c\n", center, s[center]);
         length_odd = palindromeAround (center, center, s);
         length_even = palindromeAround (center, center + 1, s);
         if (max_length < (length_longer = MAX_VALUE (length_odd, length_even))) {
