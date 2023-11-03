@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <lib/debug.h>
-#include <lib/llist.h>
-#include <lib/btree.h>
+#include <lib/list.h>
+#include <lib/bst.h>
 #include <lib/array.h>
 #include "driver.h"
 #include "easy/001-two-sum.h"

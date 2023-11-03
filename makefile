@@ -6,13 +6,13 @@ endif
 
 EXEC := lcd
 
-GCC_FLAGS := -Wall -I.
+GCC_FLAGS := -Wall -Iinclude
 
 SOURCE_FILES := driver.c easy/*.c medium/*.c hard/*.c
 SOURCE_FILES_LIB := lib/*.c
 
 HEADERS := easy/*.h medium/*.h hard/*.h
-HEADERS_LIB := lib/*.h
+HEADERS_LIB := include/lib/*.h
 
 GENERATE_VERSION := sh utils/write_version.sh
 

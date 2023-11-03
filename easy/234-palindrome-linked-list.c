@@ -1,5 +1,5 @@
 #include "234-palindrome-linked-list.h"
-#include <lib/llist.h>
+#include <lib/list.h>
 #include <stdlib.h>
 #include <stdio.h>
 

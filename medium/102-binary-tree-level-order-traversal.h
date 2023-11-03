@@ -1,7 +1,7 @@
 #ifndef INCLUDED_102_BINARY_TREE_LEVEL_ORDER_TRAVERSAL_H_
 #define INCLUDED_102_BINARY_TREE_LEVEL_ORDER_TRAVERSAL_H_
 
-#include <lib/btree.h>
+#include <lib/bst.h>
 
 int ** levelOrder (struct TreeNode * root, int * returnSize, int ** returnColumnSizes);
 

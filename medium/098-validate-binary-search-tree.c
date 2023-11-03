@@ -1,4 +1,4 @@
-#include <lib/btree.h>
+#include <lib/bst.h>
 #include <stdbool.h>
 #include <stdlib.h>
 

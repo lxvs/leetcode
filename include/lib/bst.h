@@ -1,5 +1,5 @@
-#ifndef INCLUDED_BTREE_H_
-#define INCLUDED_BTREE_H_
+#ifndef INCLUDED_BST_H_
+#define INCLUDED_BST_H_
 
 typedef struct TreeNode {
     int val;
@@ -32,4 +32,4 @@ void printTree (tree_t * tree, int level);
 
 void freeTree (tree_t * tree);
 
-#endif  /* INCLUDED_BTREE_H_ */
+#endif  /* INCLUDED_BST_H_ */

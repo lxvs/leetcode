@@ -1,4 +1,4 @@
-#include <lib/llist.h>
+#include <lib/list.h>
 #include <stdlib.h>
 
 struct ListNode * reverseList (struct ListNode * head) {

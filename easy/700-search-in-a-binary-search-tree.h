@@ -1,7 +1,7 @@
 #ifndef INCLUDED_700_SEARCH_IN_A_BINARY_SEARCH_TREE_H_
 #define INCLUDED_700_SEARCH_IN_A_BINARY_SEARCH_TREE_H_
 
-#include <lib/btree.h>
+#include <lib/bst.h>
 
 struct TreeNode * searchBST (struct TreeNode * root, int val);
 

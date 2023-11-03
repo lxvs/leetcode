@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "btree.h"
+#include <lib/bst.h>
 
 tree_t * NewTreeNode (int val) {
     tree_t * p = malloc(sizeof *p);
