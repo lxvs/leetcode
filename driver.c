@@ -14,6 +14,7 @@
 #include "easy/021-merge-two-sorted-lists.h"
 #include "easy/026-remove-duplicates-from-sorted-array.h"
 #include "easy/027-remove-element.h"
+#include "easy/028-find-the-index-of-the-first-occurrence-in-a-string.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -301,6 +302,19 @@ int lc027_RemoveElement (int argc, char ** argv) {
 
     free (input);
     return 0;
+}
+
+int lc028_FindNeedleInHaystack (int argc, char ** argv) {
+    const char * usage =
+        USAGE_PREFIX "28 <haystack> <needle>\n"
+        "Return the index of the first occurrence of needle in haystack.\n";
+
+    if (argc != 2) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    return strStr (argv[0], argv[1]);
 }
 
 int lc034_FindPosOfElementsInSortedArray(int argc, char ** argv) {
@@ -1121,6 +1135,9 @@ int main (int argc, char **argv) {
             break;
         case 27:
             ret = lc027_RemoveElement (argc - 2, argv + 2);
+            break;
+        case 28:
+            ret = lc028_FindNeedleInHaystack (argc - 2, argv + 2);
             break;
         case 34:
             ret = lc034_FindPosOfElementsInSortedArray (argc - 2, argv + 2);
