@@ -35,6 +35,7 @@
 #include "easy/2078-two-furthest-houses-with-different-colors.h"
 #include "easy/2085-count-common-words-with-one-occurrence.h"
 #include "easy/2089-find-target-indices-after-sorting-array.h"
+#include "easy/2094-finding-3-digit-even-numbers.h"
 #include "medium/002-add-two-numbers.h"
 #include "medium/003-longest-substring-without-repeating-characters.h"
 #include "medium/005-longest-palindromic-substring.h"
@@ -998,6 +999,30 @@ int lc2092_Secret (int argc, char ** argv) {
     return 0;
 }
 
+int lc2094_Finding3DigitEvenNumbers (int argc, char ** argv) {
+    const char * usage =
+        USAGE_PREFIX "2094 <digit> <digit> <digit> [<digit> ...]\n"
+        "Find all 3-digit even numbers that consist of 3 elements from given array.\n";
+    int inputSize;
+    int * input;
+    int * returnedValues;
+    int returnedSize[1];
+
+    if (argc < 3) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    inputSize = argc;
+    input = parseArgsToIntArray (inputSize, argv);
+    returnedValues = findEvenNumbers (input, inputSize, returnedSize);
+    printIntArray (returnedValues, *returnedSize);
+
+    free (input);
+    free (returnedValues);
+    return 0;
+}
+
 int main (int argc, char **argv) {
     int ret;
     int num;
@@ -1143,6 +1168,9 @@ int main (int argc, char **argv) {
             break;
         case 2092:
             ret = lc2092_Secret (argc - 2, argv + 2);
+            break;
+        case 2094:
+            ret = lc2094_Finding3DigitEvenNumbers (argc - 2, argv + 2);
             break;
         default:
             fprintf(stderr, "error: There is no driver for %d yet!\n", num);
