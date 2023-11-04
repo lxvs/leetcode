@@ -81,6 +81,13 @@ int lc001_TwoSums (int argc, char ** argv) {
     printf ("input array:\n");
     printIntArray (inputArray, inputArraySize);
     returnedArray = twoSum (inputArray, inputArraySize, target, returnedArraySize);
+
+    if (returnedArray == NULL) {
+        printf ("invalid input for this problem\n");
+        free (inputArray);
+        return 0;
+    }
+
     printf ("returned 2 indices:\n");
     printIntArray (returnedArray, *returnedArraySize);
 
