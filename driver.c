@@ -435,6 +435,7 @@ int lc083_RemoveDupFromSortedList (int argc, char ** argv) {
 
     input = parseArgsToLinkedList (argv + 2);
     afterDeletion = deleteDuplicates (input);
+    printf ("after deleting the duplicates:\n");
     PrintList (afterDeletion);
     FreeLinkedList (afterDeletion);
     return 0;
