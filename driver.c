@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <lib/debug.h>
@@ -894,14 +893,8 @@ int lc2085_CountCommonWordsWithOneOccurrence (int argc, char ** argv) {
     words1Size = atoi (argv[2]);
     words2Size = atoi (argv[3]);
 
-    if (words1Size + words2Size + 4 != argc) {
-        fprintf (stderr,
-            "error: invalid number of arguments\n"
-            "Provided sizes are %d and %d (total %d), but the real total size is %d.\n",
-            words1Size,
-            words2Size,
-            words1Size + words2Size,
-            argc - 4);
+    if (words1Size + words2Size != argc - 4) {
+        errorInputSizeMismatch (words1Size, words2Size, argc - 4);
         return -1;
     }
 
