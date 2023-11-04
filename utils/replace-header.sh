@@ -14,7 +14,8 @@ main () {
     sed -e "/^\s*#include\s*\"$header_wo_ext.h\"\s*\$/{" \
         -e "r $source_path_wo_ext.h" \
         -e "d}" \
-        "$source_path_wo_ext.c"
+        "$source_path_wo_ext.c" |
+        sed -e '/\s*#include\s*<lib\//d'
 }
 
 main "$@"
