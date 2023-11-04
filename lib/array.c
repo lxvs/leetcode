@@ -44,13 +44,8 @@ char ** parseArgsToStringArray (int argc, char ** argv, int startingIndex, int a
 /// @param column column number of the matrix
 /// @return the integer matrix
 int ** parseArgsToIntMatrix (int argc, char ** argv, int startingIndex, int elementCount, int column) {
-    int row;
+    int row = matrixGetRow (elementCount, column);
     int ** returnedMatrix;
-
-    row = elementCount / column;
-    while (row * column < elementCount) {
-        row++;
-    }
 
     returnedMatrix = malloc (sizeof *returnedMatrix * row);
     for (int i = 0; i < row; i++) {

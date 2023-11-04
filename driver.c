@@ -413,7 +413,7 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
 
     input = parseArgsToIntMatrix (argc, argv, argc - inputElementCount, inputElementCount, column);
 
-    row = inputElementCount / column;
+    row = matrixGetRow (inputElementCount, column);
     printf ("input matrix:\n");
     printIntMatrix (input, row, column);
     printf ("\n");
@@ -803,7 +803,7 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     newRow = atoi (argv[2]);
     newColumn = atoi (argv[3]);
     column = atoi (argv[4]);
-    row = elementCount / column;
+    row = matrixGetRow (elementCount, column);
 
     inputMatrix = parseArgsToIntMatrix (argc, argv, argc - elementCount, elementCount, column);
 

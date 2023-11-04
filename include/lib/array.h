@@ -1,6 +1,12 @@
 #ifndef INCLUDED_ARRAY_H_
 #define INCLUDED_ARRAY_H_
 
+//
+// Get the minimum row count of a matrix to place all elements.
+//
+#define matrixGetRow(elementCount, column) \
+    (((elementCount) % (column) == 0) ? ((elementCount) / (column)) : ((elementCount) / (column) + 1))
+
 int * parseArgsToIntArray (int argc, char ** argv, int startingIndex, int arraySize);
 
 char ** parseArgsToStringArray (int argc, char ** argv, int startingIndex, int arraySize);
