@@ -63,31 +63,29 @@ const char * driver_usage =
     USAGE_PREFIX "<id> [<argument> ...]\n";
 
 int lc001_TwoSums (int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "1 <target> <integer> <integer> [<integer> ...]\n" \
+    const char * usage = USAGE_PREFIX "1 <target> <integer> <integer> [<integer> ...]\n"
         "Return two different indices of the two integers such that they add up to target.\n";
-    int * input;
-    int * ret;
-    int inputSize;
-    int retSize[1] = {0};
+    int inputArraySize = argc - 3;
+    int * inputArray;
+    int * returnedArray;
+    int returnedArraySize[1] = {0};
     int target;
 
-    if (argc < 3) {
+    if (inputArraySize < 2) {
         printf ("%s", usage);
         return 0;
     }
 
-    inputSize = argc - 1;
-    target = atoi (argv[0]);
-    input = parseArgsToIntArray (inputSize, argv + 1);
+    target = atoi (argv[2]);
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
     printf ("input array:\n");
-    printIntArray (input, inputSize);
-    ret = twoSum (input, inputSize, target, retSize);
+    printIntArray (inputArray, inputArraySize);
+    returnedArray = twoSum (inputArray, inputArraySize, target, returnedArraySize);
     printf ("returned 2 indices:\n");
-    printIntArray (ret, *retSize);
+    printIntArray (returnedArray, *returnedArraySize);
 
-    free (input);
-    free (ret);
+    free (inputArray);
+    free (returnedArray);
 
     return 0;
 }
@@ -150,11 +148,11 @@ int lc005_LongestPalindromicSubstring (int argc, char ** argv) {
 
 int lc009_Palindrome (int argc, char ** argv) {
     int num;
+    argv += 2;
 
-    while (*argv) {
-        num = atoi(*argv++);
-        fprintf(stdout, "%d %s a palindrome number.\n",
-                num, isPalindrome(num) ? "is" : "isn't");
+    while (*argv != NULL) {
+        num = atoi (*argv++);
+        printf ("%d %s a palindrome number.\n", num, isPalindrome (num) ? "is" : "isn't");
     }
 
     return 0;
@@ -171,27 +169,24 @@ int lc013_RomanToInteger (int argc, char ** argv) {
 }
 
 int lc014_LongestCommonPrefix (int argc, char ** argv) {
-    char ** input;
-    char * ret;
-    const char * usage = \
-        USAGE_PREFIX "14 <string> [<string> ...]\n" \
+    const char * usage = USAGE_PREFIX "14 <string> [<string> ...]\n"
         "Find the longest common prefix of the given strings.\n";
+    int inputSize = argc - 2;
+    char ** input;
+    char * returnedString;
 
-    if (argc < 1) {
-        fprintf (stdout, "%s", usage);
+    if (inputSize < 1) {
+        printf ("%s", usage);
         return 0;
     }
 
-    input = parseArgsToStringArray (argc, argv);
-    if (input == NULL) {
-        return -1;
-    }
+    input = parseArgsToStringArray (argc, argv, argc - inputSize, inputSize);
 
-    ret = longestCommonPrefix (argv, argc);
-    fprintf (stdout, "Longest common prefix is `%s'\n", ret);
+    returnedString = longestCommonPrefix (input, inputSize);
+    printf ("Longest common prefix is `%s'\n", returnedString);
 
-    free (ret);
-    freeStringArray (input, argc);
+    free (returnedString);
+    freeStringArray (input, inputSize);
 
     return 0;
 }
@@ -206,30 +201,29 @@ int lc020_ValidParentheses (int argc, char ** argv) {
 }
 
 int lc021_Merge2LinkedLists (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "21 <l1.len> <l2.len> [<l1.val> ...] [<l2.val> ...]\n"
+        "Merge 2 non-decreasing linked lists.\n";
     Node * l1 = NULL;
     Node * l2 = NULL;
     Node * ret;
     int len1, len2;
-    const char * usage =
-        USAGE_PREFIX "21 <l1.len> <l2.len> [<l1.val> ...] [<l2.val> ...]\n"
-        "Merge 2 non-decreasing linked lists.\n";
 
     if (argc < 2) {
         printf ("%s", usage);
         return 0;
     }
 
-    len1 = atoi(argv[0]);
-    len2 = atoi(argv[1]);
+    len1 = atoi (argv[2]);
+    len2 = atoi (argv[3]);
 
     if (len1 + len2 != argc - 2)
         return -1;
 
     for (int i = 0; i < len1 + len2; i++) {
         if (i < len1)
-            l1 = AddValue(l1, atoi(argv[2 + i]));
+            l1 = AddValue (l1, atoi (argv[4 + i]));
         else
-            l2 = AddValue(l2, atoi(argv[2 + i]));
+            l2 = AddValue (l2, atoi (argv[4 + i]));
     }
 
 #if DEBUG
@@ -249,58 +243,58 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
     return 0;
 }
 
-int lc026_RmDup(int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "26 <integer> [<integer> ...]\n" \
+int lc026_RmDup (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "26 <integer> [<integer> ...]\n"
         "Remove duplicated items from a non-decreasing integer array.\n";
-    int * input;
+    int inputArraySize = argc - 2;
+    int * inputArray;
     int newSize;
 
-    if (argc < 1) {
-        fprintf (stdout, "%s", usage);
-        return 0;
-    }
-
-    input = parseArgsToIntArray (argc, argv);
-
-    printf ("input array:\n");
-    printIntArray (input, argc);
-
-    newSize = removeDuplicates(input, argc);
-
-    printf ("after removal of duplicated items:\n");
-    printIntArray (input, newSize);
-
-    free (input);
-    return 0;
-}
-
-int lc027_RemoveElement (int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "27 <value> [<integer> ...]\n" \
-        "Remove all occurrences of <value> in given integer array.\n" \
-        "array size: [0, 100]\n" \
-        "array element range: [0, 50]\n" \
-        "value range: [0, 100]\n";
-    int * input;
-    int value;
-    int arraySize;
-
-    if (argc < 1) {
+    if (inputArraySize < 1) {
         printf ("%s", usage);
         return 0;
     }
 
-    arraySize = argc - 1;
-    value = atoi (argv[0]);
-    input = parseArgsToIntArray (arraySize, argv + 1);
-    printf ("input array:\n");
-    printIntArray (input, arraySize);
-    arraySize = removeElement (input, arraySize, value);
-    printf ("after removal:\n");
-    printIntArray (input, arraySize);
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
 
-    free (input);
+    printf ("input array:\n");
+    printIntArray (inputArray, inputArraySize);
+
+    newSize = removeDuplicates (inputArray, inputArraySize);
+
+    printf ("after removal of duplicated items:\n");
+    printIntArray (inputArray, newSize);
+
+    free (inputArray);
+    return 0;
+}
+
+int lc027_RemoveElement (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "27 <value> [<integer> ...]\n"
+        "Remove all occurrences of <value> in given integer array.\n"
+        "array size: [0, 100]\n"
+        "array element range: [0, 50]\n"
+        "value range: [0, 100]\n";
+    int inputArraySize = argc - 3;
+    int * inputArray;
+    int value;
+
+    if (inputArraySize < 0) {
+        printf ("%s", usage);
+        return 0;
+    }
+
+    value = atoi (argv[2]);
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+
+    printf ("input array:\n");
+    printIntArray (inputArray, inputArraySize);
+
+    inputArraySize = removeElement (inputArray, inputArraySize, value);
+    printf ("after removal:\n");
+    printIntArray (inputArray, inputArraySize);
+
+    free (inputArray);
     return 0;
 }
 
@@ -317,28 +311,28 @@ int lc028_FindNeedleInHaystack (int argc, char ** argv) {
     return strStr (argv[0], argv[1]);
 }
 
-int lc034_FindPosOfElementsInSortedArray(int argc, char ** argv) {
+int lc034_FindPosOfElementsInSortedArray (int argc, char ** argv) {
     int target;
-    int * input;
-    int * ret;
-    int retSize;
-    const char * usage = \
-        USAGE_PREFIX "34 <target> [<integer> ...]\n" \
+    int inputArraySize = argc - 3;
+    int * inputArray;
+    int * returnedArray;
+    int returnedArraySize;
+    const char * usage = USAGE_PREFIX "34 <target> [<integer> ...]\n"
         "Find the starting and ending position of <target> in a non-decreasing integer array.\n";
 
-    if (argc < 1) {
-        fprintf(stdout, "%s", usage);
+    if (inputArraySize < 0) {
+        printf ("%s", usage);
         return 0;
     }
 
-    target = atoi(*argv);
-    input = parseArgsToIntArray(argc - 1, argv + 1);
-    ret = searchRange(input, argc - 1, target, &retSize);
+    target = atoi (argv[2]);
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    returnedArray = searchRange(inputArray, inputArraySize, target, &returnedArraySize);
 
-    printIntArray(ret, retSize);
+    printIntArray (returnedArray, returnedArraySize);
 
-    free(ret);
-    free(input);
+    free (returnedArray);
+    free (inputArray);
 
     return 0;
 }
@@ -375,68 +369,67 @@ int lc036_ValidSudoku (int argc, char ** argv) {
 }
 
 int lc053_MaxSubarray (int argc, char ** argv) {
-    int * input = parseArgsToIntArray(argc, argv);
-    int ret;
+    const char * usage = USAGE_PREFIX "53 <integer> [<integer> ...]\n"
+        "Find the sub-array with the largest sum, and return the sum.\n";
+    int inputArraySize = argc - 2;
+    int * inputArray;
+    int returnedSum;
 
-    if (!input)
-        return -1;
-
-    ret = maxSubArray(input, argc);
-    free(input);
-    return ret;
-}
-
-int lc074_Search2dMatrix (int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "74 <target> <column> <integer> [<integer> ...]\n" \
-        "Search the given matrix of given column(s) for given target.\n";
-    int ** input;
-    int t;
-    int r;
-    int c;
-    int * csz;
-
-    if (argc < 3) {
+    if (inputArraySize < 1) {
         printf ("%s", usage);
         return 0;
     }
 
-    input = parseArgsToIntMatrix(argc - 1, argv + 1);
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    returnedSum = maxSubArray (inputArray, inputArraySize);
+    free (inputArray);
+    return returnedSum;
+}
 
-    if (!input)
-        return -1;
+int lc074_Search2dMatrix (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "74 <target> <column> <integer> [<integer> ...]\n"
+        "Search the given matrix of given column(s) for given target.\n";
+    int inputElementCount = argc - 4;
+    int ** input;
+    int target;
+    int column;
+    int row;
+    int * columnSize;
 
-    t = atoi(argv[0]);
-    c = atoi(argv[1]);
-    r = (argc - 2) / c;
-    fprintf(stdout, "input matrix:\n");
-    printIntMatrix(input, r, c);
-    putchar('\n');
+    if (inputElementCount < 1) {
+        printf ("%s", usage);
+        return 0;
+    }
 
-    csz = malloc(sizeof *csz * r);
-    for (int i = 0; i < r; i++)
-        csz[i] = c;
+    target = atoi (argv[2]);
+    column = atoi (argv[3]);
 
-    fprintf(stdout, "%s target %d\n.",
-            searchMatrix(input, r, csz, t) ? "Found" : "Couldn't find",
-            t);
+    input = parseArgsToIntMatrix (argc, argv, argc - inputElementCount, inputElementCount, column);
 
-    free (csz);
-    freeIntMatrix (input, r);
+    row = inputElementCount / column;
+    printf ("input matrix:\n");
+    printIntMatrix (input, row, column);
+    printf ("\n");
+
+    columnSize = malloc (sizeof *columnSize * row);
+    for (int i = 0; i < row; i++)
+        columnSize[i] = column;
+
+    printf ("%s target %d\n.", searchMatrix (input, row, columnSize, target) ? "Found" : "Couldn't find", target);
+
+    free (columnSize);
+    freeIntMatrix (input, row);
     return 0;
 }
 
 int lc083_RemoveDupFromSortedList (int argc, char ** argv) {
-    Node * input = NULL;
-    Node * ret;
+    Node * input;
+    Node * afterDeletion;
 
-    while (*argv)
-        input = AddValue(input, atoi(*argv++));
-
-    ret = deleteDuplicates(input);
-    PrintList(ret);
-
-    FreeLinkedList (ret);
+    input = parseArgsToLinkedList (argv + 2);
+    afterDeletion = deleteDuplicates (input);
+    PrintList (afterDeletion);
+    FreeLinkedList (afterDeletion);
     return 0;
 }
 
@@ -571,21 +564,20 @@ int lc104_MaxDepthOfBinaryTree (int argc, char ** argv) {
 }
 
 int lc118_PascalsTriangle (int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "118 <row>\n" \
-        "Generate a Pascal's triangle of given row(s).\n" \
+    const char * usage = USAGE_PREFIX "118 <row>\n"
+        "Generate a Pascal's triangle of given row(s).\n"
         "row range: [1, 20]\n";
     int row;
     int retRow[1];
     int * retCols[1];
     int ** ret;
 
-    if (argc != 1) {
+    if (argc != 3) {
         printf ("%s", usage);
         return 0;
     }
 
-    ret = generate (row = atoi (argv[0]), retRow, retCols);
+    ret = generate (row = atoi (argv[2]), retRow, retCols);
 
     for (int i = 0; i < *retRow; i++) {
         for (int j = *retRow - (i + 1); j > 0; j--) {
@@ -602,16 +594,23 @@ int lc118_PascalsTriangle (int argc, char ** argv) {
     return 0;
 }
 
-int lc121_MaxProfit(int argc, char ** argv) {
-    int * input = parseArgsToIntArray(argc, argv);
-    int ret;
+int lc121_MaxProfit (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "121 <integer> [<integer> ...]\n"
+        "Given an array where the i-th element is the price of a stock on the i-th day.\n"
+        "Return the maximum profit to buy and sell the stock.\n";
+    int inputArraySize = argc - 2;
+    int * inputArray;
+    int returnedProfit;
 
-    if (!input)
-        return -1;
+    if (inputArraySize < 1) {
+        printf ("%s", usage);
+        return 0;
+    }
 
-    ret = maxProfit(input, argc);
-    free(input);
-    return ret;
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    returnedProfit = maxProfit (inputArray, inputArraySize);
+    free (inputArray);
+    return returnedProfit;
 }
 
 int lc144_BinaryTreePreorderTraversal (int argc, char ** argv) {
@@ -625,18 +624,17 @@ int lc145_BinaryTreePostorderTraversal (int argc, char ** argv) {
 }
 
 int lc203_RemoveLinkedListElements (int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "203 <value> [<integer> ...]\n" \
+    const char * usage = USAGE_PREFIX "203 <value> [<integer> ...]\n"
         "Remove all occurrences of value for given linked list.\n";
     int value;
     Node * input;
 
-    if (argc < 1) {
+    if (argc < 3) {
         printf ("%s", usage);
         return 0;
     }
-    value = atoi (argv[0]);
-    input = parseArgsToLinkedList (argv + 1);
+    value = atoi (argv[2]);
+    input = parseArgsToLinkedList (argv + 3);
     printf ("input list:\n");
     PrintList (input);
     input = removeElements (input, value);
@@ -649,29 +647,32 @@ int lc203_RemoveLinkedListElements (int argc, char ** argv) {
 
 int lc206_ReverseLinkedList (int argc, char ** argv) {
     Node * input = NULL;
-    Node * ret;
+    Node * reversed;
 
-    while (*argv)
-        input = AddValue(input, atoi(*argv++));
-
-    ret = reverseList(input);
-
-    PrintList(ret);
-
-    FreeLinkedList (ret);
+    input = parseArgsToLinkedList (argv + 2);
+    reversed = reverseList (input);
+    PrintList (reversed);
+    FreeLinkedList (reversed);
     return 0;
 }
 
 int lc217_ContainsDup (int argc, char ** argv) {
-    int * input = parseArgsToIntArray(argc, argv);
+    const char * usage = USAGE_PREFIX "217 <integer> [<integer> ...]\n"
+        "Check if the given array contains any duplicate.\n";
+    int inputArraySize = argc - 2;
+    int * inputArray;
+    int returnedValue;
 
-    if (!input)
-        return -1;
+    if (inputArraySize < 1) {
+        printf ("%s", usage);
+        return 0;
+    }
 
-    fprintf(stdout, "%s\n", containsDuplicate(input, argc) ? "True" : "False");
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    returnedValue = containsDuplicate (inputArray, inputArraySize) ? 0 : 1;
 
-    free(input);
-    return 0;
+    free(inputArray);
+    return returnedValue;
 }
 
 int lc226_InvertBinaryTree (int argc, char ** argv) {
@@ -708,38 +709,42 @@ int lc242_ValidAnagram (int argc, char ** argv) {
 }
 
 int lc350_Intersection (int argc, char ** argv) {
-    int * input = parseArgsToIntArray(argc, argv);
-    int * nums2 = NULL;
+    int inputArraySize = argc - 2;
+    int * inputArray;
+    int * nums2;
     int nums2Size[1];
-    int * ret = NULL;
-    int retsz[1];
+    int * returnedArray;
+    int returnedArraySize[1];
 
-    if (!input)
+    if (inputArraySize < 0) {
         return -1;
+    }
 
-    fprintf(stdout, "How many numbers in nums2? ");
-    scanf("%d", nums2Size);
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+
+    printf ("How many numbers in nums2? ");
+    scanf ("%d", nums2Size);
     nums2 = malloc(sizeof *nums2 * *nums2Size);
-    fprintf(stdout, "Input nums2, separated with spaces: ");
+    printf ("Input nums2, separated with spaces: ");
     for (int i = 0; i < *nums2Size; i++)
-        if (scanf("%d", nums2 + i) != 1) {
-            fprintf(stderr, "Error in parsing input.\n");
+        if (scanf ("%d", nums2 + i) != 1) {
+            fprintf (stderr, "Error in parsing input.\n");
             return -1;
         }
 
-    fprintf(stdout, "nums1:\n");
-    printIntArray(input, argc);
-    fprintf(stdout, "nums2:\n");
-    printIntArray(nums2, *nums2Size);
-    putchar('\n');
+    printf ("nums1:\n");
+    printIntArray (inputArray, inputArraySize);
+    printf ("nums2:\n");
+    printIntArray (nums2, *nums2Size);
+    printf ("\n");
 
-    ret = intersect(input, argc, nums2, *nums2Size, retsz);
+    returnedArray = intersect (inputArray, inputArraySize, nums2, *nums2Size, returnedArraySize);
 
-    fprintf(stdout, "return:\n");
-    printIntArray(ret, *retsz);
+    printf ("return:\n");
+    printIntArray (returnedArray, *returnedArraySize);
 
-    free(input);
-    free(ret);
+    free (inputArray);
+    free (returnedArray);
 
     return 0;
 }
@@ -774,43 +779,42 @@ int lc387_FirstUniqueChar (int argc, char ** argv) {
 }
 
 int lc566_MatrixReshape (int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "566 <new-row> <new-column> <column> <integer> [<integer> ...]\n" \
+    const char * usage = USAGE_PREFIX "566 <new-row> <new-column> <column> <integer> [<integer> ...]\n"
         "Reshape the given matrix.\n";
-    int ** input;
-    int r, c, m, n;
+    int elementCount = argc - 5;
+    int ** inputMatrix;
+    int newRow, newColumn, row, column;
     int ** reshaped;
-    int retr[1];
-    int * retc[1];
+    int returnedRow[1];
+    int * returnedColumn[1];
 
-    if (argc < 4) {
+    if (elementCount < 1) {
         printf ("%s", usage);
         return 0;
     }
 
-    input = parseArgsToIntMatrix(argc - 2, argv + 2);
+    newRow = atoi (argv[2]);
+    newColumn = atoi (argv[3]);
+    column = atoi (argv[4]);
+    row = elementCount / column;
 
-    if (!input)
-        return -1;
-
-    r = atoi(argv[0]);
-    c = atoi(argv[1]);
-    n = atoi(argv[2]);
-    m = (argc - 3) / n;
+    inputMatrix = parseArgsToIntMatrix (argc, argv, argc - elementCount, elementCount, column);
 
     printf ("Input matrix:\n");
-    printIntMatrix(input, m, n);
+    printIntMatrix (inputMatrix, row, column);
 
-    reshaped = matrixReshape(input, m, &n, r, c, retr, retc);
+    reshaped = matrixReshape (inputMatrix, row, &column, newRow, newColumn, returnedRow, returnedColumn);
 
     printf ("Reshaped:\n");
-    printIntMatrix(reshaped, *retr, **retc);
+    printIntMatrix (reshaped, *returnedRow, **returnedColumn);
 
-    if (reshaped != input)
-        freeIntMatrix (reshaped, *retr);
-    if (*retc != &n)
-        free (*retc);
-    freeIntMatrix (input, m);
+    if (reshaped != inputMatrix) {
+        freeIntMatrix (reshaped, *returnedRow);
+    }
+    if (*returnedColumn != &column) {
+        free (*returnedColumn);
+    }
+    freeIntMatrix (inputMatrix, row);
     return 0;
 }
 
@@ -825,48 +829,48 @@ int lc701_InsertIntoABinaryTree (int argc, char ** argv) {
 }
 
 int lc977_SortSquare (int argc, char ** argv) {
-    int * input;
-    int * ret;
-    int retsz;
+    int inputArraySize = argc - 2;
+    int * inputArray;
+    int * returnedValue;
+    int returnedArraySize;
 
-    if (argc < 1)
+    if (inputArraySize < 0) {
         return -1;
+    }
 
-    input = parseArgsToIntArray(argc, argv);
-    ret = sortedSquares(input, argc, &retsz);
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    returnedValue = sortedSquares (inputArray, inputArraySize, &returnedArraySize);
 
-    printIntArray(ret, retsz);
+    printIntArray (returnedValue, returnedArraySize);
 
-    free(input);
-    free(ret);
+    free (inputArray);
+    free (returnedValue);
     return 0;
 }
 
 int lc1290_Bin2Int (int argc, char ** argv) {
-    if (!argc)
-        return -1;
-
-    Node * head = NULL;
-
-    while (*argv)
-        head = AddValue(head, atoi(*argv++));
-
-    return getDecimalValue(head);
+    Node * inputList = parseArgsToLinkedList (argv + 2);
+    return getDecimalValue (inputList);
 }
 
 int lc2078_maxDistance (int argc, char ** argv) {
-    int * input = parseArgsToIntArray(argc, argv);
-    int ret;
+    int inputArraySize = argc - 2;
+    int * inputArray;
+    int returnedValue;
 
-    ret = maxDistance(input, argc);
-    free(input);
+    if (inputArraySize < 0) {
+        return -1;
+    }
 
-    return ret;
+    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    returnedValue = maxDistance (inputArray, inputArraySize);
+    free (inputArray);
+
+    return returnedValue;
 }
 
 int lc2085_CountCommonWordsWithOneOccurrence (int argc, char ** argv) {
-    const char * usage = \
-        USAGE_PREFIX "2085 <words1size> <words2size> <string> [<string> ...] <string> [<string> ...]\n" \
+    const char * usage = USAGE_PREFIX "2085 <words1size> <words2size> <string> [<string> ...] <string> [<string> ...]\n"
         "Count strings that appear exactly once in both string arrays.\n";
     int words1Size;
     int words2Size;
@@ -874,27 +878,27 @@ int lc2085_CountCommonWordsWithOneOccurrence (int argc, char ** argv) {
     char ** words2;
     int returnValue;
 
-    if (argc < 4) {
+    if (argc < 6) {
         printf ("%s", usage);
         return 0;
     }
 
-    words1Size = atoi (argv[0]);
-    words2Size = atoi (argv[1]);
+    words1Size = atoi (argv[2]);
+    words2Size = atoi (argv[3]);
 
-    if (words1Size + words2Size != argc - 2) {
+    if (words1Size + words2Size + 4 != argc) {
         fprintf (stderr,
             "error: invalid number of arguments\n"
             "Provided sizes are %d and %d (total %d), but the real total size is %d.\n",
             words1Size,
             words2Size,
             words1Size + words2Size,
-            argc - 2);
+            argc - 4);
         return -1;
     }
 
-    words1 = parseArgsToStringArray (words1Size, argv + 2);
-    words2 = parseArgsToStringArray (words2Size, argv + 2 + words1Size);
+    words1 = parseArgsToStringArray (argc, argv, 4, words1Size);
+    words2 = parseArgsToStringArray (argc, argv, 4 + words1Size, words2Size);
     returnValue = countWords (words1, words1Size, words2, words2Size);
 
     freeStringArray (words1, words1Size);
@@ -926,25 +930,23 @@ int lc2087_RobotComingHome (int argc, char ** argv) {
 }
 
 int lc2089_FindTargetIndicesAfterSortingArray (int argc, char ** argv) {
-    const char * usage =
-        USAGE_PREFIX "2089 <target> <integer> [<integer> ...]\n"
+    const char * usage = USAGE_PREFIX "2089 <target> <integer> [<integer> ...]\n"
         "Return the indices of all occurrences of target integer after sorting the given\n"
         "array in non-decreasing order.  The returned array must be sorted in increasing\n"
         "order.\n";
     int target;
-    int inputSize;
+    int inputSize = argc - 3;
     int * input;
     int * returnedValues;
     int returnedSize[1];
 
-    if (argc < 2) {
+    if (inputSize < 1) {
         printf ("%s", usage);
         return 0;
     }
 
-    target = atoi (argv[0]);
-    inputSize = argc - 1;
-    input = parseArgsToIntArray (inputSize, argv + 1);
+    target = atoi (argv[2]);
+    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
 
     printf ("input array:\n");
     printIntArray (input, inputSize);
@@ -959,24 +961,22 @@ int lc2089_FindTargetIndicesAfterSortingArray (int argc, char ** argv) {
 }
 
 int lc2090_KRadiusSubarrayAverages (int argc, char ** argv) {
-    const char * usage =
-        USAGE_PREFIX "2090 <k> <integer> [<integer> ...]\n"
+    const char * usage = USAGE_PREFIX "2090 <k> <integer> [<integer> ...]\n"
         "Return a integer array containing the average values of range [i - k, i + k] of\n"
         "the given array.  If i - k < 0 or i + k > array size, the average is -1.\n";
     int k;
-    int inputSize;
+    int inputSize = argc - 3;
     int * input;
     int * returnedArray;
     int returnedSize[1];
 
-    if (argc < 2) {
+    if (inputSize < 1) {
         printf ("%s", usage);
         return 0;
     }
 
-    k = atoi (argv[0]);
-    inputSize = argc - 1;
-    input = parseArgsToIntArray (inputSize, argv + 1);
+    k = atoi (argv[2]);
+    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
 
     printf ("input array:\n");
     printIntArray (input, inputSize);
@@ -991,23 +991,22 @@ int lc2090_KRadiusSubarrayAverages (int argc, char ** argv) {
 }
 
 int lc2091_RemovingMinumumAndMaximumFromArray (int argc, char ** argv) {
-    const char * usage =
-        USAGE_PREFIX "2091 <integer> [<integer> ...]\n"
+    const char * usage = USAGE_PREFIX "2091 <integer> [<integer> ...]\n"
         "Return the minimum number of deletions it would take to remove the both the\n"
         "minimum and maximum element from the given array of *distinct* integers.\n"
         "A deletion is removing an element from either the front or the back of the\n"
         "array.\n";
-    int inputSize;
+    int inputSize = argc - 2;
     int * input;
     int returnedValue;
 
-    if (argc < 1) {
+    if (inputSize < 1) {
         printf ("%s", usage);
         return 0;
     }
 
     inputSize = argc;
-    input = parseArgsToIntArray (inputSize, argv);
+    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
     printf ("input array:\n");
     printIntArray (input, inputSize);
 
@@ -1045,21 +1044,19 @@ int lc2092_Secret (int argc, char ** argv) {
 }
 
 int lc2094_Finding3DigitEvenNumbers (int argc, char ** argv) {
-    const char * usage =
-        USAGE_PREFIX "2094 <digit> <digit> <digit> [<digit> ...]\n"
+    const char * usage = USAGE_PREFIX "2094 <digit> <digit> <digit> [<digit> ...]\n"
         "Find all 3-digit even numbers that consist of 3 elements from given array.\n";
-    int inputSize;
+    int inputSize = argc - 2;
     int * input;
     int * returnedValues;
     int returnedSize[1];
 
-    if (argc < 3) {
+    if (inputSize < 3) {
         printf ("%s", usage);
         return 0;
     }
 
-    inputSize = argc;
-    input = parseArgsToIntArray (inputSize, argv);
+    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
     returnedValues = findEvenNumbers (input, inputSize, returnedSize);
     printIntArray (returnedValues, *returnedSize);
 
@@ -1087,182 +1084,183 @@ int lc2095_DeleteTheMiddleNodeOfALinkedList (int argc, char ** argv) {
 }
 
 int main (int argc, char **argv) {
-    int ret;
-    int num;
+    int returnedValue;
+    int problemNumber;
 
     if (argc < 2) {
         printf("%s", driver_usage);
         return 0;
     }
 
-    num = atoi(argv[1]);
+    problemNumber = atoi (argv[1]);
 
-    if (num <= 0) {
-        fprintf(stderr, "error: ID must be greater than 0.\n");
-        return 1;
+    if (problemNumber <= 0) {
+        printf("%s", driver_usage);
+        return 0;
     }
 
-    switch(num) {
+    switch (problemNumber) {
         case 1:
-            ret = lc001_TwoSums (argc - 2, argv + 2);
+            returnedValue = lc001_TwoSums (argc, argv);
             break;
         case 2:
-            ret = lc002_AddTwoNumbers (argc - 2, argv + 2);
+            returnedValue = lc002_AddTwoNumbers (argc, argv);
             break;
         case 3:
-            ret = lc003_LongestSubstring (argc - 2, argv + 2);
+            returnedValue = lc003_LongestSubstring (argc, argv);
             break;
         case 5:
-            ret = lc005_LongestPalindromicSubstring (argc - 2, argv + 2);
+            returnedValue = lc005_LongestPalindromicSubstring (argc, argv);
             break;
         case 9:
-            ret = lc009_Palindrome (argc -2, argv + 2);
+            returnedValue = lc009_Palindrome (argc, argv);
             break;
         case 13:
-            ret = lc013_RomanToInteger (argc -2, argv + 2);
+            returnedValue = lc013_RomanToInteger (argc, argv);
             break;
         case 14:
-            ret = lc014_LongestCommonPrefix (argc -2, argv + 2);
+            returnedValue = lc014_LongestCommonPrefix (argc, argv);
             break;
         case 20:
-            ret = lc020_ValidParentheses (argc -2, argv + 2);
+            returnedValue = lc020_ValidParentheses (argc, argv);
             break;
         case 21:
-            ret = lc021_Merge2LinkedLists (argc - 2, argv + 2);
+            returnedValue = lc021_Merge2LinkedLists (argc, argv);
             break;
         case 26:
-            ret = lc026_RmDup (argc - 2, argv + 2);
+            returnedValue = lc026_RmDup (argc, argv);
             break;
         case 27:
-            ret = lc027_RemoveElement (argc - 2, argv + 2);
+            returnedValue = lc027_RemoveElement (argc, argv);
             break;
         case 28:
-            ret = lc028_FindNeedleInHaystack (argc - 2, argv + 2);
+            returnedValue = lc028_FindNeedleInHaystack (argc, argv);
             break;
         case 34:
-            ret = lc034_FindPosOfElementsInSortedArray (argc - 2, argv + 2);
+            returnedValue = lc034_FindPosOfElementsInSortedArray (argc, argv);
             break;
         case 36:
-            ret = lc036_ValidSudoku (argc - 2, argv + 2);
+            returnedValue = lc036_ValidSudoku (argc, argv);
             break;
         case 53:
-            ret = lc053_MaxSubarray (argc - 2, argv + 2);
+            returnedValue = lc053_MaxSubarray (argc, argv);
             break;
         case 74:
-            ret = lc074_Search2dMatrix (argc - 2, argv + 2);
+            returnedValue = lc074_Search2dMatrix (argc, argv);
             break;
         case 83:
-            ret = lc083_RemoveDupFromSortedList (argc - 2, argv + 2);
+            returnedValue = lc083_RemoveDupFromSortedList (argc, argv);
             break;
         case 88:
-            ret = lc088_MergeNums (argc - 2, argv + 2);
+            returnedValue = lc088_MergeNums (argc, argv);
             break;
         case 98:
-            ret = lc098_ValidBST (argc - 2, argv + 2);
+            returnedValue = lc098_ValidBST (argc, argv);
             break;
         case 101:
-            ret = lc101_SymmetricTree (argc - 2, argv + 2);
+            returnedValue = lc101_SymmetricTree (argc, argv);
             break;
         case 102:
-            ret = lc102_BinTreeLevelTraversal (argc - 2, argv + 2);
+            returnedValue = lc102_BinTreeLevelTraversal (argc, argv);
             break;
         case 104:
-            ret = lc104_MaxDepthOfBinaryTree (argc - 2, argv + 2);
+            returnedValue = lc104_MaxDepthOfBinaryTree (argc, argv);
             break;
         case 118:
-            ret = lc118_PascalsTriangle (argc - 2, argv + 2);
+            returnedValue = lc118_PascalsTriangle (argc, argv);
             break;
         case 121:
-            ret = lc121_MaxProfit (argc - 2, argv + 2);
+            returnedValue = lc121_MaxProfit (argc, argv);
             break;
         case 144:
-            ret = lc144_BinaryTreePreorderTraversal (argc - 2, argv + 2);
+            returnedValue = lc144_BinaryTreePreorderTraversal (argc, argv);
             break;
         case 145:
-            ret = lc145_BinaryTreePostorderTraversal (argc - 2, argv + 2);
+            returnedValue = lc145_BinaryTreePostorderTraversal (argc, argv);
             break;
         case 203:
-            ret = lc203_RemoveLinkedListElements (argc - 2, argv + 2);
+            returnedValue = lc203_RemoveLinkedListElements (argc, argv);
             break;
         case 206:
-            ret = lc206_ReverseLinkedList (argc - 2, argv + 2);
+            returnedValue = lc206_ReverseLinkedList (argc, argv);
             break;
         case 217:
-            ret = lc217_ContainsDup (argc - 2, argv + 2);
+            returnedValue = lc217_ContainsDup (argc, argv);
             break;
         case 226:
-            ret = lc226_InvertBinaryTree (argc - 2, argv + 2);
+            returnedValue = lc226_InvertBinaryTree (argc, argv);
             break;
         case 232:
-            ret = lc232_ImplementQueueUsingStacks (argc - 2, argv + 2);
+            returnedValue = lc232_ImplementQueueUsingStacks (argc, argv);
             break;
         case 234:
-            ret = lc234_Palindrome_ll (argc - 2, argv + 2);
+            returnedValue = lc234_Palindrome_ll (argc, argv);
             break;
         case 242:
-            ret = lc242_ValidAnagram (argc - 2, argv + 2);
+            returnedValue = lc242_ValidAnagram (argc, argv);
             break;
         case 350:
-            ret = lc350_Intersection (argc - 2, argv + 2);
+            returnedValue = lc350_Intersection (argc, argv);
             break;
         case 383:
-            ret = lc383_RansomNote (argc - 2, argv + 2);
+            returnedValue = lc383_RansomNote (argc, argv);
             break;
         case 387:
-            ret = lc387_FirstUniqueChar (argc - 2, argv + 2);
+            returnedValue = lc387_FirstUniqueChar (argc, argv);
             break;
         case 566:
-            ret = lc566_MatrixReshape (argc - 2, argv + 2);
+            returnedValue = lc566_MatrixReshape (argc, argv);
             break;
         case 700:
-            ret = lc700_SearchBst (argc - 2, argv + 2);
+            returnedValue = lc700_SearchBst (argc, argv);
             break;
         case 701:
-            ret = lc701_InsertIntoABinaryTree (argc - 2, argv + 2);
+            returnedValue = lc701_InsertIntoABinaryTree (argc, argv);
             break;
         case 977:
-            ret = lc977_SortSquare (argc - 2, argv + 2);
+            returnedValue = lc977_SortSquare (argc, argv);
             break;
         case 1290:
-            ret = lc1290_Bin2Int (argc - 2, argv + 2);
+            returnedValue = lc1290_Bin2Int (argc, argv);
             break;
         case 2078:
-            ret = lc2078_maxDistance (argc - 2, argv + 2);
+            returnedValue = lc2078_maxDistance (argc, argv);
             break;
         case 2085:
-            ret = lc2085_CountCommonWordsWithOneOccurrence (argc - 2, argv + 2);
+            returnedValue = lc2085_CountCommonWordsWithOneOccurrence (argc, argv);
             break;
         case 2086:
-            ret = lc2086_FeedTheHamsters (argc - 2, argv + 2);
+            returnedValue = lc2086_FeedTheHamsters (argc, argv);
             break;
         case 2087:
-            ret = lc2087_RobotComingHome (argc - 2, argv + 2);
+            returnedValue = lc2087_RobotComingHome (argc, argv);
             break;
         case 2089:
-            ret = lc2089_FindTargetIndicesAfterSortingArray (argc - 2, argv + 2);
+            returnedValue = lc2089_FindTargetIndicesAfterSortingArray (argc, argv);
             break;
         case 2090:
-            ret = lc2090_KRadiusSubarrayAverages (argc - 2, argv + 2);
+            returnedValue = lc2090_KRadiusSubarrayAverages (argc, argv);
             break;
         case 2091:
-            ret = lc2091_RemovingMinumumAndMaximumFromArray (argc - 2, argv + 2);
+            returnedValue = lc2091_RemovingMinumumAndMaximumFromArray (argc, argv);
             break;
         case 2092:
-            ret = lc2092_Secret (argc - 2, argv + 2);
+            returnedValue = lc2092_Secret (argc, argv);
             break;
         case 2094:
-            ret = lc2094_Finding3DigitEvenNumbers (argc - 2, argv + 2);
+            returnedValue = lc2094_Finding3DigitEvenNumbers (argc, argv);
             break;
         case 2095:
-            ret = lc2095_DeleteTheMiddleNodeOfALinkedList (argc - 2, argv + 2);
+            returnedValue = lc2095_DeleteTheMiddleNodeOfALinkedList (argc, argv);
             break;
         default:
-            fprintf(stderr, "error: There is no driver for %d yet!\n", num);
-            ret = 1;
+            fprintf (stderr, "no driver for %d\n", problemNumber);
+            returnedValue = 1;
             break;
     }
 
-    if (ret)
-        fprintf(stderr, "warning: Return value is %d\n", ret);
-    return ret;
+    if (returnedValue != 0) {
+        fprintf(stderr, "warning: Return value is %d\n", returnedValue);
+    }
+    return returnedValue;
 }

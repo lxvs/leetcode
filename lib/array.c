@@ -3,102 +3,97 @@
 #include <string.h>
 #include <lib/array.h>
 
-int * parseArgsToIntArray (const int argc, char ** argv) {
+int * parseArgsToIntArray (int argc, char ** argv, int startingIndex, int arraySize) {
     int * input;
 
-    input = malloc(sizeof *input * argc);
+    input = malloc (sizeof *input * arraySize);
 
-    for (int i = 0; i < argc; i++) {
-        input[i] = atoi(argv[i]);
+    for (int i = 0; i < arraySize; i++) {
+        input[i] = atoi (argv[startingIndex + i]);
     }
 
     return input;
 }
 
-char ** parseArgsToStringArray (const int argc, char ** argv) {
-    char ** ret;
-    int MAX_STRING_LENGTH = 0;
+char ** parseArgsToStringArray (int argc, char ** argv, int startingIndex, int arraySize) {
+    char ** returnedArray;
+    int maxElementLength = 0;
 
-    for (int i = 0, stringLength; i < argc; i++) {
-        if (MAX_STRING_LENGTH < (stringLength = strlen (argv[i]))) {
-            MAX_STRING_LENGTH = stringLength;
+    for (int i = 0, stringLength; i < arraySize; i++) {
+        if (maxElementLength < (stringLength = strlen (argv[startingIndex + i]))) {
+            maxElementLength = stringLength;
         }
     }
 
-    ret = malloc (sizeof *ret * argc);
+    returnedArray = malloc (sizeof *returnedArray * arraySize);
 
-    for (int i = 0; i < argc; i++) {
-        ret[i] = malloc (sizeof *ret[i] * (MAX_STRING_LENGTH + 1));
-        strncpy (ret[i], argv[i], strlen (argv[i]) + 1);
+    for (int i = 0; i < arraySize; i++) {
+        returnedArray[i] = malloc (sizeof *returnedArray[i] * (maxElementLength + 1));
+        strncpy (returnedArray[i], argv[startingIndex + i], strlen (argv[startingIndex + i]) + 1);
     }
 
-    return ret;
+    return returnedArray;
 }
 
-int ** parseArgsToIntMatrix (const int argc, char ** argv) {
-    int c = atoi(*argv);
-    int r;
-    int ** ret;
+/// @brief Parse arguments as a integer matrix of specific columns.  If there are
+/// empty slots left in the matrix, fill them with 0s.
+/// @param argc the original argument count
+/// @param argv the original arguments
+/// @param startingIndex the index of the first matrix element in arguments
+/// @param elementCount the number of elements of the matrix
+/// @param column column number of the matrix
+/// @return the integer matrix
+int ** parseArgsToIntMatrix (int argc, char ** argv, int startingIndex, int elementCount, int column) {
+    int row;
+    int ** returnedMatrix;
 
-    if (c == 0) {
-        fprintf(stderr, "parseArgsToIntMatrix error: Cannot create a matrix of 0 column.\n");
-        return NULL;
+    row = elementCount / column;
+    while (row * column < elementCount) {
+        row++;
     }
 
-    if ((argc - 1) % c) {
-        fprintf(stderr,
-                "parseArgsToIntMatrix error: Cannot create a matrix of %d columns out of %d %s.\n",
-                c, argc - 1, argc - 1 > 1 ? "numbers" : "number");
-        return NULL;
-    }
-
-    r = (argc - 1) / c;
-
-    ret = malloc(sizeof *ret * r);
-    for (int i = 0; i < r; i++) {
-        ret[i] = malloc(sizeof **ret * c);
-    }
-
-    for (int i = 0; i < r; i++) {
-        for (int j = 0; j < c; j++) {
-            ret[i][j] = atoi(argv[1 + i * c + j]);
+    returnedMatrix = malloc (sizeof *returnedMatrix * row);
+    for (int i = 0; i < row; i++) {
+        returnedMatrix[i] = malloc (sizeof **returnedMatrix * column);
+        for (int j = 0, currentIndex; j < column; j++) {
+            returnedMatrix[i][j] = ((currentIndex = column * i + j) < elementCount) ? atoi (argv[startingIndex + currentIndex]) : 0;
         }
     }
 
-    return ret;
+    return returnedMatrix;
 }
 
-void printIntArray (const int * nums, int size) {
-    for (int i = 0; i < size; i++)
-        fprintf(stdout, "nums[%2d] = %d\n", i, nums[i]);
-    return;
+void printIntArray (int * nums, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("nums[%d] = %d\n", i, nums[i]);
+    }
 }
 
 void printStringArray (char ** str, int size) {
     for (int i = 0; i < size; i++) {
-        fprintf (stdout, "str[%2d] = %s\n", i, str[i]);
+        printf ("str[%d] = %s\n", i, str[i]);
     }
 }
 
-void printIntMatrix (int ** matrix, int r, int c) {
-    fprintf(stdout, " r\\c");
-    for (int j = 0; j < c; j++)
-        fprintf(stdout, "  %2d  ", j);
-    putchar('\n');
-
-    for (int i = 0; i < r; i++) {
-        fprintf(stdout, "%2d  ", i);
-        for (int j = 0; j < c; j++)
-            fprintf(stdout, "  %4d", matrix[i][j]);
-        putchar('\n');
+void printIntMatrix (int ** matrix, int row, int column) {
+    printf (" r\\c");
+    for (int i = 0; i < column; i++) {
+        printf ("  %2d  ", i);
     }
+    printf ("\n");
 
-    return;
+    for (int i = 0; i < row; i++) {
+        printf ("%2d  ", i);
+        for (int j = 0; j < column; j++) {
+            printf ("  %4d", matrix[i][j]);
+        }
+        printf ("\n");
+    }
 }
 
-void freeStringArray (char ** str, int elementCount) {
-    while (elementCount > 0) {
-        free (str[--elementCount]);
+void freeStringArray (char ** str, int arraySize) {
+    while (arraySize > 0) {
+        free (str[--arraySize]);
     }
     free (str);
 }
