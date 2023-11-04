@@ -40,20 +40,24 @@ tree_t * parseArgsToTree (int argc, char ** argv) {
     return NewTree (argc, argv);
 }
 
-void printTree (tree_t * tree, int level) {
+static void _printTree (tree_t * tree, int level) {
     if (tree == NULL) {
         return;
     }
     if (tree->right != NULL) {
-        printTree (tree->right, level + 1);
+        _printTree (tree->right, level + 1);
     }
     for (int i = 0; i < level; i++) {
         printf ("%6s", "");
     }
     printf ("%5d \n", tree->val);
     if (tree->left != NULL) {
-        printTree (tree->left, level + 1);
+        _printTree (tree->left, level + 1);
     }
+}
+
+void printTree (tree_t * tree) {
+    _printTree (tree, 0);
 }
 
 void freeTree (tree_t * tree) {

@@ -493,7 +493,7 @@ int lc101_SymmetricTree (int argc, char ** argv) {
     testCasePass->right->left = NewTreeNode (4);
     testCasePass->right->right = NewTreeNode (3);
     printf ("input tree:\n");
-    printTree (testCasePass, 0);
+    printTree (testCasePass);
     printf ("This tree is %s\n", isSymmetric (testCasePass) ? "symmetric" : "asymmetric");
 
     testCaseFail = NewTreeNode (1);
@@ -504,7 +504,7 @@ int lc101_SymmetricTree (int argc, char ** argv) {
     testCaseFail->right->left = NewTreeNode (4);
     testCaseFail->right->right = NewTreeNode (3);
     printf ("input tree:\n");
-    printTree (testCaseFail, 0);
+    printTree (testCaseFail);
     printf ("This tree is %s\n", isSymmetric (testCaseFail) ? "symmetric" : "asymmetric");
 
     freeTree (testCasePass);
@@ -549,7 +549,7 @@ int lc104_MaxDepthOfBinaryTree (int argc, char ** argv) {
     testCaseOne->left = NewTreeNode (1);
     testCaseOne->left->left = NewTreeNode (1);
     printf ("test case 1:\n");
-    printTree (testCaseOne, 0);
+    printTree (testCaseOne);
     printf ("The maximum depth of this tree is %d\n", maxDepth (testCaseOne));
 
     testCaseTwo = NewTreeNode (2);
@@ -562,7 +562,7 @@ int lc104_MaxDepthOfBinaryTree (int argc, char ** argv) {
     testCaseTwo->right->right = NewTreeNode (2);
     testCaseTwo->right->right->right = NewTreeNode (2);
     printf ("test case 2:\n");
-    printTree (testCaseTwo, 0);
+    printTree (testCaseTwo);
     printf ("The maximum depth of this tree is %d\n", maxDepth (testCaseTwo));
 
     freeTree (testCaseOne);

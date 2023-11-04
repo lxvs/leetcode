@@ -28,7 +28,7 @@ tree_t * NewTree (int nodeAmount, char ** nodes);
 
 tree_t * parseArgsToTree (int argc, char ** argv);
 
-void printTree (tree_t * tree, int level);
+void printTree (tree_t * tree);
 
 void freeTree (tree_t * tree);
 
