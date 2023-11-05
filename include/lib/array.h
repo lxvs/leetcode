@@ -7,7 +7,7 @@
 #define matrixGetRow(elementCount, column) \
     (((elementCount) % (column) == 0) ? ((elementCount) / (column)) : ((elementCount) / (column) + 1))
 
-int * parseArgsToIntArray (int argc, char ** argv, int startingIndex, int arraySize);
+int * parseArgsToIntegerArray (int argc, char ** argv, int startingIndex, int arraySize);
 
 char ** parseArgsToStringArray (int argc, char ** argv, int startingIndex, int arraySize);
 
@@ -19,16 +19,16 @@ char ** parseArgsToStringArray (int argc, char ** argv, int startingIndex, int a
 /// @param elementCount the number of elements of the matrix
 /// @param column column number of the matrix
 /// @return the integer matrix
-int ** parseArgsToIntMatrix (int argc, char ** argv, int startingIndex, int elementCount, int column);
+int ** parseArgsToIntegerMatrix (int argc, char ** argv, int startingIndex, int elementCount, int column);
 
-void printIntArray (int * nums, int size);
+void printIntegerArray (int * nums, int size);
 
 void printStringArray (char ** str, int size);
 
-void printIntMatrix (int ** matrix, int row, int column);
+void printIntegerMatrix (int ** matrix, int row, int column);
 
 void freeStringArray (char ** str, int arraySize);
 
-void freeIntMatrix (int ** matrix, int row);
+void freeIntegerMatrix (int ** matrix, int row);
 
 #endif

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <lib/array.h>
 
-int * parseArgsToIntArray (int argc, char ** argv, int startingIndex, int arraySize) {
+int * parseArgsToIntegerArray (int argc, char ** argv, int startingIndex, int arraySize) {
     int * input;
 
     input = malloc (sizeof *input * arraySize);
@@ -43,7 +43,7 @@ char ** parseArgsToStringArray (int argc, char ** argv, int startingIndex, int a
 /// @param elementCount the number of elements of the matrix
 /// @param column column number of the matrix
 /// @return the integer matrix
-int ** parseArgsToIntMatrix (int argc, char ** argv, int startingIndex, int elementCount, int column) {
+int ** parseArgsToIntegerMatrix (int argc, char ** argv, int startingIndex, int elementCount, int column) {
     int row = matrixGetRow (elementCount, column);
     int ** returnedMatrix;
 
@@ -58,19 +58,19 @@ int ** parseArgsToIntMatrix (int argc, char ** argv, int startingIndex, int elem
     return returnedMatrix;
 }
 
-void printIntArray (int * nums, int size) {
+void printIntegerArray (int * array, int size) {
     for (int i = 0; i < size; i++) {
-        printf("nums[%d] = %d\n", i, nums[i]);
+        printf("array[%d] = %d\n", i, array[i]);
     }
 }
 
-void printStringArray (char ** str, int size) {
+void printStringArray (char ** array, int size) {
     for (int i = 0; i < size; i++) {
-        printf ("str[%d] = %s\n", i, str[i]);
+        printf ("array[%d] = %s\n", i, array[i]);
     }
 }
 
-void printIntMatrix (int ** matrix, int row, int column) {
+void printIntegerMatrix (int ** matrix, int row, int column) {
     printf (" r\\c");
     for (int i = 0; i < column; i++) {
         printf ("  %2d  ", i);
@@ -86,14 +86,14 @@ void printIntMatrix (int ** matrix, int row, int column) {
     }
 }
 
-void freeStringArray (char ** str, int arraySize) {
-    while (arraySize > 0) {
-        free (str[--arraySize]);
+void freeStringArray (char ** array, int size) {
+    while (size > 0) {
+        free (array[--size]);
     }
-    free (str);
+    free (array);
 }
 
-void freeIntMatrix (int ** matrix, int row) {
+void freeIntegerMatrix (int ** matrix, int row) {
     for (int i = 0; i < row; i++) {
         free (matrix[i]);
     }

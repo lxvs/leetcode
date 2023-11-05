@@ -76,9 +76,9 @@ int lc001_TwoSums (int argc, char ** argv) {
     }
 
     target = atoi (argv[2]);
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
     printf ("input array:\n");
-    printIntArray (inputArray, inputArraySize);
+    printIntegerArray (inputArray, inputArraySize);
     returnedArray = twoSum (inputArray, inputArraySize, target, returnedArraySize);
 
     if (returnedArray == NULL) {
@@ -88,7 +88,7 @@ int lc001_TwoSums (int argc, char ** argv) {
     }
 
     printf ("returned 2 indices:\n");
-    printIntArray (returnedArray, *returnedArraySize);
+    printIntegerArray (returnedArray, *returnedArraySize);
 
     free (inputArray);
     free (returnedArray);
@@ -261,15 +261,15 @@ int lc026_RmDup (int argc, char ** argv) {
         return 0;
     }
 
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
 
     printf ("input array:\n");
-    printIntArray (inputArray, inputArraySize);
+    printIntegerArray (inputArray, inputArraySize);
 
     newSize = removeDuplicates (inputArray, inputArraySize);
 
     printf ("after removal of duplicated items:\n");
-    printIntArray (inputArray, newSize);
+    printIntegerArray (inputArray, newSize);
 
     free (inputArray);
     return 0;
@@ -291,14 +291,14 @@ int lc027_RemoveElement (int argc, char ** argv) {
     }
 
     value = atoi (argv[2]);
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
 
     printf ("input array:\n");
-    printIntArray (inputArray, inputArraySize);
+    printIntegerArray (inputArray, inputArraySize);
 
     inputArraySize = removeElement (inputArray, inputArraySize, value);
     printf ("after removal:\n");
-    printIntArray (inputArray, inputArraySize);
+    printIntegerArray (inputArray, inputArraySize);
 
     free (inputArray);
     return 0;
@@ -332,10 +332,10 @@ int lc034_FindPosOfElementsInSortedArray (int argc, char ** argv) {
     }
 
     target = atoi (argv[2]);
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
     returnedArray = searchRange(inputArray, inputArraySize, target, &returnedArraySize);
 
-    printIntArray (returnedArray, returnedArraySize);
+    printIntegerArray (returnedArray, returnedArraySize);
 
     free (returnedArray);
     free (inputArray);
@@ -386,7 +386,7 @@ int lc053_MaxSubarray (int argc, char ** argv) {
         return 0;
     }
 
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
     returnedSum = maxSubArray (inputArray, inputArraySize);
     free (inputArray);
     return returnedSum;
@@ -410,11 +410,11 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
     target = atoi (argv[2]);
     column = atoi (argv[3]);
 
-    input = parseArgsToIntMatrix (argc, argv, argc - inputElementCount, inputElementCount, column);
+    input = parseArgsToIntegerMatrix (argc, argv, argc - inputElementCount, inputElementCount, column);
 
     row = matrixGetRow (inputElementCount, column);
     printf ("input matrix:\n");
-    printIntMatrix (input, row, column);
+    printIntegerMatrix (input, row, column);
     printf ("\n");
 
     columnSize = malloc (sizeof *columnSize * row);
@@ -424,7 +424,7 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
     printf ("%s target %d\n.", searchMatrix (input, row, columnSize, target) ? "Found" : "Couldn't find", target);
 
     free (columnSize);
-    freeIntMatrix (input, row);
+    freeIntegerMatrix (input, row);
     return 0;
 }
 
@@ -450,7 +450,7 @@ int lc088_MergeNums (int argc, char ** argv) {
 
     merge(nums1, nums1Size, m, nums2, nums2Size, n);
 
-    printIntArray(nums1, m + n);
+    printIntegerArray(nums1, m + n);
 
     return 0;
 }
@@ -528,7 +528,7 @@ int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
     }
     freeTree (tree);
     free(retColumnSize[0]);
-    freeIntMatrix (ret, *retSize);
+    freeIntegerMatrix (ret, *retSize);
     return 0;
 }
 
@@ -596,7 +596,7 @@ int lc118_PascalsTriangle (int argc, char ** argv) {
         printf ("\n");
     }
 
-    freeIntMatrix (ret, *retRow);
+    freeIntegerMatrix (ret, *retRow);
     free (*retCols);
     return 0;
 }
@@ -614,7 +614,7 @@ int lc121_MaxProfit (int argc, char ** argv) {
         return 0;
     }
 
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
     returnedProfit = maxProfit (inputArray, inputArraySize);
     free (inputArray);
     return returnedProfit;
@@ -675,7 +675,7 @@ int lc217_ContainsDup (int argc, char ** argv) {
         return 0;
     }
 
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
     returnedValue = containsDuplicate (inputArray, inputArraySize) ? 0 : 1;
 
     free(inputArray);
@@ -727,7 +727,7 @@ int lc350_Intersection (int argc, char ** argv) {
         return -1;
     }
 
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
 
     printf ("How many numbers in nums2? ");
     scanf ("%d", nums2Size);
@@ -740,15 +740,15 @@ int lc350_Intersection (int argc, char ** argv) {
         }
 
     printf ("nums1:\n");
-    printIntArray (inputArray, inputArraySize);
+    printIntegerArray (inputArray, inputArraySize);
     printf ("nums2:\n");
-    printIntArray (nums2, *nums2Size);
+    printIntegerArray (nums2, *nums2Size);
     printf ("\n");
 
     returnedArray = intersect (inputArray, inputArraySize, nums2, *nums2Size, returnedArraySize);
 
     printf ("return:\n");
-    printIntArray (returnedArray, *returnedArraySize);
+    printIntegerArray (returnedArray, *returnedArraySize);
 
     free (inputArray);
     free (returnedArray);
@@ -805,23 +805,23 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     column = atoi (argv[4]);
     row = matrixGetRow (elementCount, column);
 
-    inputMatrix = parseArgsToIntMatrix (argc, argv, argc - elementCount, elementCount, column);
+    inputMatrix = parseArgsToIntegerMatrix (argc, argv, argc - elementCount, elementCount, column);
 
     printf ("Input matrix:\n");
-    printIntMatrix (inputMatrix, row, column);
+    printIntegerMatrix (inputMatrix, row, column);
 
     reshaped = matrixReshape (inputMatrix, row, &column, newRow, newColumn, returnedRow, returnedColumn);
 
     printf ("Reshaped:\n");
-    printIntMatrix (reshaped, *returnedRow, **returnedColumn);
+    printIntegerMatrix (reshaped, *returnedRow, **returnedColumn);
 
     if (reshaped != inputMatrix) {
-        freeIntMatrix (reshaped, *returnedRow);
+        freeIntegerMatrix (reshaped, *returnedRow);
     }
     if (*returnedColumn != &column) {
         free (*returnedColumn);
     }
-    freeIntMatrix (inputMatrix, row);
+    freeIntegerMatrix (inputMatrix, row);
     return 0;
 }
 
@@ -845,10 +845,10 @@ int lc977_SortSquare (int argc, char ** argv) {
         return -1;
     }
 
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
     returnedValue = sortedSquares (inputArray, inputArraySize, &returnedArraySize);
 
-    printIntArray (returnedValue, returnedArraySize);
+    printIntegerArray (returnedValue, returnedArraySize);
 
     free (inputArray);
     free (returnedValue);
@@ -869,7 +869,7 @@ int lc2078_maxDistance (int argc, char ** argv) {
         return -1;
     }
 
-    inputArray = parseArgsToIntArray (argc, argv, argc - inputArraySize, inputArraySize);
+    inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
     returnedValue = maxDistance (inputArray, inputArraySize);
     free (inputArray);
 
@@ -947,14 +947,14 @@ int lc2089_FindTargetIndicesAfterSortingArray (int argc, char ** argv) {
     }
 
     target = atoi (argv[2]);
-    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
+    input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
 
     printf ("input array:\n");
-    printIntArray (input, inputSize);
+    printIntegerArray (input, inputSize);
 
     returnedValues = targetIndices (input, inputSize, target, returnedSize);
     printf ("returned array:\n");
-    printIntArray (returnedValues, *returnedSize);
+    printIntegerArray (returnedValues, *returnedSize);
 
     free (input);
     free (returnedValues);
@@ -977,14 +977,14 @@ int lc2090_KRadiusSubarrayAverages (int argc, char ** argv) {
     }
 
     k = atoi (argv[2]);
-    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
+    input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
 
     printf ("input array:\n");
-    printIntArray (input, inputSize);
+    printIntegerArray (input, inputSize);
 
     returnedArray = getAverages (input, inputSize, k, returnedSize);
     printf ("returned array:\n");
-    printIntArray (returnedArray, *returnedSize);
+    printIntegerArray (returnedArray, *returnedSize);
 
     free (input);
     free (returnedArray);
@@ -1007,9 +1007,9 @@ int lc2091_RemovingMinumumAndMaximumFromArray (int argc, char ** argv) {
     }
 
     inputSize = argc;
-    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
+    input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
     printf ("input array:\n");
-    printIntArray (input, inputSize);
+    printIntegerArray (input, inputSize);
 
     returnedValue = minimumDeletions (input, inputSize);
     free (input);
@@ -1037,9 +1037,9 @@ int lc2092_Secret (int argc, char ** argv) {
     ret = findAllPeople(4, meetings, 3, NULL, 3, retsz);
 
     fprintf(stdout, "Expected:\n");
-    printIntArray(expected, 3);
+    printIntegerArray(expected, 3);
     fprintf(stdout, "Got:\n");
-    printIntArray(ret, *retsz);
+    printIntegerArray(ret, *retsz);
 
     return 0;
 }
@@ -1057,9 +1057,9 @@ int lc2094_Finding3DigitEvenNumbers (int argc, char ** argv) {
         return 0;
     }
 
-    input = parseArgsToIntArray (argc, argv, argc - inputSize, inputSize);
+    input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
     returnedValues = findEvenNumbers (input, inputSize, returnedSize);
-    printIntArray (returnedValues, *returnedSize);
+    printIntegerArray (returnedValues, *returnedSize);
 
     free (input);
     free (returnedValues);
