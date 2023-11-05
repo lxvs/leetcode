@@ -110,25 +110,25 @@ int lc002_AddTwoNumbers (int argc, char ** argv) {
     }
 
     for (int i = 0, length = strlen (argv[0]); argv[0][i] != '\0'; i++) {
-        augend = AddValue (augend, argv[0][length - i - 1] - '0');
+        augend = addListNode (augend, argv[0][length - i - 1] - '0');
     }
 
     for (int i = 0, length = strlen (argv[1]); argv[1][i] != '\0'; i++) {
-        addend = AddValue (addend, argv[1][length - i - 1] - '0');
+        addend = addListNode (addend, argv[1][length - i - 1] - '0');
     }
 
     printf ("augend:\n");
-    PrintList (augend);
+    printLinkedList (augend);
     printf ("addend:\n");
-    PrintList (addend);
+    printLinkedList (addend);
 
     sum = addTwoNumbers (augend, addend);
     printf ("sum:\n");
-    PrintList (sum);
+    printLinkedList (sum);
 
-    FreeLinkedList (augend);
-    FreeLinkedList (addend);
-    FreeLinkedList (sum);
+    freeLinkedList (augend);
+    freeLinkedList (addend);
+    freeLinkedList (sum);
 
     return 0;
 }
@@ -227,25 +227,25 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
 
     for (int i = 0; i < len1 + len2; i++) {
         if (i < len1)
-            l1 = AddValue (l1, atoi (argv[4 + i]));
+            l1 = addListNode (l1, atoi (argv[4 + i]));
         else
-            l2 = AddValue (l2, atoi (argv[4 + i]));
+            l2 = addListNode (l2, atoi (argv[4 + i]));
     }
 
 #if DEBUG
     fprintf(stdout, "Input lists:\n");
-    PrintList(l1);
+    printLinkedList(l1);
     putchar('\n');
-    PrintList(l2);
+    printLinkedList(l2);
     putchar('\n');
 #endif
 
     ret = mergeTwoLists(l1, l2);
 
     fprintf(stdout, "Merged lists:\n");
-    PrintList(ret);
+    printLinkedList(ret);
 
-    FreeLinkedList (ret);
+    freeLinkedList (ret);
     return 0;
 }
 
@@ -432,11 +432,11 @@ int lc083_RemoveDupFromSortedList (int argc, char ** argv) {
     Node * input;
     Node * afterDeletion;
 
-    input = parseArgsToLinkedList (argv + 2);
+    input = parseArgsToLinkedList (argv, 2);
     afterDeletion = deleteDuplicates (input);
     printf ("after deleting the duplicates:\n");
-    PrintList (afterDeletion);
-    FreeLinkedList (afterDeletion);
+    printLinkedList (afterDeletion);
+    freeLinkedList (afterDeletion);
     return 0;
 }
 
@@ -641,14 +641,14 @@ int lc203_RemoveLinkedListElements (int argc, char ** argv) {
         return 0;
     }
     value = atoi (argv[2]);
-    input = parseArgsToLinkedList (argv + 3);
+    input = parseArgsToLinkedList (argv, 3);
     printf ("input list:\n");
-    PrintList (input);
+    printLinkedList (input);
     input = removeElements (input, value);
     printf ("after removal of all %d:\n", value);
-    PrintList (input);
+    printLinkedList (input);
 
-    FreeLinkedList (input);
+    freeLinkedList (input);
     return 0;
 }
 
@@ -656,10 +656,10 @@ int lc206_ReverseLinkedList (int argc, char ** argv) {
     Node * input = NULL;
     Node * reversed;
 
-    input = parseArgsToLinkedList (argv + 2);
+    input = parseArgsToLinkedList (argv, 2);
     reversed = reverseList (input);
-    PrintList (reversed);
-    FreeLinkedList (reversed);
+    printLinkedList (reversed);
+    freeLinkedList (reversed);
     return 0;
 }
 
@@ -696,12 +696,12 @@ int lc234_Palindrome_ll (int argc, char ** argv) {
     Node * input = NULL;
 
     while (*argv)
-        input = AddValue(input, atoi(*argv++));
+        input = addListNode(input, atoi(*argv++));
 
     fprintf(stdout, "%s\n",
             isPalindrome_ll(input) ? "True" : "False");
 
-    FreeLinkedList (input);
+    freeLinkedList (input);
     return 0;
 }
 
@@ -856,7 +856,7 @@ int lc977_SortSquare (int argc, char ** argv) {
 }
 
 int lc1290_Bin2Int (int argc, char ** argv) {
-    Node * inputList = parseArgsToLinkedList (argv + 2);
+    Node * inputList = parseArgsToLinkedList (argv, 2);
     return getDecimalValue (inputList);
 }
 
@@ -1078,9 +1078,9 @@ int lc2095_DeleteTheMiddleNodeOfALinkedList (int argc, char ** argv) {
         return 0;
     }
 
-    input = parseArgsToLinkedList (argv);
-    PrintList (deleteMiddle (input));
-    FreeLinkedList (input);
+    input = parseArgsToLinkedList (argv, 0);
+    printLinkedList (deleteMiddle (input));
+    freeLinkedList (input);
     return 0;
 }
 

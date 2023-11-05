@@ -31,6 +31,11 @@ bool isPalindrome_ll (struct ListNode * head) {
         q = q->next;
     }
 
-    FreeLinkedList (tail);
+    while (tail != NULL) {
+        Node * toBeFreed = tail;
+        tail = tail->next;
+        free (toBeFreed);
+    }
+
     return ret;
 }

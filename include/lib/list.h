@@ -8,11 +8,12 @@ struct ListNode {
 
 typedef struct ListNode Node;
 
-Node * AddValue (Node * list, int value);
-void DelValue (Node * list, int value);
-void PrintList (const Node * list);
-void GenRandList (Node * list, int length);
-void FreeLinkedList (Node * list);
-Node * parseArgsToLinkedList (char ** argv);
+Node * addListNode (Node * list, int value);
+
+void printLinkedList (const Node * list);
+
+void freeLinkedList (Node * list);
+
+Node * parseArgsToLinkedList (char ** argv, int startingIndex);
 
 #endif
