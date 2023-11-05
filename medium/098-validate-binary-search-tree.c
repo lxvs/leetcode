@@ -1,6 +1,5 @@
 #include <lib/bst.h>
-#include <stdbool.h>
-#include <stdlib.h>
+#include "098-validate-binary-search-tree.h"
 
 bool isValidBST (struct TreeNode * root) {
     if (!(root && (root->left || root->right)))

@@ -1,3 +1,5 @@
+#include "2078-two-furthest-houses-with-different-colors.h"
+
 int maxDistance (int * colors, int colorsSize) {
     int dist;
     int max = 0;

@@ -2,16 +2,19 @@
 #include "2095-delete-the-middle-node-of-a-linked-list.h"
 
 struct ListNode * deleteMiddle (struct ListNode * head) {
-    if (!head->next) {
-        free(head);
+    struct ListNode * p;
+    struct ListNode * q;
+    struct ListNode * prev;
+
+    if (head->next == NULL) {
+        free (head);
         return NULL;
     }
 
-    struct ListNode * p, * q, * prev;
-    for (prev = p = q = head; p && q && q->next; prev = p, p = p->next, q = q->next->next);
+    for (prev = p = q = head; p != NULL && q != NULL && q->next != NULL; prev = p, p = p->next, q = q->next->next);
 
     prev->next = p->next;
-    free(p);
+    free (p);
 
     return head;
 }

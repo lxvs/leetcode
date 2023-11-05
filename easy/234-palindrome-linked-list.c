@@ -1,7 +1,5 @@
-#include "234-palindrome-linked-list.h"
-#include <lib/list.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include "234-palindrome-linked-list.h"
 
 bool isPalindrome_ll (struct ListNode * head) {
     struct ListNode * p = head;

@@ -1,29 +1,24 @@
-#include <lib/bst.h>
 #include <stdlib.h>
+#include "102-binary-tree-level-order-traversal.h"
 
-/**
- * Return an array of arrays of size *returnSize.
- * The sizes of the arrays are returned as *returnColumnSizes array.
- * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
- */
 int ** levelOrder (struct TreeNode * root, int * returnSize, int ** returnColumnSizes) {
     *returnSize = 0;
-    if (!root) {
+    if (root == NULL) {
         *returnColumnSizes = NULL;
         return NULL;
     }
     struct TreeNode * q[1001];
     int head = 0;
     int tail = 0;
-    int ** ret = malloc(sizeof *ret * 2000);
-    *returnColumnSizes = malloc(sizeof **returnColumnSizes * 2000);
+    int ** returnArrays = malloc (sizeof *returnArrays * 2000);
+    *returnColumnSizes = malloc (sizeof **returnColumnSizes * 2000);
     q[tail++] = root;
-    while ((tail - head) % 1001) {
+    while ((tail - head) % 1001 != 0) {
         int sz = (*returnColumnSizes)[*returnSize] = (tail - head) % 1001;
-        ret[*returnSize] = malloc(sizeof **ret * sz);
+        returnArrays[*returnSize] = malloc (sizeof **returnArrays * sz);
         for (int i = 0; i < sz; i++) {
             struct TreeNode * p = q[head++ % 1001];
-            ret[*returnSize][i] = p->val;
+            returnArrays[*returnSize][i] = p->val;
             if (p->left)
                 q[tail++ % 1001] = p->left;
             if (p->right)
@@ -31,5 +26,5 @@ int ** levelOrder (struct TreeNode * root, int * returnSize, int ** returnColumn
         }
         (*returnSize)++;
     }
-    return ret;
+    return returnArrays;
 }

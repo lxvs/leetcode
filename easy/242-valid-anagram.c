@@ -1,6 +1,6 @@
-#include <stdbool.h>
+#include "242-valid-anagram.h"
 
-bool isAnagram(char * s, char * t){
+bool isAnagram (char * s, char * t) {
     int letters[26] = {0};
     int i = 0;
 
@@ -9,12 +9,15 @@ bool isAnagram(char * s, char * t){
         letters[t[i] - 'a']--;
     }
 
-    if (s[i] != '\0' || t[i] != '\0')
+    if (s[i] != '\0' || t[i] != '\0') {
         return false;
+    }
 
-    for (i = 0; i < 26; i++)
-        if (letters[i])
+    for (i = 0; i < 26; i++) {
+        if (letters[i]) {
             return false;
+        }
+    }
 
     return true;
 }

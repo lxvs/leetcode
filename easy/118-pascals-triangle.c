@@ -1,5 +1,5 @@
-#include "118-pascals-triangle.h"
 #include <stdlib.h>
+#include "118-pascals-triangle.h"
 
 /**
  * Return an array of arrays of size *returnSize.

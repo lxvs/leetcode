@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "101-symmetric-tree.h"
 
 static bool symmetric (tree_t * left, tree_t * right) {

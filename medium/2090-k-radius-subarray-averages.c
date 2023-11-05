@@ -1,9 +1,6 @@
 #include <stdlib.h>
 #include "2090-k-radius-subarray-averages.h"
 
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
 int * getAverages (int * nums, int numsSize, int k, int * returnSize) {
     int * ret = malloc(sizeof *ret * (*returnSize = numsSize));
     long sum = 0;

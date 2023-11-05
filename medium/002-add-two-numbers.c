@@ -2,43 +2,39 @@
 #include <lib/array.h>
 #include "002-add-two-numbers.h"
 
-struct ListNode* addTwoNumbers (struct ListNode* l1, struct ListNode* l2) {
-
-    struct ListNode* r;
-    struct ListNode* l3;
+struct ListNode * addTwoNumbers (struct ListNode * l1, struct ListNode * l2) {
+    struct ListNode * l3 = malloc (sizeof *l3);
+    struct ListNode * p = l3;
     int sum;
     int carry = 0;
 
-    l3 = (struct ListNode*) malloc(sizeof(struct ListNode));
     l3->val = 0;
     l3->next = NULL;
-    r = l3;
 
-    while (l1 || l2 || carry)
-    {
+    while (l1 != NULL || l2 != NULL || carry != 0) {
         sum = 0;
 
-        if (l1) {
+        if (l1 != NULL) {
             sum += l1->val;
             l1 = l1->next;
         }
-        if (l2) {
+        if (l2 != NULL) {
             sum += l2->val;
             l2 = l2->next;
         }
         sum += carry;
-        if (!r)
-            r = (struct ListNode*) malloc(sizeof(struct ListNode));
-        r->val = sum % 10;
-        r->next = NULL;
+        if (p == NULL) {
+            p = malloc (sizeof *p);
+        }
+        p->val = sum % 10;
+        p->next = NULL;
 
         carry = sum / 10;
 
-        if (l1 || l2 || carry) {
-            r->next = (struct ListNode*) malloc(sizeof(struct ListNode));
-            r = r->next;
+        if (l1 != NULL || l2 != NULL || carry != 0) {
+            p->next = malloc (sizeof *p->next);
+            p = p->next;
         }
-
     }
 
     return l3;

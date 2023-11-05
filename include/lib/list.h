@@ -3,7 +3,7 @@
 
 struct ListNode {
     int val;
-    struct ListNode* next;
+    struct ListNode * next;
 };
 
 typedef struct ListNode Node;
@@ -16,4 +16,4 @@ void freeLinkedList (Node * list);
 
 Node * parseArgsToLinkedList (char ** argv, int startingIndex);
 
-#endif
+#endif  /* INCLUDED_LIST_H_ */

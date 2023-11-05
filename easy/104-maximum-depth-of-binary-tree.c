@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include <stddef.h>
 #include "104-maximum-depth-of-binary-tree.h"
 
 #define MAX(a, b)       (a < b ? b : a)

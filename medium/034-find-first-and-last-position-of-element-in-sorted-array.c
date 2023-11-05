@@ -1,27 +1,29 @@
 #include <stdlib.h>
+#include "034-find-first-and-last-position-of-element-in-sorted-array.h"
 
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
-int * searchRange(int * nums, int numsSize, int target, int * returnSize) {
-    int * ret = malloc(sizeof *ret * (*returnSize = 2));
-    int i = 0;
+int * searchRange (int * nums, int numsSize, int target, int * returnSize) {
+    int * returnArray = malloc (sizeof *returnArray * (*returnSize = 2));
+    int position = 0;
 
-    ret[0] = ret[1] = -1;
+    returnArray[0] = returnArray[1] = -1;
 
-    for (; i < numsSize && nums[i] <= target && ret[0] == -1; i++)
-        if (target == nums[i])
-            ret[0] = i;
+    for (; position < numsSize && nums[position] <= target && returnArray[0] == -1; position++) {
+        if (target == nums[position]) {
+            returnArray[0] = position;
+        }
+    }
 
-    if (ret[0] == -1)
-        return ret;
+    if (returnArray[0] == -1) {
+        return returnArray;
+    }
 
-    i--;
+    position--;
 
-    while (i < numsSize && target == nums[i])
-        i++;
+    while (position < numsSize && target == nums[position]) {
+        position++;
+    }
 
-    ret[1] = i - 1;
+    returnArray[1] = position - 1;
 
-    return ret;
+    return returnArray;
 }

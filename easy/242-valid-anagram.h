@@ -3,6 +3,6 @@
 
 #include <stdbool.h>
 
-bool isAnagram(char * s, char * t);
+bool isAnagram (char * s, char * t);
 
 #endif  /* INCLUDED_242_VALID_ANAGRAM_H_ */

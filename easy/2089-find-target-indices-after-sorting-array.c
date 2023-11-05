@@ -1,11 +1,14 @@
 #include <stdlib.h>
+#if DEBUG
+#include <lib/debug.h>
+#include <lib/array.h>
+#endif
 #include "2089-find-target-indices-after-sorting-array.h"
 
 static void swap (int * a, int * b) {
     int tmp = *a;
     *a = *b;
     *b = tmp;
-    return;
 }
 
 static int * bubble (int * nums, int numsSize) {
@@ -13,7 +16,7 @@ static int * bubble (int * nums, int numsSize) {
         for (int j = 0; j < numsSize - i - 1; j++) {
             if (nums[j] > nums[j + 1]) {
                 swapped++;
-                swap(nums + j, nums + j + 1);
+                swap (nums + j, nums + j + 1);
             }
         }
         if (!swapped)
@@ -22,17 +25,22 @@ static int * bubble (int * nums, int numsSize) {
     return nums;
 }
 
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
 int * targetIndices (int * nums, int numsSize, int target, int * returnSize) {
-    int * ret = malloc(sizeof *ret * 100);
+    int * returnArray = malloc (sizeof *returnArray * 100);
     *returnSize = 0;
 
-    nums = bubble(nums, numsSize);
-    for (int i = 0; i < numsSize && nums[i] <= target; i++)
-        if (nums[i] == target)
-            ret[(*returnSize)++] = i;
+    nums = bubble (nums, numsSize);
 
-    return ret;
+#if DEBUG
+    printf ("after sorting: ");
+    printIntegerArray (nums, numsSize);
+#endif
+
+    for (int i = 0; i < numsSize && nums[i] <= target; i++) {
+        if (nums[i] == target) {
+            returnArray[(*returnSize)++] = i;
+        }
+    }
+
+    return returnArray;
 }

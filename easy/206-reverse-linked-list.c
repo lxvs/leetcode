@@ -1,16 +1,16 @@
+#include <stddef.h>
 #include <lib/list.h>
-#include <stdlib.h>
 
 struct ListNode * reverseList (struct ListNode * head) {
     struct ListNode * p = head;
     struct ListNode * q;
     struct ListNode * r;
 
-    if (p) {
-        if (p->next) {
+    if (p != NULL) {
+        if (p->next != NULL) {
             q = p->next;
             p->next = NULL;
-            if (q->next) {
+            if (q->next != NULL) {
                 r = q->next;
                 q->next = NULL;
             } else {
@@ -25,10 +25,10 @@ struct ListNode * reverseList (struct ListNode * head) {
         return NULL;
     }
 
-    while (r) {
+    while (r != NULL) {
         q->next = p;
         p = q;
-        if (!r->next) {
+        if (r->next == NULL) {
             r->next = q;
             break;
         }

@@ -1,13 +1,12 @@
-#include <lib/list.h>
+#include <stddef.h>
+#include "1290-convert-binary-number-in-a-linked-list-to-integer.h"
 
 int getDecimalValue (struct ListNode * head) {
-    int ret = 0;
-    struct ListNode * p = head;
+    int decimal = 0;
 
-    while (p) {
-        ret = (ret << 1) + p->val;
-        p = p->next;
+    for (; head != NULL; head = head->next) {
+        decimal = (decimal << 1) + head->val;
     }
 
-    return ret;
+    return decimal;
 }
