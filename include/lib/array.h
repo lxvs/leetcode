@@ -25,6 +25,8 @@ void printIntegerArray (int * nums, int size);
 
 void printStringArray (char ** str, int size);
 
+void printIntegerArrays (int ** arrays, int size, int * arraysSize);
+
 void printIntegerMatrix (int ** matrix, int row, int column);
 
 void freeStringArray (char ** str, int arraySize);

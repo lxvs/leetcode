@@ -59,28 +59,37 @@ int ** parseArgsToIntegerMatrix (int argc, char ** argv, int startingIndex, int 
 }
 
 void printIntegerArray (int * array, int size) {
-    for (int i = 0; i < size; i++) {
-        printf("array[%d] = %d\n", i, array[i]);
+    printf ("[");
+    for (int i = 0; i < size - 1; i++) {
+        printf ("%d, ", array[i]);
     }
+    if (size > 0) {
+        printf ("%d", array[size - 1]);
+    }
+    printf ("]\n");
 }
 
 void printStringArray (char ** array, int size) {
+    printf ("[");
+    for (int i = 0; i < size - 1; i++) {
+        printf ("`%s', ", array[i]);
+    }
+    if (size > 0) {
+        printf ("`%s'", array[size - 1]);
+    }
+    printf ("]\n");
+}
+
+void printIntegerArrays (int ** arrays, int size, int * arraysSize) {
     for (int i = 0; i < size; i++) {
-        printf ("array[%d] = %s\n", i, array[i]);
+        printIntegerArray (arrays[i], arraysSize[i]);
     }
 }
 
 void printIntegerMatrix (int ** matrix, int row, int column) {
-    printf (" r\\c");
-    for (int i = 0; i < column; i++) {
-        printf ("  %2d  ", i);
-    }
-    printf ("\n");
-
     for (int i = 0; i < row; i++) {
-        printf ("%2d  ", i);
         for (int j = 0; j < column; j++) {
-            printf ("  %4d", matrix[i][j]);
+            printf ("%3d ", matrix[i][j]);
         }
         printf ("\n");
     }
