@@ -14,6 +14,7 @@
 #include "easy/026-remove-duplicates-from-sorted-array.h"
 #include "easy/027-remove-element.h"
 #include "easy/028-find-the-index-of-the-first-occurrence-in-a-string.h"
+#include "easy/035-search-insert-position.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -380,6 +381,33 @@ int lc034_FindPosOfElementsInSortedArray (int argc, char ** argv) {
     free (returnValues);
     free (inputArray);
 
+    return 0;
+}
+
+int lc035_SearchInsertPosition (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "35 <target> <integer> [<integer> ...]\n"
+        "Print the index of target (or the expected index) in a ascending sorted array\n"
+        "of distinct integers.\n";
+    int target;
+    int inputSize = argc - 3;
+    int * input;
+
+    if (argc < 4) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    target = atoi (argv[2]);
+    input = parseArgsToIntegerArray (argc, argv, 3, inputSize);
+
+#if DEBUG
+    printf ("input: ");
+    printIntegerArray (input, inputSize);
+#endif
+
+    printf ("%d\n", searchInsert (input, inputSize, target));
+
+    free (input);
     return 0;
 }
 
@@ -1252,6 +1280,9 @@ int main (int argc, char **argv) {
             break;
         case 34:
             returnedValue = lc034_FindPosOfElementsInSortedArray (argc, argv);
+            break;
+        case 35:
+            returnedValue = lc035_SearchInsertPosition (argc, argv);
             break;
         case 36:
             returnedValue = lc036_ValidSudoku (argc, argv);
