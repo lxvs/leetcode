@@ -66,46 +66,49 @@ int lc001_TwoSums (int argc, char ** argv) {
         "Return two different indices of the two integers such that they add up to target.\n";
     int inputArraySize = argc - 3;
     int * inputArray;
-    int * returnedArray;
-    int returnedArraySize[1] = {0};
+    int * returnArray;
+    int returnSize = 0;
     int target;
 
     if (inputArraySize < 2) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     target = atoi (argv[2]);
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
+
+#if DEBUG
     printf ("input array:\n");
     printIntegerArray (inputArray, inputArraySize);
-    returnedArray = twoSum (inputArray, inputArraySize, target, returnedArraySize);
+#endif
 
-    if (returnedArray == NULL) {
-        printf ("invalid input for this problem\n");
+    returnArray = twoSum (inputArray, inputArraySize, target, &returnSize);
+
+    if (returnArray == NULL) {
+        fprintf (stderr, "error: invalid input\n");
         free (inputArray);
-        return 0;
+        return -1;
     }
 
-    printf ("returned 2 indices:\n");
-    printIntegerArray (returnedArray, *returnedArraySize);
+    printIntegerArray (returnArray, returnSize);
 
     free (inputArray);
-    free (returnedArray);
+    free (returnArray);
 
     return 0;
 }
 
 int lc002_AddTwoNumbers (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "2 <augend> <addend>\n"
-        "Return the sum of the 2 given numbers.\n";
+        "Print the sum of the 2 given numbers.\n";
     Node * augend = NULL;
     Node * addend = NULL;
     Node * sum = NULL;
 
     if (argc != 4) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     for (int i = 0, length = strlen (argv[2]); argv[2][i] != '\0'; i++) {
@@ -116,14 +119,14 @@ int lc002_AddTwoNumbers (int argc, char ** argv) {
         addend = addListNode (addend, argv[3][length - i - 1] - '0');
     }
 
-    printf ("augend:\n");
+#if DEBUG
+    printf ("augend: ");
     printLinkedList (augend);
-    printf ("addend:\n");
+    printf ("addend: ");
     printLinkedList (addend);
+#endif
 
-    sum = addTwoNumbers (augend, addend);
-    printf ("sum:\n");
-    printLinkedList (sum);
+    printLinkedList (sum = addTwoNumbers (augend, addend));
 
     freeLinkedList (augend);
     freeLinkedList (addend);
@@ -135,11 +138,15 @@ int lc002_AddTwoNumbers (int argc, char ** argv) {
 int lc003_LongestSubstring (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "3 <string>\n"
         "Find the length of the longest substring without repeating characters.\n";
+
     if (argc != 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
-    return lengthOfLongestSubstring (argv[2]);
+
+    printf ("%d\n", lengthOfLongestSubstring (argv[2]));
+
+    return 0;
 }
 
 int lc005_LongestPalindromicSubstring (int argc, char ** argv) {
@@ -149,13 +156,15 @@ int lc005_LongestPalindromicSubstring (int argc, char ** argv) {
     char * returnString;
 
     if (argc != 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     input = argv[2];
     returnString = longestPalindrome (input);
-    printf ("Longest palindromic substring of `%s' is `%s'\n", input, returnString);
+
+    printf ("%s\n", returnString);
+
     free (returnString);
     return 0;
 }
@@ -165,14 +174,14 @@ int lc009_Palindrome (int argc, char ** argv) {
         "Check if a integer is palindromic.\n";
 
     if (argc < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     argv += 2;
     while (*argv != NULL) {
         int num = atoi (*argv++);
-        printf ("%d %s a palindrome number.\n", num, isPalindrome (num) ? "is" : "isn't");
+        printf ("%d: %s\n", num, isPalindrome (num) ? "true" : "false");
     }
 
     return 0;
@@ -183,13 +192,13 @@ int lc013_RomanToInteger (int argc, char ** argv) {
         "Convert a roman numeral to an integer.\n";
 
     if (argc < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     argv += 2;
     while (*argv != NULL) {
-        printf ("%s = %d\n", *argv, romanToInt (*argv));
+        printf ("%s: %d\n", *argv, romanToInt (*argv));
         argv++;
     }
 
@@ -201,19 +210,18 @@ int lc014_LongestCommonPrefix (int argc, char ** argv) {
         "Find the longest common prefix of the given strings.\n";
     int inputSize = argc - 2;
     char ** input;
-    char * returnedString;
+    char * returnString;
 
     if (inputSize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     input = parseArgsToStringArray (argc, argv, argc - inputSize, inputSize);
 
-    returnedString = longestCommonPrefix (input, inputSize);
-    printf ("Longest common prefix is `%s'\n", returnedString);
+    printf ("%s\n", returnString = longestCommonPrefix (input, inputSize));
 
-    free (returnedString);
+    free (returnString);
     freeStringArray (input, inputSize);
 
     return 0;
@@ -224,14 +232,14 @@ int lc020_ValidParentheses (int argc, char ** argv) {
         "Check if parentheses are valid.\n";
 
     if (argc < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     argv += 2;
 
     while (*argv != NULL) {
-        printf ("%s: %s\n", *argv, isValid (*argv) ? "valid" : "invalid");
+        printf ("%s: %s\n", *argv, isValid (*argv) ? "true" : "false");
         argv++;
     }
 
@@ -247,8 +255,8 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
     int len1, len2;
 
     if (argc < 4) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     len1 = atoi (argv[2]);
@@ -267,15 +275,15 @@ int lc021_Merge2LinkedLists (int argc, char ** argv) {
         }
     }
 
-    printf ("input lists:\n");
+#if DEBUG
+    printf ("input 1: ");
     printLinkedList (l1);
-    printf ("\n");
+    printf ("input 2: ");
     printLinkedList (l2);
-    printf ("\n");
+#endif
 
     merged = mergeTwoLists (l1, l2);
 
-    printf ("merged list:\n");
     printLinkedList (merged);
 
     freeLinkedList (merged);
@@ -290,18 +298,18 @@ int lc026_RmDup (int argc, char ** argv) {
     int newSize;
 
     if (inputArraySize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
 
-    printf ("input array:\n");
+#if DEBUG
+    printf ("input: ");
     printIntegerArray (inputArray, inputArraySize);
+#endif
 
     newSize = removeDuplicates (inputArray, inputArraySize);
-
-    printf ("after removal of duplicated items:\n");
     printIntegerArray (inputArray, newSize);
 
     free (inputArray);
@@ -316,18 +324,19 @@ int lc027_RemoveElement (int argc, char ** argv) {
     int value;
 
     if (inputArraySize < 0) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     value = atoi (argv[2]);
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
 
-    printf ("input array:\n");
+#if DEBUG
+    printf ("input: ");
     printIntegerArray (inputArray, inputArraySize);
+#endif
 
     inputArraySize = removeElement (inputArray, inputArraySize, value);
-    printf ("after removal:\n");
     printIntegerArray (inputArray, inputArraySize);
 
     free (inputArray);
@@ -336,37 +345,39 @@ int lc027_RemoveElement (int argc, char ** argv) {
 
 int lc028_FindNeedleInHaystack (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "28 <haystack> <needle>\n"
-        "Return the index of the first occurrence of needle in haystack.\n";
+        "Print the index of the first occurrence of needle in haystack.\n";
 
     if (argc != 4) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
-    return strStr (argv[2], argv[3]);
+    printf ("%d\n", strStr (argv[2], argv[3]));
+
+    return 0;
 }
 
 int lc034_FindPosOfElementsInSortedArray (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "34 <target> [<integer> ...]\n"
+        "Find the starting and ending position of <target> in a non-decreasing integer array.\n";
     int target;
     int inputArraySize = argc - 3;
     int * inputArray;
-    int * returnedArray;
-    int returnedArraySize;
-    const char * usage = USAGE_PREFIX "34 <target> [<integer> ...]\n"
-        "Find the starting and ending position of <target> in a non-decreasing integer array.\n";
+    int * returnValues;
+    int returnSize;
 
     if (inputArraySize < 0) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     target = atoi (argv[2]);
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
-    returnedArray = searchRange(inputArray, inputArraySize, target, &returnedArraySize);
+    returnValues = searchRange(inputArray, inputArraySize, target, &returnSize);
 
-    printIntegerArray (returnedArray, returnedArraySize);
+    printIntegerArray (returnValues, returnSize);
 
-    free (returnedArray);
+    free (returnValues);
     free (inputArray);
 
     return 0;
@@ -404,20 +415,20 @@ int lc036_ValidSudoku (int argc, char ** argv) {
 
 int lc053_MaxSubArray (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "53 <integer> [<integer> ...]\n"
-        "Find the sub-array with the largest sum, and return the sum.\n";
+        "Find the sub-array with the largest sum, and print the sum.\n";
     int inputArraySize = argc - 2;
     int * inputArray;
-    int returnedSum;
 
     if (inputArraySize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
-    returnedSum = maxSubArray (inputArray, inputArraySize);
+    printf ("%d\n", maxSubArray (inputArray, inputArraySize));
+
     free (inputArray);
-    return returnedSum;
+    return 0;
 }
 
 int lc074_Search2dMatrix (int argc, char ** argv) {
@@ -431,25 +442,27 @@ int lc074_Search2dMatrix (int argc, char ** argv) {
     int * columnSize;
 
     if (inputElementCount < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     target = atoi (argv[2]);
     column = atoi (argv[3]);
 
     input = parseArgsToIntegerMatrix (argc, argv, argc - inputElementCount, inputElementCount, column);
-
     row = matrixGetRow (inputElementCount, column);
-    printf ("input matrix:\n");
+
+#if DEBUG
+    printf ("input:\n");
     printIntegerMatrix (input, row, column);
-    printf ("\n");
+#endif
 
     columnSize = malloc (sizeof *columnSize * row);
-    for (int i = 0; i < row; i++)
+    for (int i = 0; i < row; i++) {
         columnSize[i] = column;
+    }
 
-    printf ("%s target %d\n.", searchMatrix (input, row, columnSize, target) ? "Found" : "Couldn't find", target);
+    printf ("%s\n.", searchMatrix (input, row, columnSize, target) ? "true" : "false");
 
     free (columnSize);
     freeIntegerMatrix (input, row);
@@ -461,9 +474,8 @@ int lc083_RemoveDupFromSortedList (int argc, char ** argv) {
     Node * afterDeletion;
 
     input = parseArgsToLinkedList (argv, 2);
-    afterDeletion = deleteDuplicates (input);
-    printf ("after deleting the duplicates:\n");
-    printLinkedList (afterDeletion);
+    printLinkedList (afterDeletion = deleteDuplicates (input));
+
     freeLinkedList (afterDeletion);
     return 0;
 }
@@ -478,8 +490,8 @@ int lc088_MergeNums (int argc, char ** argv) {
     int * nums1Realloc;
 
     if (argc < 5) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     nums1Size = atoi (argv[2]);
@@ -516,117 +528,23 @@ int lc088_MergeNums (int argc, char ** argv) {
 }
 
 int lc098_ValidBST (int argc, char ** argv) {
-    tree_t * tree = NewTreeNode(5);
-    tree->left = NewTreeNode(4);
-    tree->right = NewTreeNode(6);
-    tree->right->left = NewTreeNode(3);
-    tree->right->right = NewTreeNode(7);
-
-    printf ("%s BST\n", isValidBST (tree) ? "Valid" : "Invalid");
-
-    freeTree (tree);
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc101_SymmetricTree (int argc, char ** argv) {
-    const char * usage = USAGE_PREFIX "101\n"
-        "Check if given tree is symmetric.\n"
-        "Currently there is only fixed test cases.\n";
-    tree_t * testCasePass;
-    tree_t * testCaseFail;
-
-    if (argc != 2) {
-        printf ("%s", usage);
-        return 0;
-    }
-
-    testCasePass = NewTreeNode (1);
-    testCasePass->left = NewTreeNode (5);
-    testCasePass->left->left = NewTreeNode (3);
-    testCasePass->left->right = NewTreeNode (4);
-    testCasePass->right = NewTreeNode (5);
-    testCasePass->right->left = NewTreeNode (4);
-    testCasePass->right->right = NewTreeNode (3);
-    printf ("tree to test:\n");
-    printTree (testCasePass);
-    printf ("This tree is %s\n", isSymmetric (testCasePass) ? "symmetric" : "asymmetric");
-
-    testCaseFail = NewTreeNode (1);
-    testCaseFail->left = NewTreeNode (5);
-    testCaseFail->left->left = NewTreeNode (3);
-    testCaseFail->left->right = NewTreeNode (8);
-    testCaseFail->right = NewTreeNode (5);
-    testCaseFail->right->left = NewTreeNode (4);
-    testCaseFail->right->right = NewTreeNode (3);
-    printf ("tree to test:\n");
-    printTree (testCaseFail);
-    printf ("This tree is %s\n", isSymmetric (testCaseFail) ? "symmetric" : "asymmetric");
-
-    freeTree (testCasePass);
-    freeTree (testCaseFail);
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc102_BinTreeLevelTraversal (int argc, char ** argv) {
-    tree_t * tree = NewTreeNode(3);
-    tree->left = NewTreeNode(9);
-    tree->right = NewTreeNode(20);
-    tree->right->left = NewTreeNode(15);
-    tree->right->right = NewTreeNode(7);
-    int returnSize[1];
-    int * returnColumnSizes[1];
-    int ** returnMatrix = levelOrder (tree, returnSize, returnColumnSizes);
-
-    printf ("tree to test:\n");
-    printTree (tree);
-    printf ("level order traversal:\n");
-    for (int i = 0; i < *returnSize; i++) {
-        for (int j = 0; j < returnColumnSizes[0][i]; j++) {
-            printf ("%d ", returnMatrix[i][j]);
-        }
-        printf ("\n");
-    }
-    freeTree (tree);
-    free (returnColumnSizes[0]);
-    freeIntegerMatrix (returnMatrix, *returnSize);
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc104_MaxDepthOfBinaryTree (int argc, char ** argv) {
-    const char * usage = USAGE_PREFIX "104\n"
-        "Get maximum depth of a binary tree.\n"
-        "Currently there is only fixed test cases.\n";
-    tree_t * testCaseOne;
-    tree_t * testCaseTwo;
-
-    if (argc != 2) {
-        printf ("%s", usage);
-        return 0;
-    }
-
-    testCaseOne = NewTreeNode (1);
-    testCaseOne->left = NewTreeNode (1);
-    testCaseOne->left->left = NewTreeNode (1);
-    printf ("test case 1:\n");
-    printTree (testCaseOne);
-    printf ("The maximum depth of this tree is %d\n", maxDepth (testCaseOne));
-
-    testCaseTwo = NewTreeNode (2);
-    testCaseTwo->left = NewTreeNode (2);
-    testCaseTwo->left->left = NewTreeNode (2);
-    testCaseTwo->left->right = NewTreeNode (2);
-    testCaseTwo->left->left->left = NewTreeNode (2);
-    testCaseTwo->right = NewTreeNode (2);
-    testCaseTwo->right->left = NewTreeNode (2);
-    testCaseTwo->right->right = NewTreeNode (2);
-    testCaseTwo->right->right->right = NewTreeNode (2);
-    printf ("test case 2:\n");
-    printTree (testCaseTwo);
-    printf ("The maximum depth of this tree is %d\n", maxDepth (testCaseTwo));
-
-    freeTree (testCaseOne);
-    freeTree (testCaseTwo);
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc118_PascalsTriangle (int argc, char ** argv) {
@@ -634,59 +552,51 @@ int lc118_PascalsTriangle (int argc, char ** argv) {
         "Generate a Pascal's triangle of given row(s).\n"
         "row range: [1, 20]\n";
     int row;
-    int returnRow[1];
-    int * returnColumns[1];
+    int returnRow;
+    int * returnColumns;
     int ** returnMatrix;
 
     if (argc != 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
-    returnMatrix = generate (row = atoi (argv[2]), returnRow, returnColumns);
+    returnMatrix = generate (row = atoi (argv[2]), &returnRow, &returnColumns);
 
-    for (int i = 0; i < *returnRow; i++) {
-        for (int j = *returnRow - (i + 1); j > 0; j--) {
-            printf ("%3s", "");
-        }
-        for (int j = 0; j < (*returnColumns)[i]; j++) {
-            printf ("%5d ", returnMatrix[i][j]);
-        }
-        printf ("\n");
-    }
+    printIntegerArrays (returnMatrix, returnRow, returnColumns);
 
-    freeIntegerMatrix (returnMatrix, *returnRow);
-    free (*returnColumns);
+    freeIntegerMatrix (returnMatrix, returnRow);
+    free (returnColumns);
     return 0;
 }
 
 int lc121_MaxProfit (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "121 <integer> [<integer> ...]\n"
         "Given an array where the i-th element is the price of a stock on the i-th day.\n"
-        "Return the maximum profit to buy and sell the stock.\n";
+        "Print the maximum profit to buy and sell the stock.\n";
     int inputArraySize = argc - 2;
     int * inputArray;
-    int returnedProfit;
 
     if (inputArraySize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
-    returnedProfit = maxProfit (inputArray, inputArraySize);
+    printf ("%d\n", maxProfit (inputArray, inputArraySize));
+
     free (inputArray);
-    return returnedProfit;
+    return 0;
 }
 
 int lc144_BinaryTreePreorderTraversal (int argc, char ** argv) {
-    printf ("driver not ready\n");
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc145_BinaryTreePostorderTraversal (int argc, char ** argv) {
-    printf ("driver not ready\n");
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc203_RemoveLinkedListElements (int argc, char ** argv) {
@@ -696,16 +606,18 @@ int lc203_RemoveLinkedListElements (int argc, char ** argv) {
     Node * input;
 
     if (argc < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
     value = atoi (argv[2]);
     input = parseArgsToLinkedList (argv, 3);
-    printf ("input list:\n");
+
+#if DEBUG
+    printf ("input: ");
     printLinkedList (input);
-    input = removeElements (input, value);
-    printf ("after removal of all occurrences of `%d':\n", value);
-    printLinkedList (input);
+#endif
+
+    printLinkedList (input = removeElements (input, value));
 
     freeLinkedList (input);
     return 0;
@@ -718,8 +630,8 @@ int lc206_ReverseLinkedList (int argc, char ** argv) {
     Node * reversed;
 
     if (argc < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     input = parseArgsToLinkedList (argv, 2);
@@ -734,28 +646,27 @@ int lc217_ContainsDup (int argc, char ** argv) {
         "Check if the given array contains any duplicate.\n";
     int inputArraySize = argc - 2;
     int * inputArray;
-    int returnedValue;
 
     if (inputArraySize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
-    returnedValue = containsDuplicate (inputArray, inputArraySize) ? 0 : 1;
+    printf ("%s\n", containsDuplicate (inputArray, inputArraySize) ? "true" : "false");
 
     free (inputArray);
-    return returnedValue;
+    return 0;
 }
 
 int lc226_InvertBinaryTree (int argc, char ** argv) {
-    printf ("driver not ready\n");
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc232_ImplementQueueUsingStacks (int argc, char ** argv) {
-    printf ("driver not ready\n");
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc234_PalindromeLinkedList (int argc, char ** argv) {
@@ -764,8 +675,8 @@ int lc234_PalindromeLinkedList (int argc, char ** argv) {
     Node * input = NULL;
 
     if (argc < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     argv += 2;
@@ -773,9 +684,12 @@ int lc234_PalindromeLinkedList (int argc, char ** argv) {
         input = addListNode (input, atoi (*argv++));
     }
 
-    printf ("input linked list:\n");
+#if DEBUG
+    printf ("input: ");
     printLinkedList (input);
-    printf ("It %s palindromic.\n", isPalindrome_ll (input) ? "is" : "is NOT");
+#endif
+
+    printf ("%s\n", isPalindrome_ll (input) ? "true" : "false");
 
     freeLinkedList (input);
     return 0;
@@ -790,14 +704,14 @@ int lc242_ValidAnagram (int argc, char ** argv) {
     char * str2;
 
     if (argc != 4) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     str1 = argv[2];
     str2 = argv[3];
 
-    printf ("`%s' %s an anagram of `%s'\n", str1, isAnagram (str1, str2) ? "is" : "is NOT", str2);
+    printf ("%s\n", isAnagram (str1, str2) ? "true" : "false");
 
     return 0;
 }
@@ -810,11 +724,11 @@ int lc350_Intersection (int argc, char ** argv) {
     int * nums1;
     int * nums2;
     int * returnArray;
-    int returnArraySize[1];
+    int returnArraySize;
 
     if (argc < 6) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     nums1Size = atoi (argv[2]);
@@ -828,15 +742,15 @@ int lc350_Intersection (int argc, char ** argv) {
     nums1 = parseArgsToIntegerArray (argc, argv, argc - nums2Size - nums1Size, nums1Size);
     nums2 = parseArgsToIntegerArray (argc, argv, argc - nums2Size, nums2Size);
 
-    printf ("nums1:\n");
+#if DEBUG
+    printf ("nums1: ");
     printIntegerArray (nums1, nums1Size);
-    printf ("nums2:\n");
+    printf ("nums2: ");
     printIntegerArray (nums2, nums2Size);
+#endif
 
-    returnArray = intersect (nums1, nums1Size, nums2, nums2Size, returnArraySize);
-
-    printf ("their intersection:\n");
-    printIntegerArray (returnArray, *returnArraySize);
+    returnArray = intersect (nums1, nums1Size, nums2, nums2Size, &returnArraySize);
+    printIntegerArray (returnArray, returnArraySize);
 
     free (nums1);
     free (nums2);
@@ -852,32 +766,31 @@ int lc383_RansomNote (int argc, char ** argv) {
     char * magazine;
 
     if (argc != 4) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     note = argv[2];
     magazine = argv[3];
 
-    printf ("A ransom note `%s' %s be made by characters in magazine `%s'\n",
-        note,
-        canConstruct (note, magazine) ? "can" : "CANNOT",
-        magazine);
+    printf ("%s\n", canConstruct (note, magazine) ? "true" : "false");
 
     return 0;
 }
 
 int lc387_FirstUniqueChar (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "387 <string>\n"
-        "Return the index of the first non-repeating character in given string.\n"
-        "If it does not exist, return -1.\n";
+        "Print the index of the first non-repeating character in given string.\n"
+        "If it does not exist, print -1.\n";
 
     if (argc != 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
-    return firstUniqChar (argv[2]);
+    printf ("%d\n", firstUniqChar (argv[2]));
+
+    return 0;
 }
 
 int lc566_MatrixReshape (int argc, char ** argv) {
@@ -887,12 +800,12 @@ int lc566_MatrixReshape (int argc, char ** argv) {
     int ** inputMatrix;
     int newRow, newColumn, row, column;
     int ** reshaped;
-    int returnedRow[1];
-    int * returnedColumn[1];
+    int returnRow;
+    int * returnColumn;
 
     if (elementCount < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     newRow = atoi (argv[2]);
@@ -902,37 +815,38 @@ int lc566_MatrixReshape (int argc, char ** argv) {
 
     inputMatrix = parseArgsToIntegerMatrix (argc, argv, argc - elementCount, elementCount, column);
 
-    printf ("Input matrix:\n");
+#if DEBUG
+    printf ("input:\n");
     printIntegerMatrix (inputMatrix, row, column);
+    printf ("\n");
+#endif
 
-    reshaped = matrixReshape (inputMatrix, row, &column, newRow, newColumn, returnedRow, returnedColumn);
-
-    printf ("Reshaped:\n");
-    printIntegerMatrix (reshaped, *returnedRow, **returnedColumn);
+    reshaped = matrixReshape (inputMatrix, row, &column, newRow, newColumn, &returnRow, &returnColumn);
+    printIntegerMatrix (reshaped, returnRow, *returnColumn);
 
     if (reshaped != inputMatrix) {
-        freeIntegerMatrix (reshaped, *returnedRow);
+        freeIntegerMatrix (reshaped, returnRow);
     }
-    if (*returnedColumn != &column) {
-        free (*returnedColumn);
+    if (returnColumn != &column) {
+        free (returnColumn);
     }
     freeIntegerMatrix (inputMatrix, row);
     return 0;
 }
 
 int lc700_SearchBst (int argc, char ** argv) {
-    printf ("driver not ready\n");
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc701_InsertIntoABinaryTree (int argc, char ** argv) {
-    printf ("driver not ready\n");
-    return 0;
+    fprintf (stderr, "driver not ready\n");
+    return -1;
 }
 
 int lc977_SortSquare (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "977 <integer> [<integer> ...]\n"
-        "Given an integer array nums sorted in non-decreasing order, return an array of\n"
+        "Given an integer array nums sorted in non-decreasing order, print an array of\n"
         "the squares of each number sorted in non-decreasing order.\n";
     int inputArraySize = argc - 2;
     int * inputArray;
@@ -940,8 +854,8 @@ int lc977_SortSquare (int argc, char ** argv) {
     int returnArraySize;
 
     if (inputArraySize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     inputArray = parseArgsToIntegerArray (argc, argv, argc - inputArraySize, inputArraySize);
@@ -960,18 +874,20 @@ int lc1290_Binary2Decimal (int argc, char ** argv) {
     Node * inputList = NULL;
 
     if (argc != 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     for (int i = 0; argv[2][i] != '\0'; i++) {
         inputList = addListNode (inputList, argv[2][i] - '0');
     }
 
-    printf ("input list:\n");
+#if DEBUG
+    printf ("input: ");
     printLinkedList (inputList);
+#endif
 
-    printf ("decimal value: %d\n", getDecimalValue (inputList));
+    printf ("%d\n", getDecimalValue (inputList));
 
     freeLinkedList (inputList);
     return 0;
@@ -985,8 +901,8 @@ int lc2078_TwoFurthestHousesWithDifferentColors (int argc, char ** argv) {
     int * colors;
 
     if (colorsSize < 2) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     colors = parseArgsToIntegerArray (argc, argv, argc - colorsSize, colorsSize);
@@ -997,8 +913,8 @@ int lc2078_TwoFurthestHousesWithDifferentColors (int argc, char ** argv) {
 #endif
 
     printf ("%d\n", maxDistance (colors, colorsSize));
-    free (colors);
 
+    free (colors);
     return 0;
 }
 
@@ -1011,8 +927,8 @@ int lc2085_CountCommonWordsWithOneOccurrence (int argc, char ** argv) {
     char ** words2;
 
     if (argc < 6) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     words1Size = atoi (argv[2]);
@@ -1046,8 +962,8 @@ int lc2086_FeedTheHamsters (int argc, char ** argv) {
         "String can only contain `H', representing a hamster, or `.', representing a place to put a bucket.\n";
 
     if (argc != 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     printf ("%d\n", minimumBuckets (argv[2]));
@@ -1066,8 +982,8 @@ int lc2087_RobotComingHome (int argc, char ** argv) {
     int * colCosts;
 
     if (argc < 10) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     start[0] = atoi (argv[2]);
@@ -1100,64 +1016,64 @@ int lc2089_FindTargetIndicesAfterSortingArray (int argc, char ** argv) {
     int target;
     int inputSize = argc - 3;
     int * input;
-    int * returnedValues;
-    int returnedSize[1];
+    int * returnValues;
+    int returnSize;
 
     if (inputSize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     target = atoi (argv[2]);
     input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
 
 #if DEBUG
-    printf ("input array: ");
+    printf ("input: ");
     printIntegerArray (input, inputSize);
 #endif
 
-    returnedValues = targetIndices (input, inputSize, target, returnedSize);
-    printIntegerArray (returnedValues, *returnedSize);
+    returnValues = targetIndices (input, inputSize, target, &returnSize);
+    printIntegerArray (returnValues, returnSize);
 
     free (input);
-    free (returnedValues);
+    free (returnValues);
     return 0;
 }
 
 int lc2090_KRadiusSubArrayAverages (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "2090 <k> <integer> [<integer> ...]\n"
-        "Return a integer array containing the average values of range [i - k, i + k] of\n"
+        "Print a integer array containing the average values of range [i - k, i + k] of\n"
         "the given array.  If i - k < 0 or i + k > array size, the average is -1.\n";
     int k;
     int inputSize = argc - 3;
     int * input;
-    int * returnedArray;
-    int returnedSize[1];
+    int * returnArray;
+    int returnSize;
 
     if (inputSize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     k = atoi (argv[2]);
     input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
 
 #if DEBUG
-    printf ("input array: ");
+    printf ("input: ");
     printIntegerArray (input, inputSize);
 #endif
 
-    returnedArray = getAverages (input, inputSize, k, returnedSize);
-    printIntegerArray (returnedArray, *returnedSize);
+    returnArray = getAverages (input, inputSize, k, &returnSize);
+    printIntegerArray (returnArray, returnSize);
 
     free (input);
-    free (returnedArray);
+    free (returnArray);
     return 0;
 }
 
 int lc2091_RemovingMinumumAndMaximumFromArray (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "2091 <integer> [<integer> ...]\n"
-        "Return the minimum number of deletions it would take to remove the both the\n"
+        "Print the minimum number of deletions it would take to remove the both the\n"
         "minimum and maximum element from the given array of *distinct* integers.\n"
         "A deletion is removing an element from either the front or the back of the\n"
         "array.\n";
@@ -1165,14 +1081,14 @@ int lc2091_RemovingMinumumAndMaximumFromArray (int argc, char ** argv) {
     int * input;
 
     if (inputSize < 1) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
 
 #if DEBUG
-    printf ("input array: ");
+    printf ("input: ");
     printIntegerArray (input, inputSize);
 #endif
 
@@ -1204,11 +1120,11 @@ int lc2092_Secret (int argc, char ** argv) {
     int n, firstPerson, meetingCount;
     int ** meetings;
     int * returnArray;
-    int returnSize[1];
+    int returnSize;
 
     if (argc < 8) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     n = atoi (argv[2]);
@@ -1231,10 +1147,11 @@ int lc2092_Secret (int argc, char ** argv) {
 #if DEBUG
     printf ("meetings:\n");
     printIntegerMatrix (meetings, meetingCount, 3);
+    printf ("\n");
 #endif
 
-    returnArray = findAllPeople (n, meetings, meetingCount, NULL, firstPerson, returnSize);
-    printIntegerArray (returnArray, *returnSize);
+    returnArray = findAllPeople (n, meetings, meetingCount, NULL, firstPerson, &returnSize);
+    printIntegerArray (returnArray, returnSize);
 
     free (returnArray);
     freeIntegerMatrix (meetings, meetingCount);
@@ -1246,20 +1163,20 @@ int lc2094_Finding3DigitEvenNumbers (int argc, char ** argv) {
         "Find all 3-digit even numbers that consist of 3 elements from given array.\n";
     int inputSize = argc - 2;
     int * input;
-    int * returnedValues;
-    int returnedSize[1];
+    int * returnValues;
+    int returnSize;
 
     if (inputSize < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
-    returnedValues = findEvenNumbers (input, inputSize, returnedSize);
-    printIntegerArray (returnedValues, *returnedSize);
+    returnValues = findEvenNumbers (input, inputSize, &returnSize);
+    printIntegerArray (returnValues, returnSize);
 
     free (input);
-    free (returnedValues);
+    free (returnValues);
     return 0;
 }
 
@@ -1270,8 +1187,8 @@ int lc2095_DeleteTheMiddleNodeOfALinkedList (int argc, char ** argv) {
     Node * input;
 
     if (argc < 3) {
-        printf ("%s", usage);
-        return 0;
+        fprintf (stderr, "%s", usage);
+        return -1;
     }
 
     input = parseArgsToLinkedList (argv, 2);
@@ -1285,15 +1202,15 @@ int main (int argc, char **argv) {
     int problemNumber;
 
     if (argc < 2) {
-        printf("%s", driver_usage);
-        return 0;
+        fprintf (stderr, "%s", driver_usage);
+        return -1;
     }
 
     problemNumber = atoi (argv[1]);
 
     if (problemNumber <= 0) {
-        printf("%s", driver_usage);
-        return 0;
+        fprintf (stderr, "%s", driver_usage);
+        return -1;
     }
 
     switch (problemNumber) {
@@ -1452,12 +1369,9 @@ int main (int argc, char **argv) {
             break;
         default:
             fprintf (stderr, "no driver for %d\n", problemNumber);
-            returnedValue = 1;
+            returnedValue = -1;
             break;
     }
 
-    if (returnedValue != 0) {
-        fprintf(stderr, "warning: Return value is %d\n", returnedValue);
-    }
     return returnedValue;
 }
