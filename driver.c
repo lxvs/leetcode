@@ -16,6 +16,7 @@
 #include "easy/028-find-the-index-of-the-first-occurrence-in-a-string.h"
 #include "easy/035-search-insert-position.h"
 #include "easy/058-length-of-last-word.h"
+#include "easy/066-plus-one.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -471,6 +472,34 @@ int lc058_LengthOfLastWord (int argc, char ** argv) {
 
     printf ("%d\n", lengthOfLastWord (argv[2]));
 
+    return 0;
+}
+
+int lc066_PlusOne (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "66 <digit> [<digit> ...]\n"
+        "Input a integer array, each element represents a digit of an integer, ordered\n"
+        "from most significant to least significant, no leading zeros.  Print a array\n"
+        "that represents the input integer plus one.\n";
+    int inputSize = argc - 2;
+    int * digits;
+    int returnSize;
+
+    if (inputSize < 1) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    digits = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
+
+#if DEBUG
+    printf ("input: ");
+    printIntegerArray (digits, inputSize);
+#endif
+
+    digits = plusOne (digits, inputSize, &returnSize);
+    printIntegerArray (digits, returnSize);
+
+    free (digits);
     return 0;
 }
 
@@ -1307,6 +1336,9 @@ int main (int argc, char **argv) {
             break;
         case 58:
             returnedValue = lc058_LengthOfLastWord (argc, argv);
+            break;
+        case 66:
+            returnedValue = lc066_PlusOne (argc, argv);
             break;
         case 74:
             returnedValue = lc074_Search2dMatrix (argc, argv);
