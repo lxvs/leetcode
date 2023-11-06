@@ -17,6 +17,7 @@
 #include "easy/035-search-insert-position.h"
 #include "easy/058-length-of-last-word.h"
 #include "easy/066-plus-one.h"
+#include "easy/066-plus-one-enhanced.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -496,7 +497,10 @@ int lc066_PlusOne (int argc, char ** argv) {
     printIntegerArray (digits, inputSize);
 #endif
 
-    digits = plusOne (digits, inputSize, &returnSize);
+    digits = (getenv("LCD_66_ENHANCED") != NULL) ?
+        plusOneEnhanced (digits, inputSize, &returnSize) :
+        plusOne (digits, inputSize, &returnSize);
+
     printIntegerArray (digits, returnSize);
 
     free (digits);
