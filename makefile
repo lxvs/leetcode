@@ -1,8 +1,6 @@
 .PHONY: all clean debug generate_version
 
-ifeq ($(PREFIX),)
-    PREFIX := /usr/local
-endif
+SHELL := /bin/sh
 
 EXEC := lcd
 
@@ -17,7 +15,7 @@ HEADERS_LIB := include/lib/*.h
 GENERATE_VERSION := sh utils/write_version.sh
 
 all: generate_version $(SOURCE_FILES) $(SOURCE_FILES_LIB) $(HEADERS) $(HEADERS_LIB)
-	gcc $(GCC_FLAGS) $(DEBUG_FLAGS) $(ADDRESS_SANITIZER_FLAGS) $(SOURCE_FILES) $(SOURCE_FILES_LIB) -o $(EXEC)
+	gcc $(GCC_FLAGS) $(DEBUG_FLAGS) $(ADDRESS_SANITIZER_FLAGS) $(CFLAGS) $(SOURCE_FILES) $(SOURCE_FILES_LIB) -o $(EXEC)
 
 clean:
 	rm $(EXEC)
