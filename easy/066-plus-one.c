@@ -4,15 +4,19 @@
 int * plusOne (int * digits, int digitsSize, int * returnSize) {
     char carry = 1;
 
-    for (int i = digitsSize - 1; carry != 0 && i >= 0; i--) {
-        digits[i] += carry--;
-        if (digits[i] >= 10) {
-            digits[i] -= 10;
+    *returnSize = digitsSize;
+    if (++digits[digitsSize - 1] != 10) {
+        return digits;
+    }
+
+    digits[digitsSize - 1] = 0;
+
+    for (int i = digitsSize - 2; carry != 0 && i >= 0; i--) {
+        if ((digits[i] += carry--) == 10) {
+            digits[i] = 0;
             carry++;
         }
     }
-
-    *returnSize = digitsSize;
 
     if (carry > 0) {
         int * digitsRealloc;
@@ -27,7 +31,7 @@ int * plusOne (int * digits, int digitsSize, int * returnSize) {
         for (int i = 1; i < *returnSize; i++) {
             digits[i] = digits[i - 1];
         }
-        digits[0] += carry--;
+        digits[0] = 1;
     }
     return digits;
 }
