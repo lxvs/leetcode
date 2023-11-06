@@ -1,0 +1,6 @@
+#ifndef INCLUDED_058_LENGTH_OF_LAST_WORD_H_
+#define INCLUDED_058_LENGTH_OF_LAST_WORD_H_
+
+int lengthOfLastWord (char * s);
+
+#endif  /* INCLUDED_058_LENGTH_OF_LAST_WORD_H_ */

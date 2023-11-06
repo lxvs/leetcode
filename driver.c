@@ -15,6 +15,7 @@
 #include "easy/027-remove-element.h"
 #include "easy/028-find-the-index-of-the-first-occurrence-in-a-string.h"
 #include "easy/035-search-insert-position.h"
+#include "easy/058-length-of-last-word.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -456,6 +457,20 @@ int lc053_MaxSubArray (int argc, char ** argv) {
     printf ("%d\n", maxSubArray (inputArray, inputArraySize));
 
     free (inputArray);
+    return 0;
+}
+
+int lc058_LengthOfLastWord (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "58 <string>\n"
+        "Get the length of last word in string, which contains only words and spaces.\n";
+
+    if (argc != 3) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    printf ("%d\n", lengthOfLastWord (argv[2]));
+
     return 0;
 }
 
@@ -1289,6 +1304,9 @@ int main (int argc, char **argv) {
             break;
         case 53:
             returnedValue = lc053_MaxSubArray (argc, argv);
+            break;
+        case 58:
+            returnedValue = lc058_LengthOfLastWord (argc, argv);
             break;
         case 74:
             returnedValue = lc074_Search2dMatrix (argc, argv);
