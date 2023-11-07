@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "005-longest-palindromic-substring.h"
 
+#define max(a, b)       (((a) > (b)) ? (a) : (b))
+
 static int palindromeAround (int center_left, int center_right, const char * const s) {
     int sLength = strlen (s);
 

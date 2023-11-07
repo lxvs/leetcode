@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include "350-intersection-of-two-arrays-ii.h"
 
+#define min(a, b)       (((a) > (b)) ? (b) : (a))
+
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
