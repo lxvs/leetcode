@@ -1,7 +1,7 @@
 #include "069-sqrtx.h"
 
 int mySqrt (int x) {
-    int i = 0;
-    for (; i * i < x; i++);
-    return (i * i == x) ? i : i - 1;
+    int i;
+    for (i = 1; x != 0 && x / i >= i; i++);
+    return ((x != 0) && (x / i == i) && (x % i == 0)) ? i : i - 1;
 }
