@@ -18,6 +18,7 @@
 #include "easy/058-length-of-last-word.h"
 #include "easy/066-plus-one.h"
 #include "easy/066-plus-one-enhanced.h"
+#include "easy/067-add-binary.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -504,6 +505,30 @@ int lc066_PlusOne (int argc, char ** argv) {
     printIntegerArray (digits, returnSize);
 
     free (digits);
+    return 0;
+}
+
+int lc067_AddBinary (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "67 <binary> <binary>\n"
+        "Add two binary numbers, whose lengths are both in range [1, 10000]\n";
+    char * augend;
+    char * addend;
+    char * sum;
+
+    if (argc != 4) {
+        fprintf (stderr, usage);
+        return -1;
+    }
+
+    augend = argv[2];
+    addend = argv[3];
+
+    if ((sum = addBinary (augend, addend)) == NULL) {
+        return 1;
+    }
+
+    printf ("%s\n", sum);
+    free (sum);
     return 0;
 }
 
@@ -1343,6 +1368,9 @@ int main (int argc, char **argv) {
             break;
         case 66:
             returnedValue = lc066_PlusOne (argc, argv);
+            break;
+        case 67:
+            returnedValue = lc067_AddBinary (argc, argv);
             break;
         case 74:
             returnedValue = lc074_Search2dMatrix (argc, argv);
