@@ -19,6 +19,7 @@
 #include "easy/066-plus-one.h"
 #include "easy/066-plus-one-enhanced.h"
 #include "easy/067-add-binary.h"
+#include "easy/069-sqrtx.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -529,6 +530,20 @@ int lc067_AddBinary (int argc, char ** argv) {
 
     printf ("%s\n", sum);
     free (sum);
+    return 0;
+}
+
+int lc069_SquareRoot (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "69 <integer>\n"
+        "Get square root of given integer, which is in range [0, 2^31 - 1].\n";
+
+    if (argc != 3) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    printf ("%d\n", mySqrt (atoi (argv[2])));
+
     return 0;
 }
 
@@ -1371,6 +1386,9 @@ int main (int argc, char **argv) {
             break;
         case 67:
             returnedValue = lc067_AddBinary (argc, argv);
+            break;
+        case 69:
+            returnedValue = lc069_SquareRoot (argc, argv);
             break;
         case 74:
             returnedValue = lc074_Search2dMatrix (argc, argv);
