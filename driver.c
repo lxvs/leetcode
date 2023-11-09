@@ -56,6 +56,7 @@
 #include "medium/098-validate-binary-search-tree.h"
 #include "medium/102-binary-tree-level-order-traversal.h"
 #include "medium/701-insert-into-a-binary-tree.h"
+#include "medium/1759-count-number-of-homogenous-substrings.h"
 #include "medium/2086-minimum-number-of-food-buckets-to-feed-the-hamsters.h"
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "medium/2090-k-radius-subarray-averages.h"
@@ -1009,6 +1010,24 @@ int lc1290_Binary2Decimal (int argc, char ** argv) {
     return 0;
 }
 
+int lc1759_CountNumberOfHomogenousSubstrings (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "1759 <string>\n"
+        "Given a string s, return the number of homogenous substrings of s.  Since the\n"
+        "answer may be too large, return it modulo (10^9 + 7).\n"
+        "A string is homogenous if all the characters of the string are the same.\n"
+        "A substring is a contiguous sequence of characters within a string.\n"
+        "The given string contains only lowercase letters, length ranging in [1, 10^5].\n";
+
+    if (argc != 3) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    printf ("%d\n", countHomogenous (argv[2]));
+
+    return 0;
+}
+
 int lc2078_TwoFurthestHousesWithDifferentColors (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "2078 <integer> <integer> [<integer> ...]\n"
         "Each different integer represents a different color.  Find the maximum\n"
@@ -1467,6 +1486,9 @@ int main (int argc, char **argv) {
             break;
         case 1290:
             returnedValue = lc1290_Binary2Decimal (argc, argv);
+            break;
+        case 1759:
+            returnedValue = lc1759_CountNumberOfHomogenousSubstrings (argc, argv);
             break;
         case 2078:
             returnedValue = lc2078_TwoFurthestHousesWithDifferentColors (argc, argv);
