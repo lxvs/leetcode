@@ -5,7 +5,7 @@
 static inline int getFullCount (int n) {
     int returnValue = 0;
     for (int i = 1; i <= n; i++) {
-        returnValue += i;
+        returnValue = (returnValue + i) % SUM_MODULO;
     }
     return returnValue;
 }
