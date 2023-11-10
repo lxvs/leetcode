@@ -56,6 +56,7 @@
 #include "medium/098-validate-binary-search-tree.h"
 #include "medium/102-binary-tree-level-order-traversal.h"
 #include "medium/701-insert-into-a-binary-tree.h"
+#include "medium/1743-restore-the-array-from-adjacent-pairs.h"
 #include "medium/1759-count-number-of-homogenous-substrings.h"
 #include "medium/2086-minimum-number-of-food-buckets-to-feed-the-hamsters.h"
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
@@ -1010,6 +1011,45 @@ int lc1290_Binary2Decimal (int argc, char ** argv) {
     return 0;
 }
 
+int lc1743_RestoreTheArrayFromAdjacentPairs (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "1743 <integer> <integer> [<integer> <integer> ...]\n"
+        "There is an integer array `nums' that consists of n unique elements, but you\n"
+        "have forgotten it.  However, you do remember every pair of adjacent elements in\n"
+        "nums.\n"
+        "You are given a 2D integer array adjacentPairs of size (n - 1) where each\n"
+        "adjacentPairs[i] = [ui, vi] indicates that the elements ui and vi are adjacent\n"
+        "in nums.\n"
+        "It is guaranteed that every adjacent pair of elements nums[i] and nums[i+1]\n"
+        "will exist in adjacentPairs, either as [nums[i], nums[i+1]] or [nums[i+1],\n"
+        "nums[i]]. The pairs can appear in any order.\n"
+        "Return the original array nums. If there are multiple solutions, return any of\n"
+        "them.\n";
+    int ** input;
+    int inputColSize = 2;
+    int inputSize = (argc - 2) / inputColSize;
+    int * restored;
+    int restoredSize = 0;
+
+    if (inputSize < 1 || argc % 2 != 0) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    input = parseArgsToIntegerMatrix (argc, argv, argc - inputSize * inputColSize, inputSize * inputColSize, inputColSize);
+
+#if DEBUG
+    printf ("input matrix:\n");
+    printIntegerMatrix (input, inputSize, inputColSize);
+#endif
+
+    restored = restoreArray (input, inputSize, &inputColSize, &restoredSize);
+    printIntegerArray (restored, restoredSize);
+
+    free (restored);
+    freeIntegerMatrix (input, inputSize);
+    return 0;
+}
+
 int lc1759_CountNumberOfHomogenousSubstrings (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "1759 <string>\n"
         "Given a string s, return the number of homogenous substrings of s.  Since the\n"
@@ -1486,6 +1526,9 @@ int main (int argc, char **argv) {
             break;
         case 1290:
             returnedValue = lc1290_Binary2Decimal (argc, argv);
+            break;
+        case 1743:
+            returnedValue = lc1743_RestoreTheArrayFromAdjacentPairs (argc, argv);
             break;
         case 1759:
             returnedValue = lc1759_CountNumberOfHomogenousSubstrings (argc, argv);
