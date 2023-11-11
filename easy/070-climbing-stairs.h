@@ -1,0 +1,6 @@
+#ifndef INCLUDED_070_CLIMBING_STAIRS_H_
+#define INCLUDED_070_CLIMBING_STAIRS_H_
+
+int climbStairs (int n);
+
+#endif  /* INCLUDED_070_CLIMBING_STAIRS_H_ */

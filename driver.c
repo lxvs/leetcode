@@ -20,6 +20,7 @@
 #include "easy/066-plus-one-enhanced.h"
 #include "easy/067-add-binary.h"
 #include "easy/069-sqrtx.h"
+#include "easy/070-climbing-stairs.h"
 #include "easy/083-remove-duplicates-from-sorted-list.h"
 #include "easy/088-merge-sorted-array.h"
 #include "easy/101-symmetric-tree.h"
@@ -545,6 +546,22 @@ int lc069_SquareRoot (int argc, char ** argv) {
     }
 
     printf ("%d\n", mySqrt (atoi (argv[2])));
+
+    return 0;
+}
+
+int lc070_ClimbingStairs (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "70 <n>\n"
+        "You are climbing a staircase.  It takes n steps to reach the top.\n"
+        "Each time you can either climb 1 or 2 steps.  In how many distinct ways can\n"
+        "you climb to the top? (1 <= n <= 45)\n";
+
+    if (argc != 3) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    printf ("%d\n", climbStairs (atoi (argv[2])));
 
     return 0;
 }
@@ -1448,6 +1465,9 @@ int main (int argc, char **argv) {
             break;
         case 69:
             returnedValue = lc069_SquareRoot (argc, argv);
+            break;
+        case 70:
+            returnedValue = lc070_ClimbingStairs (argc, argv);
             break;
         case 74:
             returnedValue = lc074_Search2dMatrix (argc, argv);
