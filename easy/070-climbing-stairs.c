@@ -1,22 +1,21 @@
-#include <stdlib.h>
 #include "070-climbing-stairs.h"
 
 int climbStairs (int n) {
-    int * result;
+    int prev1, prev2;
     int returnValue;
 
     if (n <= 2) {
         return n;
     }
 
-    result = malloc (sizeof *result * n);
-    result[0] = 1;
-    result[1] = 2;
+    prev2 = 1;
+    prev1 = 2;
+
     for (int i = 2; i < n; i++) {
-        result[i] = result[i - 1] + result[i - 2];
+        returnValue = prev1 + prev2;
+        prev2 = prev1;
+        prev1 = returnValue;
     }
 
-    returnValue = result[n - 1];
-    free (result);
     return returnValue;
 }
