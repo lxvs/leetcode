@@ -1,6 +1,7 @@
 .PHONY: all clean debug generate_version
 
 SHELL := /bin/sh
+CC := gcc
 
 EXEC := lcd
 
@@ -12,10 +13,10 @@ SOURCE_FILES_LIB := lib/*.c
 HEADERS := easy/*.h medium/*.h hard/*.h
 HEADERS_LIB := include/lib/*.h
 
-GENERATE_VERSION := sh utils/write_version.sh
+GENERATE_VERSION := $(SHELL) utils/write_version.sh
 
 all: generate_version $(SOURCE_FILES) $(SOURCE_FILES_LIB) $(HEADERS) $(HEADERS_LIB)
-	gcc $(GCC_FLAGS) $(DEBUG_FLAGS) $(ADDRESS_SANITIZER_FLAGS) $(CFLAGS) $(SOURCE_FILES) $(SOURCE_FILES_LIB) -o $(EXEC)
+	$(CC) $(GCC_FLAGS) $(DEBUG_FLAGS) $(ADDRESS_SANITIZER_FLAGS) $(CFLAGS) $(SOURCE_FILES) $(SOURCE_FILES_LIB) -o $(EXEC)
 
 clean:
 	rm $(EXEC)
@@ -23,6 +24,9 @@ clean:
 debug: export DEBUG_FLAGS := -DDEBUG
 debug: export ADDRESS_SANITIZER_FLAGS := -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
 debug: all
+
+debugger: export DEBUG_FLAGS := -fdiagnostics-color=always -g
+debugger: all
 
 generate_version:
 	$(GENERATE_VERSION)
