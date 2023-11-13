@@ -5,7 +5,11 @@ CC := gcc
 
 EXEC := lcd
 
-GCC_FLAGS := -Wall -Iinclude
+export CFLAGS_LOCAL := -Wall -Iinclude
+
+DEBUG_FLAGS := -DDEBUG
+DEBUGGER_FLAGS := -fdiagnostics-color=always -g
+ADDRESS_SANITIZER_FLAGS := -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
 
 SOURCE_FILES := driver.c easy/*.c medium/*.c hard/*.c
 SOURCE_FILES_LIB := lib/*.c
@@ -13,19 +17,18 @@ SOURCE_FILES_LIB := lib/*.c
 HEADERS := easy/*.h medium/*.h hard/*.h
 HEADERS_LIB := include/lib/*.h
 
-GENERATE_VERSION := $(SHELL) utils/write_version.sh
+GENERATE_VERSION := $(SHELL) utils/write-version.sh
 
 all: generate_version $(SOURCE_FILES) $(SOURCE_FILES_LIB) $(HEADERS) $(HEADERS_LIB)
-	$(CC) $(GCC_FLAGS) $(DEBUG_FLAGS) $(ADDRESS_SANITIZER_FLAGS) $(CFLAGS) $(SOURCE_FILES) $(SOURCE_FILES_LIB) -o $(EXEC)
+	$(CC) $(CFLAGS_LOCAL) $(CFLAGS) $(SOURCE_FILES) $(SOURCE_FILES_LIB) -o $(EXEC)
 
 clean:
 	rm $(EXEC)
 
-debug: export DEBUG_FLAGS := -DDEBUG
-debug: export ADDRESS_SANITIZER_FLAGS := -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
+debug: CFLAGS_LOCAL += $(DEBUG_FLAGS) $(ADDRESS_SANITIZER_FLAGS)
 debug: all
 
-debugger: export DEBUG_FLAGS := -fdiagnostics-color=always -g
+debugger: CFLAGS_LOCAL += $(DEBUGGER_FLAGS)
 debugger: all
 
 generate_version:
