@@ -1,34 +1,32 @@
 #include "1887-reduction-operations-to-make-the-array-elements-equal.h"
 
-inline static void swap (int * a, int * b) {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
-
-static int * bubbleSort (int * array, int arraySize) {
-    for (int i = 0, swapped = 0; i < arraySize; i++, swapped = 0) {
-        for (int j = 0; j < arraySize - i - 1; j++) {
-            if (array[j] > array[j + 1]) {
-                swapped = 1;
-                swap (array + j, array + j + 1);
-            }
-        }
-        if (swapped == 0) {
-            break;
-        }
-    }
-    return array;
-}
+#define MAX_VALUE   50000
+#define MIN_VALUE   1
 
 int reductionOperations (int * nums, int numsSize) {
+    int frequency[MAX_VALUE - MIN_VALUE + 1] = {0};
+    int max = MIN_VALUE;
+    int min = MAX_VALUE;
+    int weight = 0;
     int returnValue = 0;
-    nums = bubbleSort (nums, numsSize);
-    for (int i = 1, increment = 0; i < numsSize; i++) {
-        if (nums[i] > nums[i - 1]) {
-            increment++;
+
+    for (int i = 0; i < numsSize; i++) {
+        int value = nums[i];
+        frequency[value]++;
+        if (value > max) {
+            max = value;
         }
-        returnValue += increment;
+        if (value < min) {
+            min = value;
+        }
     }
+
+    for (int i = min; i <= max; i++) {
+        if (frequency[i] == 0) {
+            continue;
+        }
+        returnValue += weight++ * frequency[i];
+    }
+
     return returnValue;
 }
