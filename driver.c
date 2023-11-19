@@ -59,6 +59,7 @@
 #include "medium/701-insert-into-a-binary-tree.h"
 #include "medium/1743-restore-the-array-from-adjacent-pairs.h"
 #include "medium/1759-count-number-of-homogenous-substrings.h"
+#include "medium/1887-reduction-operations-to-make-the-array-elements-equal.h"
 #include "medium/2086-minimum-number-of-food-buckets-to-feed-the-hamsters.h"
 #include "medium/2087-minimum-cost-homecoming-of-a-robot-in-a-grid.h"
 #include "medium/2090-k-radius-subarray-averages.h"
@@ -1085,6 +1086,33 @@ int lc1759_CountNumberOfHomogenousSubstrings (int argc, char ** argv) {
     return 0;
 }
 
+int lc1887_ReductionOperationToMakeTheArrayElementsEqual (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "1887 <integer> [<integer> ...]\n"
+        "Given an integer array nums, your goal is to make all elements in nums equal.\n"
+        "To complete one operation, follow these steps:\n"
+        "Find the largest value in nums.  Let its index be i (0-indexed) and its value\n"
+        "be largest.  If there are multiple elements with the largest value, pick the\n"
+        "smallest i.  Find the next largest value in nums strictly smaller than largest.\n"
+        "Let its value be nextLargest.  Reduce nums[i] to nextLargest.\n"
+        "Return the number of operations to make all elements in nums equal.\n"
+        "Ranges of input integer and input size are both [1, 50000]\n";
+    int * input;
+    int inputSize = argc - 2;
+    int operations;
+
+    if (inputSize < 1) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
+    operations = reductionOperations (input, inputSize);
+    printf ("%d\n", operations);
+
+    free (input);
+    return 0;
+}
+
 int lc2078_TwoFurthestHousesWithDifferentColors (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "2078 <integer> <integer> [<integer> ...]\n"
         "Each different integer represents a different color.  Find the maximum\n"
@@ -1552,6 +1580,9 @@ int main (int argc, char **argv) {
             break;
         case 1759:
             returnedValue = lc1759_CountNumberOfHomogenousSubstrings (argc, argv);
+            break;
+        case 1887:
+            returnedValue = lc1887_ReductionOperationToMakeTheArrayElementsEqual (argc, argv);
             break;
         case 2078:
             returnedValue = lc2078_TwoFurthestHousesWithDifferentColors (argc, argv);
