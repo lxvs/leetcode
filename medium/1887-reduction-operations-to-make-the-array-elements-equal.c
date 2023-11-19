@@ -4,7 +4,7 @@
 #define MIN_VALUE   1
 
 int reductionOperations (int * nums, int numsSize) {
-    int frequency[MAX_VALUE - MIN_VALUE + 1] = {0};
+    int frequency[MAX_VALUE + 1] = {0};
     int max = MIN_VALUE;
     int min = MAX_VALUE;
     int weight = 0;
