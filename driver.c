@@ -57,6 +57,7 @@
 #include "medium/098-validate-binary-search-tree.h"
 #include "medium/102-binary-tree-level-order-traversal.h"
 #include "medium/701-insert-into-a-binary-tree.h"
+#include "medium/935-knight-dialer.h"
 #include "medium/1743-restore-the-array-from-adjacent-pairs.h"
 #include "medium/1759-count-number-of-homogenous-substrings.h"
 #include "medium/1887-reduction-operations-to-make-the-array-elements-equal.h"
@@ -980,6 +981,31 @@ int lc701_InsertIntoABinaryTree (int argc, char ** argv) {
     return -1;
 }
 
+int lc935_KnightDialer (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "935 <integer>\n"
+        "The chess knight has a unique movement, it may move two squares vertically and\n"
+        "one square horizontally, or two squares horizontally and one square vertically\n"
+        "(with both forming the shape of an L).\n"
+        "We have a chess knight and a phone pad as shown below, the knight can only\n"
+        "stand on a numeric cell.\n"
+        "Given an integer n, return how many distinct phone numbers of length n we can\n"
+        "dial.\n"
+        "You are allowed to place the knight on any numeric cell initially and then you\n"
+        "should perform n - 1 jumps to dial a number of length n.  All jumps should be\n"
+        "valid knight jumps.\n"
+        "As the answer may be very large, return the answer modulo 109 + 7.\n"
+        "Range of n: [1, 5000]\n";
+    int input;
+
+    if (argc != 3 || (input = atoi (argv[2])) == 0) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    printf ("%d\n", knightDialer (input));
+    return 0;
+}
+
 int lc977_SortSquare (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "977 <integer> [<integer> ...]\n"
         "Given an integer array nums sorted in non-decreasing order, print an array of\n"
@@ -1568,6 +1594,9 @@ int main (int argc, char **argv) {
             break;
         case 701:
             returnedValue = lc701_InsertIntoABinaryTree (argc, argv);
+            break;
+        case 935:
+            returnedValue = lc935_KnightDialer (argc, argv);
             break;
         case 977:
             returnedValue = lc977_SortSquare (argc, argv);
