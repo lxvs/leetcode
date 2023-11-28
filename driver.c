@@ -67,6 +67,7 @@
 #include "medium/2091-removing-minimum-and-maximum-from-array.h"
 #include "medium/2095-delete-the-middle-node-of-a-linked-list.h"
 #include "hard/2092-find-all-people-with-secret.h"
+#include "hard/2147-number-of-ways-to-divide-a-long-corridor.h"
 
 const char * driver_usage =
     "leet-code driver " EXEC_VERSION "\n"
@@ -1443,6 +1444,37 @@ int lc2095_DeleteTheMiddleNodeOfALinkedList (int argc, char ** argv) {
     return 0;
 }
 
+int lc2147_DivideALongCorridor (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "2147 <corridor>\n"
+        "Along a long library corridor, there is a line of seats and decorative plants.\n"
+        "You are given a 0-indexed string corridor of length n consisting of letters 'S'\n"
+        "and 'P' where each 'S' represents a seat and each 'P' represents a plant.\n"
+        "\n"
+        "One room divider has already been installed to the left of index 0, and another\n"
+        "to the right of index n - 1. Additional room dividers can be installed. For\n"
+        "each position between indices i - 1 and i (1 <= i <= n - 1), at most one\n"
+        "divider can be installed.\n"
+        "\n"
+        "Divide the corridor into non-overlapping sections, where each section has\n"
+        "exactly two seats with any number of plants.  There may be multiple ways to\n"
+        "perform the division.  Two ways are different if there is a position with a\n"
+        "room divider installed in the first way but not in the second way.\n"
+        "\n"
+        "Return the number of ways to divide the corridor.  Since the answer may be\n"
+        "very large, return it modulo 109 + 7.  If there is no way, return 0.\n"
+        "\n"
+        "<corridor> contains only 'S' or 'P', and its length ranges in [1, 10^5].\n";
+
+    if (argc != 3) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    printf ("%d\n", numberOfWays (argv[2]));
+
+    return 0;
+}
+
 int main (int argc, char **argv) {
     int returnedValue;
     int problemNumber;
@@ -1642,6 +1674,9 @@ int main (int argc, char **argv) {
             break;
         case 2095:
             returnedValue = lc2095_DeleteTheMiddleNodeOfALinkedList (argc, argv);
+            break;
+        case 2147:
+            returnedValue = lc2147_DivideALongCorridor (argc, argv);
             break;
         default:
             fprintf (stderr, "no driver for %d\n", problemNumber);
