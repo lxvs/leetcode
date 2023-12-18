@@ -1,11 +1,8 @@
 #include "1913-maximum-product-difference-between-two-pairs.h"
 
-#define MIN_VALUE 1
-#define MAX_VALUE 10000
-
 int maxProductDifference (int * nums, int numsSize) {
-    int max[2] = {MIN_VALUE, MIN_VALUE};
-    int min[2] = {MAX_VALUE, MAX_VALUE};
+    int max[2] = {nums[0], nums[1]};
+    int min[2] = {nums[2], nums[3]};
 
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < numsSize; j++) {
