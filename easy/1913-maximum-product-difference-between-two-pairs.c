@@ -1,19 +1,26 @@
 #include "1913-maximum-product-difference-between-two-pairs.h"
 
-int maxProductDifference (int * nums, int numsSize) {
-    int max[2] = {nums[0], nums[1]};
-    int min[2] = {nums[2], nums[3]};
+static inline void swap (int * a, int * b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < numsSize; j++) {
-            if (max[i] < nums[j] && max[i ^ 1] != nums[j]) {
-                max[i] = nums[j];
-            }
-            if (min[i] > nums[j] && min[i ^ 1] != nums[j]) {
-                min[i] = nums[j];
+static void selection_sort (int * nums, int numsSize) {
+    int min_index = 0;
+
+    for (int i = 0; i < numsSize; i++) {
+        for (int j = i; j < numsSize; j++) {
+            if (nums[j] < nums[min_index]) {
+                min_index = j;
             }
         }
+        swap (&nums[i], &nums[min_index]);
+        min_index = i + 1;
     }
+}
 
-    return max[0] * max[1] - min[0] * min[1];
+int maxProductDifference (int * nums, int numsSize) {
+    selection_sort (nums, numsSize);
+    return nums[numsSize - 1] * nums[numsSize - 2] - nums[1] * nums[0];
 }
