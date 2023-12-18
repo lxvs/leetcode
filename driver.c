@@ -43,6 +43,7 @@
 #include "easy/700-search-in-a-binary-search-tree.h"
 #include "easy/977-squares-of-a-sorted-array.h"
 #include "easy/1290-convert-binary-number-in-a-linked-list-to-integer.h"
+#include "easy/1913-maximum-product-difference-between-two-pairs.h"
 #include "easy/2078-two-furthest-houses-with-different-colors.h"
 #include "easy/2085-count-common-words-with-one-occurrence.h"
 #include "easy/2089-find-target-indices-after-sorting-array.h"
@@ -1140,6 +1141,36 @@ int lc1887_ReductionOperationToMakeTheArrayElementsEqual (int argc, char ** argv
     return 0;
 }
 
+int lc1913_MaxProductDifference (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "1913 <int> <int> <int> <int> [<int> ...]\n"
+        "The product difference between two pairs (a, b) and (c, d) is defined as\n"
+        "(a * b) - (c * d).  For example, the product difference between (5, 6) and\n"
+        "(2, 7) is (5 * 6) - (2 * 7) = 16.  Given an integer array nums, choose four\n"
+        "distinct indices w, x, y, and z such that the product difference between pairs\n"
+        "(nums[w], nums[x]) and (nums[y], nums[z]) is maximized.  Return the maximum\n"
+        "such product difference.\n"
+        "\n"
+        "The length of nums ranges in [4, 10^4]\n"
+        "The elements of nums range in [1, 10^4]\n";
+    int * input;
+    int inputSize = argc - 2;
+
+    if (inputSize < 4) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    input = parseArgsToIntegerArray (argc, argv, argc - inputSize, inputSize);
+#if DEBUG
+    printf ("input array: ");
+    printIntegerArray (input, inputSize);
+#endif
+
+    printf ("%d\n", maxProductDifference (input, inputSize));
+    free (input);
+    return 0;
+}
+
 int lc2078_TwoFurthestHousesWithDifferentColors (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "2078 <integer> <integer> [<integer> ...]\n"
         "Each different integer represents a different color.  Find the maximum\n"
@@ -1644,6 +1675,9 @@ int main (int argc, char **argv) {
             break;
         case 1887:
             returnedValue = lc1887_ReductionOperationToMakeTheArrayElementsEqual (argc, argv);
+            break;
+        case 1913:
+            returnedValue = lc1913_MaxProductDifference (argc, argv);
             break;
         case 2078:
             returnedValue = lc2078_TwoFurthestHousesWithDifferentColors (argc, argv);
