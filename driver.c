@@ -48,6 +48,7 @@
 #include "easy/2085-count-common-words-with-one-occurrence.h"
 #include "easy/2089-find-target-indices-after-sorting-array.h"
 #include "easy/2094-finding-3-digit-even-numbers.h"
+#include "easy/2706-buy-two-chocolates.h"
 #include "medium/002-add-two-numbers.h"
 #include "medium/003-longest-substring-without-repeating-characters.h"
 #include "medium/005-longest-palindromic-substring.h"
@@ -1506,6 +1507,39 @@ int lc2147_DivideALongCorridor (int argc, char ** argv) {
     return 0;
 }
 
+int lc2706_BuyTwoChocolates (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "2706 <money> <price> <price> [<price> ...]\n"
+        "You are given an integer array prices representing the prices of various\n"
+        "chocolates in a store.  You are also given a single integer money, which\n"
+        "represents your initial amount of money.\n"
+        "\n"
+        "You must buy exactly two chocolates in such a way that you still have some\n"
+        "non-negative leftover money. You would like to minimize the sum of the prices\n"
+        "of the two chocolates you buy.\n"
+        "\n"
+        "Return the amount of money you will have leftover after buying the two\n"
+        "chocolates.  If there is no way for you to buy two chocolates without ending up\n"
+        "in debt, return money.  Note that the leftover must be non-negative.\n"
+        "\n"
+        "The number of prices ranges in [2, 50].\n"
+        "The price and money range in [1, 100].\n";
+    int money;
+    int * prices;
+    int pricesSize = argc - 3;
+
+    if (pricesSize < 2) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    money = atoi (argv[2]);
+    prices = parseArgsToIntegerArray (argc, argv, argc - pricesSize, pricesSize);
+    printf ("%d\n", buyChoco (prices, pricesSize, money));
+
+    free (prices);
+    return 0;
+}
+
 int main (int argc, char **argv) {
     int returnedValue;
     int problemNumber;
@@ -1711,6 +1745,9 @@ int main (int argc, char **argv) {
             break;
         case 2147:
             returnedValue = lc2147_DivideALongCorridor (argc, argv);
+            break;
+        case 2706:
+            returnedValue = lc2706_BuyTwoChocolates (argc, argv);
             break;
         default:
             fprintf (stderr, "no driver for %d\n", problemNumber);
