@@ -60,6 +60,7 @@
 #include "medium/102-binary-tree-level-order-traversal.h"
 #include "medium/701-insert-into-a-binary-tree.h"
 #include "medium/935-knight-dialer.h"
+#include "medium/1637-widest-vertical-area-between-two-points-containing-no-points.h"
 #include "medium/1743-restore-the-array-from-adjacent-pairs.h"
 #include "medium/1759-count-number-of-homogenous-substrings.h"
 #include "medium/1887-reduction-operations-to-make-the-array-elements-equal.h"
@@ -1058,6 +1059,36 @@ int lc1290_Binary2Decimal (int argc, char ** argv) {
     return 0;
 }
 
+int lc1637_WidestVerticalArea (int argc, char ** argv) {
+    const char * usage = USAGE_PREFIX "1637 <x1> <y1> <x2> <y2> [<x> <y> ...]]\n";
+    int ** points;
+    int * pointsColSize;
+    int pointsSize = (argc - 2) / 2;
+
+    if (pointsSize < 2 || pointsSize * 2 != argc - 2) {
+        fprintf (stderr, "%s", usage);
+        return -1;
+    }
+
+    pointsColSize = malloc (sizeof *pointsColSize * pointsSize);
+    for (int i = 0; i < pointsSize; i++) {
+        pointsColSize[i] = 2;
+    }
+
+    points = parseArgsToIntegerMatrix (argc, argv, argc - pointsSize * 2, pointsSize * 2, 2);
+
+#if DEBUG
+    printf ("input matrix:\n");
+    printIntegerMatrix (points, pointsSize, 2);
+#endif
+
+    printf ("%d\n", maxWidthOfVerticalArea (points, pointsSize, pointsColSize));
+
+    free (pointsColSize);
+    freeIntegerMatrix (points, pointsSize);
+    return 0;
+}
+
 int lc1743_RestoreTheArrayFromAdjacentPairs (int argc, char ** argv) {
     const char * usage = USAGE_PREFIX "1743 <integer> <integer> [<integer> <integer> ...]\n"
         "There is an integer array `nums' that consists of n unique elements, but you\n"
@@ -1700,6 +1731,9 @@ int main (int argc, char **argv) {
             break;
         case 1290:
             returnedValue = lc1290_Binary2Decimal (argc, argv);
+            break;
+        case 1637:
+            returnedValue = lc1637_WidestVerticalArea (argc, argv);
             break;
         case 1743:
             returnedValue = lc1743_RestoreTheArrayFromAdjacentPairs (argc, argv);
