@@ -28,7 +28,7 @@ clean:
 debug: CFLAGS_LOCAL += $(DEBUG_FLAGS) $(ADDRESS_SANITIZER_FLAGS)
 debug: all
 
-debugger: CFLAGS_LOCAL += $(DEBUGGER_FLAGS)
+debugger: CFLAGS_LOCAL += $(DEBUG_FLAGS) $(DEBUGGER_FLAGS)
 debugger: all
 
 generate_version:
